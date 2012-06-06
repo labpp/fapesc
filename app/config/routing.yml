@@ -1,0 +1,553 @@
+FapescTutorialBundle:
+  resource: "@FapescTutorialBundle/Controller/"
+  type: annotation
+  prefix: /
+
+index:
+  pattern: /
+  defaults: { _controller: FapescTutorialBundle:Usuario:index }
+  
+# visitante
+
+cadastrar:
+  pattern: /cadastrar
+  defaults: { _controller: FapescTutorialBundle:Usuario:cadastrar }
+  requirements:
+    _method: GET
+
+cadastrarPost:
+  pattern: /cadastrar/post
+  defaults: { _controller: FapescTutorialBundle:Usuario:cadastrarPost }
+  requirements:
+    _method: POST
+
+recuperar:
+  pattern: /recuperar
+  defaults: { _controller: FapescTutorialBundle:Usuario:recuperar }
+  requirements:
+    _method: GET
+
+recuperarPost:
+  pattern: /recuperar/post
+  defaults: { _controller: FapescTutorialBundle:Usuario:recuperarPost }
+  requirements:
+    _method: POST
+
+recuperarSenha:
+  pattern: /recuperar/senha/{cpf}/{email}/{hash}
+  defaults: { _controller: FapescTutorialBundle:Usuario:recuperarSenha }
+  requirements:
+    _method: GET
+    cpf: .+
+    email: .+
+    hash: \w+
+
+recuperarSenhaPost:
+  pattern: /recuperar/senha/{cpf}/{email}/{hash}/post
+  defaults: { _controller: FapescTutorialBundle:Usuario:recuperarSenhaPost }
+  requirements:
+    _method: POST
+    cpf: .+
+    email: .+
+    hash: \w+
+
+login:
+  pattern: /login
+  defaults: { _controller: FapescTutorialBundle:Usuario:login }
+  requirements:
+    _method: GET
+
+loginPost:
+  pattern: /loginPost
+  defaults: { _controller: FapescTutorialBundle:Usuario:loginPost }
+  requirements:
+    _method: POST
+    
+# usuario
+
+inicio:
+  pattern: /inicio
+  defaults: { _controller: FapescTutorialBundle:Usuario:inicio }
+
+perfil:
+  pattern: /perfil
+  defaults: { _controller: FapescTutorialBundle:Usuario:perfil }
+  requirements:
+    _method: GET
+
+perfilPost:
+  pattern: /perfil/post
+  defaults: { _controller: FapescTutorialBundle:Usuario:perfilPost }
+  requirements:
+    _method: POST
+
+senha:
+  pattern: /senha
+  defaults: { _controller: FapescTutorialBundle:Usuario:senha }
+  requirements:
+    _method: GET
+
+senhaPost:
+  pattern: /senha/post
+  defaults: { _controller: FapescTutorialBundle:Usuario:senhaPost }
+  requirements:
+    _method: POST
+
+logout:
+  pattern: /logout
+  defaults: { _controller: FapescTutorialBundle:Usuario:logout }
+  
+# bolsista
+
+bolsistas:
+  pattern: /bolsistas
+  defaults: { _controller: FapescTutorialBundle:Bolsista:bolsistas }
+  requirements:
+    _method: GET
+
+bolsista:
+  pattern: /bolsista/{idBolsista}
+  defaults: { _controller: FapescTutorialBundle:Bolsista:bolsista }
+  requirements:
+    _method: GET
+    idBolsista: \d+
+
+bolsistaPost:
+  pattern: /bolsista/{idBolsista}/post
+  defaults: { _controller: FapescTutorialBundle:Bolsista:bolsistaPost }
+  requirements:
+    _method: POST
+    idBolsista: \d+
+
+# fornecedor
+
+fornecedores:
+  pattern: /fornecedores
+  defaults: { _controller: FapescTutorialBundle:Fornecedor:fornecedores }
+  requirements:
+    _method: GET
+
+fornecedor:
+  pattern: /fornecedor/{idFornecedor}
+  defaults: { _controller: FapescTutorialBundle:Fornecedor:fornecedor }
+  requirements:
+    _method: GET
+    idFornecedor: \d+
+
+fornecedorPost:
+  pattern: /fornecedor/{idFornecedor}/post
+  defaults: { _controller: FapescTutorialBundle:Fornecedor:fornecedorPost }
+  requirements:
+    _method: POST
+    idFornecedor: \d+
+
+# projeto
+
+projetoDados:
+  pattern: /projeto/{idProjeto}/dados
+  defaults: { _controller: FapescTutorialBundle:Projeto:dados }
+  requirements:
+    _method: GET
+    idProjeto: \d+
+
+projetoDadosPost:
+  pattern: /projeto/{idProjeto}/dados/post
+  defaults: { _controller: FapescTutorialBundle:Projeto:dadosPost }
+  requirements:
+    _method: POST
+    idProjeto: \d+
+
+projetoResumo:
+  pattern: /projeto/{idProjeto}/resumo
+  defaults: { _controller: FapescTutorialBundle:Projeto:resumo }
+  requirements:
+    _method: GET
+    idProjeto: \d+
+
+projetoResumoPost:
+  pattern: /projeto/{idProjeto}/resumo/post
+  defaults: { _controller: FapescTutorialBundle:Projeto:resumoPost }
+  requirements:
+    _method: POST
+    idProjeto: \d+
+
+projetoMetas:
+  pattern: /projeto/{idProjeto}/metas
+  defaults: { _controller: FapescTutorialBundle:Projeto:metas }
+  requirements:
+    idProjeto: \d+
+
+projetoMeta:
+  pattern: /projeto/{idProjeto}/meta/{idMeta}
+  defaults: { _controller: FapescTutorialBundle:Projeto:meta }
+  requirements:
+    _method: GET
+    idProjeto: \d+
+    idMeta: \d+
+
+projetoMetaPost:
+  pattern: /projeto/{idProjeto}/meta/{idMeta}/post
+  defaults: { _controller: FapescTutorialBundle:Projeto:metaPost }
+  requirements:
+    _method: POST
+    idProjeto: \d+
+    idMeta: \d+
+
+projetoMetaDelete:
+  pattern: /projeto/{idProjeto}/meta/{idMeta}/delete
+  defaults: { _controller: FapescTutorialBundle:Projeto:metaDelete }
+  requirements:
+    _method: GET
+    idProjeto: \d+
+    idMeta: \d+
+
+projetoDelete:
+  pattern: /projeto/{idProjeto}/delete
+  defaults: { _controller: FapescTutorialBundle:Projeto:delete }
+  requirements:
+    _method: GET
+    idProjeto: \d+
+
+# relatorio
+
+relatorioDados:
+  pattern: /relatorio/{idRelatorio}/dados
+  defaults: { _controller: FapescTutorialBundle:Relatorio:dados }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+
+relatorioDadosPost:
+  pattern: /relatorio/{idRelatorio}/dados/post
+  defaults: { _controller: FapescTutorialBundle:Relatorio:dadosPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+
+relatorioRelatorio:
+  pattern: /relatorio/{idRelatorio}/relatorio
+  defaults: { _controller: FapescTutorialBundle:Relatorio:relatorio }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+
+relatorioRelatorioPost:
+  pattern: /relatorio/{idRelatorio}/relatorio/post
+  defaults: { _controller: FapescTutorialBundle:Relatorio:relatorioPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+
+relatorioMetas:
+  pattern: /relatorio/{idRelatorio}/metas
+  defaults: { _controller: FapescTutorialBundle:Relatorio:metas }
+  requirements:
+    idRelatorio: \d+
+
+relatorioMeta:
+  pattern: /relatorio/{idRelatorio}/meta/{idMeta}
+  defaults: { _controller: FapescTutorialBundle:Relatorio:meta }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+    idMeta: \d+
+
+relatorioMetaPost:
+  pattern: /relatorio/{idRelatorio}/meta/{idMeta}/post
+  defaults: { _controller: FapescTutorialBundle:Relatorio:metaPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idMeta: \d+
+
+# empenho
+
+relatorioEmpenhos:
+  pattern: /relatorio/{idRelatorio}/empenhos
+  defaults: { _controller: FapescTutorialBundle:Empenho:empenhos }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+
+relatorioEmpenhosPost:
+  pattern: /relatorio/{idRelatorio}/empenhos/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:empenhosPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+
+relatorioEmpenho:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/categoria/{categoria}
+  defaults: { _controller: FapescTutorialBundle:Empenho:empenho }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+    idEmpenho: \d+
+    categoria: \w+
+
+relatorioEmpenhoBibliografiaPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/bibliografia/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:bibliografiaPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
+
+relatorioEmpenhoEquipamentoPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/equipamento/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:equipamentoPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
+
+relatorioEmpenhoMobiliarioPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/mobiliario/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:mobiliarioPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
+
+relatorioEmpenhoPessoaFisicaPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/pessoaFisica/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:pessoaFisicaPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
+
+relatorioEmpenhoPessoaJuridicaPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/pessoaJuridica/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:pessoaJuridicaPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
+
+relatorioEmpenhoAluguelPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/aluguel/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:aluguelPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
+
+#relatorioEmpenhoBolsa:
+#  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/bolsa
+#  defaults: { _controller: FapescTutorialBundle:Empenho:bolsa }
+#  requirements:
+#    _method: GET
+#    idRelatorio: \d+
+#    idEmpenho: \d+
+
+relatorioEmpenhoBolsaPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/bolsa/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:bolsaPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
+
+relatorioEmpenhoMaterialPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/material/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:materialPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
+
+relatorioEmpenhoPassagemPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/passagem/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:passagemPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
+
+relatorioEmpenhoDelete:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/categoria/{categoria}/delete
+  defaults: { _controller: FapescTutorialBundle:Empenho:empenhoDelete }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+    idEmpenho: \d+
+    categoria: \w+
+
+# contrapartida
+
+relatorioContrapartidas:
+  pattern: /relatorio/{idRelatorio}/contrapartidas
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:contrapartidas }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+
+relatorioContrapartidasPost:
+  pattern: /relatorio/{idRelatorio}/contrapartidas/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:contrapartidasPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+
+relatorioContrapartida:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/categoria/{categoria}
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:contrapartida }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+    idContrapartida: \d+
+    categoria: \w+
+
+relatorioContrapartidaBibliografiaPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/bibliografia/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:bibliografiaPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+relatorioContrapartidaEquipamentoPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/equipamento/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:equipamentoPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+relatorioContrapartidaMobiliarioPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/mobiliario/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:mobiliarioPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+relatorioContrapartidaPessoaFisicaPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/pessoaFisica/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:pessoaFisicaPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+relatorioContrapartidaPessoaJuridicaPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/pessoaJuridica/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:pessoaJuridicaPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+relatorioContrapartidaAluguelPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/aluguel/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:aluguelPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+#relatorioContrapartidaBolsa:
+#  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/bolsa
+#  defaults: { _controller: FapescTutorialBundle:Contrapartida:bolsa }
+#  requirements:
+#    _method: GET
+#    idRelatorio: \d+
+#    idContrapartida: \d+
+
+relatorioContrapartidaBolsaPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/bolsa/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:bolsaPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+relatorioContrapartidaMaterialPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/material/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:materialPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+relatorioContrapartidaPassagemPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/passagem/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:passagemPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+relatorioContrapartidaDelete:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/categoria/{categoria}/delete
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:contrapartidaDelete }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+    idContrapartida: \d+
+    categoria: \w+
+    
+# ***
+
+relatorioConciliacao:
+  pattern: /relatorio/{idRelatorio}/conciliacao
+  defaults: { _controller: FapescTutorialBundle:Relatorio:conciliacao }
+  requirements:
+    idRelatorio: \d+
+
+relatorioExtrato:
+  pattern: /relatorio/{idRelatorio}/extrato
+  defaults: { _controller: FapescTutorialBundle:Relatorio:extrato }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+
+relatorioExtratoPost:
+  pattern: /relatorio/{idRelatorio}/extrato/post
+  defaults: { _controller: FapescTutorialBundle:Relatorio:extratoPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+
+relatorioCheque:
+  pattern: /relatorio/{idRelatorio}/cheque/{idCheque}
+  defaults: { _controller: FapescTutorialBundle:Relatorio:cheque }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+    idCheque: \d+
+
+relatorioChequePost:
+  pattern: /relatorio/{idRelatorio}/cheque/{idCheque}/post
+  defaults: { _controller: FapescTutorialBundle:Relatorio:chequePost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idCheque: \d+
+
+relatorioChequeDelete:
+  pattern: /relatorio/{idRelatorio}/cheque/{idCheque}/delete
+  defaults: { _controller: FapescTutorialBundle:Relatorio:chequeDelete }
+  requirements:
+    idRelatorio: \d+
+    idCheque: \d+
+
+relatorioImpressao:
+  pattern: /relatorio/{idRelatorio}/impressao
+  defaults: { _controller: FapescTutorialBundle:Impressao:impressao }
+  requirements:
+    idRelatorio: \d+
+
+relatorioImprimir:
+  pattern: /relatorio/{idRelatorio}/imprimir
+  defaults: { _controller: FapescTutorialBundle:Impressao:imprimir }
+  requirements:
+    idRelatorio: \d+
+
+relatorioDelete:
+  pattern: /relatorio/{idRelatorio}/delete
+  defaults: { _controller: FapescTutorialBundle:Relatorio:delete }
+  requirements:
+    _method: GET
+    idRelatorio: \d+

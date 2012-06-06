@@ -1,0 +1,27 @@
+/* CSS Document */
+@page { margin: 0.2in 0.9in 0.2in 0.9in;} 
+
+body{
+background:#F7F7F7;
+font-family:Helvetica, Arial, sans-serif;
+font-size:12px;
+}
+#lateral_direita{
+width:550px;
+margin:5px;
+float: right;
+padding:2px;
+border: 1px solid black;
+}
+#lateral_esquerda{
+width:200px;
+margin: 5px;
+float: left;
+padding:2px;
+border: 1px solid black;
+}
+#rodape{
+height:50px;
+clear:both;
+border: 1px solid black;
+}

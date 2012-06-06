@@ -1,0 +1,11 @@
+{% extends "FapescTutorialBundle:Usuario:index.html.twig" %}
+
+{% block navigation %}
+<div id="navigation">
+	<ul>
+		{% for opcao in menu.opcoes %}
+		<li>{{ opcao | raw }}</li>
+		{% endfor %}
+	</ul>
+</div><!-- #navigation -->
+{% endblock %}

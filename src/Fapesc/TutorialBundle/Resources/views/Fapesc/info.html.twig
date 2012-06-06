@@ -1,0 +1,19 @@
+{% extends "FapescTutorialBundle:Fapesc:menu.html.twig" %}
+
+{% block notification %}
+<div id="title">
+	<div id="project-title">{{ info.projeto }}</div>
+	
+	<div id="report-title">{{ info.relatorio }}</div>
+	
+	<div id="notification-box">
+		{% if app.session.hasFlash('sucesso') %}
+		<div id="ok-bar" class="notification"><span class="notification-content">{{ app.session.flash('sucesso') }}</span></div>
+		{% elseif app.session.hasFlash('erro') %}
+		<div id="error-bar" class="notification"><span class="notification-content">{{ app.session.flash('erro') }}</span></div>
+		{% elseif app.session.hasFlash('aviso') %}
+		<div id="attention-bar" class="notification"><span class="notification-content">{{ app.session.flash('aviso') }}</span></div>	
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

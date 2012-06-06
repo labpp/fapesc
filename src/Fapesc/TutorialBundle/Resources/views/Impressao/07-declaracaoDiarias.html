@@ -1,0 +1,73 @@
+<div id = "corpo" >
+	<div id = "declaracaoDiarias">
+		<h1 class ="head" > DECLARAÇÃO DE DIÁRIAS </h1>
+		<div id="parte" class = "head" > {{ parte }} </div>
+		<div id="beneficiario" class="linha2"> BENEFICIÁRIO</div>
+		<div id="cpf" class="linha2"> CPF</div>
+
+		<div id="declaracao" class="espacamentoEsq">
+			Declaro, junto à <strong>FUNDAÇÃO DE APOIO À PESQUISA CIENTÍFICA E TECNOLÓGICA - FAPESC</strong>, que recebi parte dos recursos de custeio para o projeto de pesquisa aprovado através do contrato nº _________________, no valor de R$ ______ () referente a __()_________ diárias conforme relatório abaixo:
+		</div>
+
+		<div id="objetivo">OBJETIVO:</div>
+		<div id="resultados">RESULTADOS OBTIDOS COM O DESLOCAMENTO:</div>	
+
+		<table class="tabelaViagem">	
+			<tr>
+				<td class="semborda">&nbsp;</td>
+				<td class="semborda">&nbsp;</td>
+				<td class="semborda">&nbsp;</td>
+				<td colspan="2">HORÁRIO</td>
+			</tr>
+			<tr>
+				<td>DATA</td>
+				<td>DE:</td>
+				<td>PARA:</td>
+				<td>SAÍDA</td>
+				<td>CHEGADA</td>
+			</tr>
+			
+			{{ tabelaDiarias }}
+		</table>
+		
+		<div id="data"><b>{{ dataExtenso }}</b></div>
+		<div id="ass"><b>Assinatura</b></div>
+		
+		<div id="decreto">
+			<p>
+				<b>Decreto Estadual Nº 1607, de 15 de agosto de 2008</b><br>
+				   Artigo 3º. A Diária será concedida por dia de deslocamento, assim entendido o período de 24 horas.<br>
+				   § 1º Será concedida diária integral para período de deslocamento igual ou superior a 12 horas. <br>
+				   § 2º Será concedida meia diária quando o período de deslocamento for igual ou superior a 4 (quatro) horas e inferior a 12 (doze) horas.
+			
+			</p>
+		</div>
+		<div id="diarias">
+			TABELADE DIÁRIAS
+			<table class="tabelaDiarias">
+				<tr>
+					<td>GRUPOS</td>	
+					<td>NO ESTADO (R$)</td>
+					<td>FORA DO ESTADO (R$)</td>
+					<td>EXTERIOR US$</td>
+				</tr>
+				<tr>
+					<td>Pessoa de Nível Superior</td>	
+					<td>110,00</td>
+					<td>153,00</td>
+					<td>200,00</td>
+				</tr>
+				<tr>
+					<td>Auxiliar Técnico</td>	
+					<td>55,00</td>
+					<td>xxx</td>
+					<td>xxx</td>
+				</tr>
+
+			</table>		
+		</div>		
+
+
+
+	</div>
+</div>

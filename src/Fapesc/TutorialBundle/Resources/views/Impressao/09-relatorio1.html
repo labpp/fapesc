@@ -1,0 +1,87 @@
+<div id="corpo">
+	<div id = "relatorio1">
+	<!-- LINHA1-->
+		<h1 class ="head" > RELATÓRIO TÉCNICO PARCIAL </h1>
+	<!-- Linha1-->
+	<!-- LINHA2-->
+		<div class = "linhas">
+			<div id = "projeto">
+				<div class="menor espacamentoEsq">Projeto</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ projeto }}</div>
+			</div>
+			
+			<div id = "coordenador">
+				<div class="menor espacamentoEsq">Coordenador</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ coordenador }}</div>
+			</div>
+		</div>
+	<!-- Linha2-->
+	<!-- LINHA3-->
+		<div class = "linhas">
+			<div id = "area">
+				<div class="menor espacamentoEsq">Área do Conhecimento</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ area }}</div>
+			</div>
+			<div id = "localizacao">
+				<div class="menor espacamentoEsq">Localização(Cidade/Região/SDR)</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ local }}</div>
+			</div>
+		</div>
+	<!-- Linha3-->
+	<!-- LINHA4-->	
+		<div class = "linhas">
+			<div id = "instituicao">
+				<div class="menor espacamentoEsq">Instituição Proponente</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ instituicao }}</div>
+			</div>
+		</div>
+	<!-- Linha4-->
+
+	<div class="linhaDivCima"><p/>	</div>
+	
+	<!-- LINHA5-->
+		<div class = "linhas">
+			<div id = "total">
+				<div class="menor espacamentoEsq">Valor Total do Projeto(incluindo todos os intervinientes):</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ valorTotal }}</div>
+			</div>
+			<div id = "inicio">
+				<div class="menor espacamentoEsq">Início do projeto</div><br/>
+				<div class="fontePadrao espacamentoEsq"> {{ inicio }} </div>
+			</div>
+			<div id = "dataRelatorio">
+				<div class="menor espacamentoEsq">Data do Relatório Parcial:</div><br/>
+				<div class="fontePadrao espacamentoEsq"> {{ dataRelatorio }}</div>
+			</div>
+			<div id = "dataParcela">
+				<div class="menor espacamentoEsq">Data Primeira Parcela:</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ dataParcela }}</div>
+			</div>
+		</div>
+	<!-- Linha5-->
+	<!-- LINHA6-->
+		<div class = "linhas">
+			<div id = "total">
+				<div class="menor espacamentoEsq">Participação da FAPESC(Total):</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ partipacaoTotal }}</div>
+			</div>
+			<div id = "custeio">
+				<div class="menor espacamentoEsq">Participação da FAPESC(Custeio):</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ partipacaoCusteio }}</div>
+			</div>
+			<div id = "capital">
+				<div class="menor espacamentoEsq">Participação da FAPESC(Capital):</div><br/>
+				<div class="fontePadrao espacamentoEsq">{{ partipacaoCapital }}</div>
+			</div>
+		</div>
+	<!-- Linha6-->
+
+	<div class="linhaDivBaixo"><p/>	</div>
+
+	<div id = "resumo" class="menor espacamentoEsq"> Resumo da Pesquisa </div>
+	<div id="texto" class = "margemLateral fontePadrao"> {{ resumo }} </div>
+	</div>
+</div>	
+
+
+

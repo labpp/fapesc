@@ -1,0 +1,179 @@
+@charset "utf-8";
+/* CSS Document - código do BODY */
+body {
+	font-family: "Times New Roman", Times, serif;
+	width:26cm;
+	height:35cm; 
+	padding-left: 0.5%;
+	padding-right: 0.5%;
+	padding-top: 0.5%;
+	padding-bottom: 0.5%;		
+	margin-left:auto;
+	margin-right:auto;
+	text-align: center;
+	background-color: #ffffff;
+}
+
+/*Códigos sobre as fontes de texto*/
+.maior{
+	font-size:12pt;
+}
+
+.menor{
+	font-size:7pt;
+	text-align:left;
+}
+.fontePadrao{
+	font-size:10pt;
+}
+
+.textoNegrito {
+	font-weight:900;	
+}
+
+/*CÓDIGOS DO estiloCorpo*/
+
+#corpoHeader{	
+	clear:both;	
+	margin-top:2%;
+	border: 0.8pt solid #000;	
+	width: 100%;	
+	height: 81%;
+	overflow:auto;
+	position:relative;
+}
+#corpo{			
+	height: 89%;
+}
+
+
+/*Códigos sobre a formatação do texto*/
+.margemLateral{
+	padding-left:3.5%;
+	padding-right:3.5%;
+}
+.espacamentoEsq{
+	padding-left:10pt;
+}
+
+/*Elementos mais utilizados*/
+.assinatura{
+	border-top:0.8pt solid black;
+	font-size: 16pt;
+	width: 40%;
+}
+.legenda{
+	text-align: left;
+}
+.legenda td , .legenda th{
+	font-size: 8pt;
+}
+.head{
+	border-bottom:0.8pt solid black;
+	text-align:center;
+}
+h1{
+	margin-bottom:-0.2%;
+	position:absolute;
+	float:left;
+	text-align:left;
+	padding-top:2%;
+	height:4.784%;
+	width:85%;
+	font-size:14pt;
+}
+#parte{
+	position:relative;
+	float:left;
+	height:6.5%;
+	font-size:30pt;
+	border-left:0.8pt solid black;
+}
+/*Estrutura do Plano */
+#plano h4{
+	text-align:left;
+	position:relative;
+	top:15pt;
+	font-weight:normal;
+}
+#plano .tabela1{
+	word-wrap:break-word;
+	overflow:hidden;
+	border-collapse:collapse;
+  	font-size: 12pt;
+  	color: #000;
+	
+}
+#plano .tabela1 th, .tabela1 td{
+  	padding: 1pt;
+	text-align:center;
+}
+
+#plano .numero{
+	width:10%;
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;
+	border-bottom:0.8pt solid #000;
+}
+#plano .descricao5{
+	width:60%;
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;
+}
+#plano .descricao3{
+	width:75%;
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;
+}
+#plano .itens{
+	text-align: left;
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;		
+	border-bottom:0.8pt solid #000;
+}
+#plano .qtd{
+	width:8%;	
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;			
+}
+#plano .vUnit{
+	width:12%;
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;
+}
+#plano .vTotal{
+	width:10%;
+	border:0.8pt solid #000;
+}
+#plano .vTotalFooter{
+	border:0.8pt solid #000;
+}
+#plano .total{	
+	border:0.8pt solid #000;
+	padding-right: 2%;
+	text-align:right;	
+}
+#plano .bolsista{
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;
+	width:25%;
+	text-align:left;
+
+}
+#plano .periodo{
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;
+	width:15%;
+
+}
+#plano .data{
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;
+	width:10%;
+}
+#plano .trecho{
+	border-left:0.8pt solid #000;
+	border-top:0.8pt solid #000;
+	width:40%;
+	text-align:left;
+}

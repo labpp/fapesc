@@ -1,0 +1,14 @@
+{% extends "FapescTutorialBundle:Visitante:index.html.twig" %}
+
+{% block title "Recuperar senha" %}
+
+{% block content %}
+<div id="login-content">
+	<div id="sidebar" class="login-sidebar">
+		<span id="login-title">Recuperar senha</span>
+	</div><!-- #sidebar -->
+	<div id="main-content" class="login-main-content">
+		{% include "FapescTutorialBundle:Usuario:formSenha.html.twig" with { "action" : action } %}
+	</div><!-- #main-content -->			
+</div><!-- #content -->
+{% endblock %}

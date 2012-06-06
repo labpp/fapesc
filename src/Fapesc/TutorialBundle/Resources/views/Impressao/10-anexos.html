@@ -1,0 +1,46 @@
+<div id="corpo">
+	<div id="anexos">
+
+		<div id="titulo" class="linha1">
+				<strong>ANEXOS</strong>
+		</div>
+		<div id="parte" class="linha1">
+				<strong>V</strong>
+		</div>
+
+		<div id="conteudo" class="tamFont margemLateral">
+			<p>	
+				Prezado(a)<br>
+				<br>
+				No âmbito do Projeto {{ projeto }}, contratado sob no.  {{ contrato }},
+				apresentamos um conjunto de documentos complementares em apoio ao procedimento e prestação
+				de contas e auditoria de resultados.<br>
+			</p>
+		</div>
+		
+		<!-- TABELA -->
+		<table class="anexos tamFont">
+			<tr>
+					<td>A</td>
+					<td>B</td>
+					<td>C</td>
+					<td>Anexos</td>
+					
+			</tr>
+
+			{{ tabelaAnexos }}
+			
+		</table>	
+		<!-- TABELA -->
+		<table id="textoCentral" class="margemLateral">
+			<tr>
+				<td>
+                    Caro Coordenador, <br> 
+                    Afixe (grampo ou clipe) à esta folha os registros de consulta de preços referentes
+                    ao processo de contratação do {{ distribuicao }}, contratado em {{ dataContrato }}
+                    junto à {{ fornecedor }}
+				</td>					
+			</tr>	
+		</table>
+	</div> <!-- anexos -->
+</div> <!-- corpo -->

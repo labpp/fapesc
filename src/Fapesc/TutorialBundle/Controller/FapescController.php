@@ -1,0 +1,171 @@
+<?php
+
+namespace Fapesc\TutorialBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Exception;
+use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+/*
+  use Fapesc\TutorialBundle\Entity\Usuario;
+  use Fapesc\TutorialBundle\Entity\Projeto;
+  use Fapesc\TutorialBundle\Entity\Meta;
+  use Fapesc\TutorialBundle\Entity\Relatorio;
+  use Fapesc\TutorialBundle\Entity\Resultado;
+  use Fapesc\TutorialBundle\Entity\PessoaFisica;
+  use Fapesc\TutorialBundle\Entity\PessoaJuridica;
+  use Fapesc\TutorialBundle\Entity\Material;
+  use Fapesc\TutorialBundle\Entity\Aluguel;
+  use Fapesc\TutorialBundle\Entity\Obra;
+  use Fapesc\TutorialBundle\Entity\Diaria;
+  use Fapesc\TutorialBundle\Entity\Passagem;
+  use Fapesc\TutorialBundle\Entity\Mobiliario;
+  use Fapesc\TutorialBundle\Entity\Equipamento;
+  use Fapesc\TutorialBundle\Entity\Bibliografia;
+  use Fapesc\TutorialBundle\Entity\Bolsa;
+  use Fapesc\TutorialBundle\Entity\Bolsista;
+  use Fapesc\TutorialBundle\Entity\Pagamento;
+  use Fapesc\TutorialBundle\Entity\Outro;
+  use Fapesc\TutorialBundle\Entity\Conciliacao;
+  use Fapesc\TutorialBundle\Entity\Cheque;
+ */
+
+class FapescController extends Controller {
+
+    protected function usuario() {
+        $usuario = $this->get("security.context")->isGranted("ROLE_USER") ? $this->get("security.context")->getToken()->getUser()->toArray() : array();
+        return array("usuario" => $usuario);
+    }
+
+    protected function menu($tipo, $opcao, $id) {
+        $menu = array(
+            "projeto" => array(
+                "dados" => "Dados Iniciais",
+                "resumo" => "Resumo",
+                "metas" => "Plano de Metas",
+            ),
+            "relatorio" => array(
+                "dados" => "Dados Iniciais",
+                "relatorio" => "Relatório Técnico",
+                "metas" => "Plano de Metas",
+                "empenhos" => "Empenho de Recursos",
+                "contrapartidas" => "Contrapartidas",
+                "conciliacao" => "Conciliação Bancária",
+                "impressao" => "Impressão",
+            ),
+        );
+        foreach ($menu[$tipo] as $k => $v) {
+            $opcoes[] = "<a" . (($opcao == $k) ? " id='active'" : null) . " href='" . $this->get("router")->generate($tipo . ucwords($k), array("id" . ucwords($tipo) => $id)) . "'>" . $v . "</a>";
+            if ($id == 0)
+                break;
+        }
+        return array("menu" => array("opcoes" => $opcoes));
+    }
+
+    protected function info($idProjeto = null, $idRelatorio = null) {
+        if ($idProjeto == null) {
+            $info["projeto"] = "";
+        } elseif ($idProjeto == 0) {
+            $info["projeto"] = "Novo Projeto";
+        } else {
+            $projeto = $this->getDoctrine()
+                    ->getRepository("FapescTutorialBundle:Projeto")
+                    ->findOneBy(array("id" => $idProjeto, "usuario" => $this->get("security.context")->getToken()->getUser()->getId()));
+            if (!is_object($projeto)) {
+                throw new Exception("Projeto inválido!");
+            }
+            $info["projeto"] = $projeto->getTitulo();
+        }
+
+        if ($idRelatorio == null) {
+            $info["relatorio"] = "";
+        } elseif ($idRelatorio == 0) {
+            $info["relatorio"] = "Novo Relatório";
+        } else {
+            $relatorio = $this->getDoctrine()
+                    ->getRepository("FapescTutorialBundle:Relatorio")
+                    ->findOneBy(array("id" => $idRelatorio, "projeto" => $idProjeto));
+            if (!is_object($relatorio)) {
+                throw new \Exception("Relatório inválido!");
+            }
+            $info["relatorio"] = "NL " . $relatorio->getNota() . " - " . $relatorio->getLiberacao() . " - " . $relatorio->getRubrica(true);
+        }
+        return array("info" => $info);
+    }
+
+    protected function fornecedores($sel = false) {
+        switch ($sel) {
+            case "cpf": $tipo = array("tipo" => 1);
+                break;
+            case "cnpj": $tipo = array("tipo" => 2);
+                break;
+            default: $tipo = array();
+                break;
+        }
+        $fornecedores = $this->getDoctrine()->getRepository("FapescTutorialBundle:Fornecedor")->findBy($tipo, array("nome" => "ASC"));
+        if (empty($fornecedores)) {
+            //$this->get("session")->setFlash("aviso", "Nenhum fornecedor cadastrado!");
+            //return $this->forward("FapescTutorialBundle:Fornecedor:fornecedor", array("idFornecedor" => 0));
+            throw new \Exception("Nenhum fornecedor cadastrado!");
+        } else {
+            foreach ($fornecedores as $fornecedor) {
+                $dados[] = $fornecedor->toArray();
+            }
+        }
+        return array("fornecedores" => $dados);
+    }
+
+    protected function bolsistas() {
+        $bolsistas = $this->getDoctrine()->getRepository("FapescTutorialBundle:Bolsista")->findAll();
+        if (empty($bolsistas)) {
+            //$this->get("session")->setFlash("aviso", "Nenhum bolsista cadastrado!");
+            //return $this->forward("FapescTutorialBundle:Bolsista:bolsista", array("idBolsista" => 0));
+            throw new \Exception("Nenhum bolsista cadastrado!");
+        } else {
+            foreach ($bolsistas as $bolsista) {
+                $dados[] = $bolsista->toArray();
+            }
+        }
+        return array("bolsistas" => $dados);
+    }
+
+    /**
+     * @Route("/")
+     * @Template()
+     */
+    public function indexAction() {
+        return $this->forward("FapescTutorialBundle:" . ($this->get("security.context")->isGranted("ROLE_USER") ? "Fapesc:inicio" : "Visitante:login"), array());
+    }
+
+    /**
+     * @Route("/inicio")
+     * @Template("FapescTutorialBundle:Fapesc:inicio.html.twig")
+     */
+    public function inicioAction() {
+        $projetos = $this->getDoctrine()
+                ->getRepository("FapescTutorialBundle:Projeto")
+                ->findBy(array("usuario" => $this->get("security.context")->getToken()->getUser()->getId(), "ativo" => true));
+        if (empty($projetos)) {
+            $dados["projetos"] = array();
+        } else {
+            foreach ($projetos as $projeto) {
+                $dados["projetos"][$projeto->getId()] = $projeto->toArray();
+                $relatorios = $this->getDoctrine()
+                        ->getRepository("FapescTutorialBundle:Relatorio")
+                        ->findBy(array("projeto" => $projeto->getId(), "ativo" => true));
+                if (empty($relatorios)) {
+                    $dados["projetos"][$projeto->getId()]["relatorios"] = array();
+                } else {
+                    foreach ($relatorios as $relatorio) {
+                        $dados["projetos"][$projeto->getId()]["relatorios"][$relatorio->getId()] = $relatorio->toArray();
+                    }
+                }
+            }
+        }
+        return array_merge($this->usuario(), $dados);
+    }
+
+}

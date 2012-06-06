@@ -1,0 +1,55 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block content %}
+<script type="text/javascript">
+	$().ready(function() {
+		$("form").validate({
+			rules: {
+				justificativa: "required",
+			},
+			messages: {
+				justificativa: "Digite a justificativa",
+			}
+		});
+	});
+</script>
+<div id="content">
+				
+	<div id="sidebar">
+		<p><b>Instruções:</b><br /><br />Acada novo relatório de prestação de contas, faz-se necessário atualizar o status do Plano de Metas do projeto.<br /><br />O estado atual de uma meta pode assumir as seguintes condições: "Não alcançado", "Parcialmente alcançado" ou "Plenamente alcançado".<br /><br />Caso a conclusão de uma meta esteja prevista à frente do tempo presente, esta deverá ser marcada como "não alcançada" e sua justificativa definida como "Atividade em desenvolvimento".<br /><br />Observação: Caso necessite editar a descrição de uma meta, acesse o link "Meus Projetos" (vide cabeçalho do site), selecione o título do projeto em questão e, sem seguida, clique na aba "Plano de Metas".</p>
+	</div><!-- #sidebar -->
+			
+	<div id="main-content">
+		<h1>:: Plano de Metas</h1>
+		<form class="form-container" action="{{ path('relatorioMetaPost', { 'idRelatorio': idRelatorio, 'idMeta': id }) }}" method="POST">
+			<table class="form" width="90%">
+				<tr>
+					<td>Meta:<br />{{ meta }}</td>
+				</tr>
+			<table class="form" width="90%">
+				<tr>
+					<td width="28%">Resultado:<br />
+						<select name="resultado" title="Informe o estado de desenvolvimento da meta/objetivo." style="width:250px;">
+							{% for resultado in resultados %}
+							<option value="{{ resultado.value }}" {% if resultado.selected %} selected="selected" {% endif %}>{{ resultado.text }}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+			</table>
+			<table class="form" width="90%">
+				<tr>
+					<td>Justificativa:<br />
+					<textarea name="justificativa" title="Comente e justifique os resultados alcaçados. Obrigatório para metas definidas como NA e PR." rows="5" cols="50">{{ justificativa }}</textarea>
+				</tr>
+			</table>
+			<table class="submit" width="90%">
+				<tr>
+					<td><input type="submit" value="Salvar" title="" /></td>
+				</tr>
+			</table>
+		</form>					
+	</div><!-- #main-content -->			
+			
+</div><!-- #content -->
+{% endblock %}

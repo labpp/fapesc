@@ -1,0 +1,56 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block title "Contrapartidas - Bolsa" %}
+
+{% block content %}
+<script type="text/javascript">
+    jQuery(function($){
+    $(".data").mask("99/99/9999");
+    $("#valor").priceFormat({
+    prefix: '',
+    centsSeparator: ',',
+    thousandsSeparator: '.'
+    });
+    });
+</script>
+<div id="content">
+    <div id="sidebar">
+        <a id="projects-button" href="{{ path('bolsistas') }}" title="Gerenciar bolsistas">& Gerenciar Bolsistas</a><br /><br />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
+    </div><!-- #sidebar -->
+    <div id="main-content">
+        <h1>:: Contrapartidas - Bolsa</h1>
+        <form class="form-container" action="{{ path('relatorioContrapartidaBolsaPost', { 'idRelatorio': idRelatorio, 'idContrapartida': idContrapartida }) }}" method="POST">
+            <table class="form" width="90%">
+                <td width="15%">Bolsista:<br />
+                    <select name="bolsista">
+                        {% for item in bolsistas %}
+                        <option value="{{ item.idBolsista }}" {% if item.idBolsista == bolsista.idBolsista %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cpf }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <tr>
+                    <td>Descrição da Atividade:<textarea name="descricao" cols="60" rows="5">{{ descricao }}</textarea></td>
+                </tr>
+            </table>
+            <table class="form" width="40%">
+                <tr> Período de Referência: <br />
+                <td width="15%">De:<br /><input type="text" class="data" name="inicio" value="{{ inicio }}" maxlength="15" size="15" /></td>
+                <td width="15%">Até:<br /><input type="text" class="data" name="fim" value="{{ fim }}" maxlength="15" size="15" /></td>
+                </tr>
+            </table>
+            <table class="form" width="25%">
+                <tr>
+                    <td width="35%">Data do Pagamento:<br /><input type="text" class="data" name="data" value="{{ data }}" title="" maxlength="255" size="12" /></td>
+                    <td>Valor R$:<br /><input type="text" id="valor" name="valor" value="{{ valor }}" title="" maxlength="18" /></td>
+                </tr>					
+            </table>		
+            <table class="submit" width="90%">
+                <tr>
+                    <td><input type="submit" value="Incluir" title="" /></td>
+                </tr>
+            </table>
+        </form>			
+    </div><!-- #main-content -->			
+</div><!-- #content -->
+{% endblock %}

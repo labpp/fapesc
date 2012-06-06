@@ -1,0 +1,88 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block title "Contrapartidas" %}
+
+{% block content %}
+<div id="content">
+	<div id="sidebar">
+		<p><b>Instruções:</b><br /><br />Cada comprovante de dispêndio (ex: nota fiscal de compra de itens de consumo) deverá ser cadastrado individualmente.<br /><br />O valor "Orçamento NL" se refere ao valor da Nota de Liberação em questão, informado na aba "Dados Iniciais".<br /><br />Para incluir um novo Contrapartida, selecione a categoria de melhor enquadramento e clique em "Empenhar novo item".<br /><br />Para editar um dispêndio já cadastrado, clique na descrição do mesmo.<br /><br />O botão "X", em cinza, exclui um registro definitivamente.</p>
+		<p>Antes de iniciar o cadastro de novos Contrapartidas, sugerimos a leitura do <a href="http://www.fapesc.sc.gov.br/index.php?option=com_docman&task=doc_download&gid=247&Itemid=42">Guia Básico para Prestação de Contas da FAPESC</a><br /><br />Em caso de dúvida sobre a validade ou o melhor enquadramento de um dispêndio, entre em contato com a Gerência de Projetos ds FAPESC.</p>
+	</div><!-- #sidebar -->
+	<div id="main-content">
+		<h1>:: Contrapartidas</h1>
+		<div id="budget-panel">
+			<table>
+				<tr>
+					<th>Orçamento NL:</th>
+					<th>Total Empenhado:</th>
+					<th>Disponível:</th>
+				</tr>
+				<tr>
+					<td title="Valor total da nota de liquidação">R$ {{ orcamento }}</td>
+					<td title="Valor total já empenhado">R$ {{ empenhado }}</td>
+					<td title="Valor disponível para Contrapartida"><b>R$ {{ disponivel }}</b></td>
+				</tr>
+			</table>
+		</div>
+		<form class="form-container" action="{{ path('relatorioContrapartidasPost', { 'idRelatorio': idRelatorio }) }}" method="POST">
+			<table class="submit" width="90%">
+				<tr>
+					<td width="90%" style="text-align:right; padding-right:10px;">Categoria do item ser empenhado:</td>
+					<td>
+						<select name="categoria" title="Selecione a categoria de item a empenhar" style="width:200px;">
+							{% for opcao in opcoes %}
+							<option value="{{ opcao.value }}">{{ opcao.text }}</option>
+							{% endfor %}
+						</select>
+					</td>
+					<td><input type="submit" value="Empenhar novo item" title="" /></td>
+				</tr>
+			</table>
+		</form>
+
+		{% for categoria in categorias %}
+		{% if categoria.descricao == "Bolsas" %}
+		<p style="font-size:12px;"><b>:: {{ categoria.descricao }}</b></p>
+		<table id="budget-pledged" class="form" width="90%" cellspacing="5" cellpadding="5">
+			<tr>
+				<th width="30%">Bolsista</th>
+				<th width="5%">Tipo</th>
+				<th width="16%">Instituição</th>
+				<th width="16%">Valor Total</th>
+				<th width="3%"></th>
+			</tr>
+			{% for item in categoria.itens %}
+			<tr>
+				<td><a href="{{ path('relatorioContrapartida', { 'idRelatorio': idRelatorio, 'idContrapartida': item.id, 'categoria': categoria.categoria }) }}" title="Clique para editar item empenhado">{{ item.bolsista.nome }}</a></td>
+				<td>{{ item.bolsista.tipos[item.bolsista.tipo] }}</td>
+				<td>{{ item.bolsista.instituicao }}</td>
+				<td style="text-align:right;">R$ {{ item.valor }}</td>
+				<td style="text-align:center;"><a href="{{ path('relatorioContrapartidaDelete', { 'idRelatorio': idRelatorio, 'idContrapartida': item.id, 'categoria': categoria.categoria }) }}" title="Deletar item" onclick="return confirm('Tem certeza que deseja excluir este item?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Deletar"></a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% else %}
+		<p style="font-size:12px;"><b>:: {{ categoria.descricao }}</b></p>
+		<table id="budget-pledged" class="form" width="90%" cellspacing="5" cellpadding="5">
+			<tr>
+				<th width="30%">Item</th>
+				<th width="5%">Quant.</th>
+				<th width="16%">V. Unitário</th>
+				<th width="16%">V. Total</th>
+				<th width="3%"></th>
+			</tr>
+			{% for item in categoria.itens %}
+			<tr>
+				<td><a href="{{ path('relatorioContrapartida', { 'idRelatorio': idRelatorio, 'idContrapartida': item.id, 'categoria': categoria.categoria }) }}" title="Clique para editar item empenhado">{{ item.descricao }}</a></td>
+				<td style="text-align:center;">{{ item.quantidade }}</td>
+				<td style="text-align:right;">R$ {{ item.unitario }}</td>
+				<td style="text-align:right;">R$ {{ item.total }}</td>
+				<td style="text-align:center;"><a href="{{ path('relatorioContrapartidaDelete', { 'idRelatorio': idRelatorio, 'idContrapartida': item.id, 'categoria': categoria.categoria }) }}" title="Deletar item" onclick="return confirm('Tem certeza que deseja excluir este item?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Deletar"></a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% endif %}
+		{% endfor %}
+	</div><!-- #main-content -->
+</div><!-- #content -->
+{% endblock %}

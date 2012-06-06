@@ -1,0 +1,43 @@
+{% extends "FapescTutorialBundle:Visitante:index.html.twig" %}
+
+{% block title "Recuperar Senha" %}
+
+{% block content %}
+<script type="text/javascript">
+	jQuery(function($){
+	   $("#cpf").mask("999.999.999-99");
+	});
+	$().ready(function() {
+		$("form").validate({
+			rules: {
+				cpf: "required",
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				cpf: "Digite o CPF",
+				senha: {
+					required: "Digite o email",
+					email: "Digite um email válido"
+				}
+			}
+		});
+	});
+</script>
+<div id="login-content">
+	<div id="sidebar" class="login-sidebar">
+		<p id="login-title">Recuperar Senha</p>
+	</div><!-- #sidebar -->
+	<div id="main-content" class="login-main-content">
+		<form class="form-container" action="{{ path('recuperarPost') }}" method="POST">
+			<table cellpadding="5">
+				<tr><td>CPF:<br /><input type="text" id="cpf" name="cpf" value="{{ cpf }}" /></td></tr>
+				<tr><td>E-mail:<br /><input type="text" id="email" name="email" value="{{ email }}" /></td></tr>
+				<tr><td><input type="submit" value="Enviar" /></td></tr>
+			</table>
+		</form>
+	</div><!-- #main-content -->
+</div><!-- #content -->
+{% endblock %}

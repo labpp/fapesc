@@ -1,0 +1,79 @@
+{% extends "FapescTutorialBundle:Usuario:index.html.twig" %}
+
+{% block content %}
+<div id="content">
+
+	<div id="sidebar">
+		<a id="projects-registry" href="{{ path('projetoDados', { 'idProjeto': 0 }) }}" title="Adicionar um projeto ao sistema.">Registrar Projeto</a><br /><br /><br />
+		{% if projetos|length > 0 %}
+		<a id="new-report" href="{{ path('relatorioDados', { 'idRelatorio': 0 }) }}" title="Iniciar um novo relatório.">Iniciar Relatório</a><br /><br /><br />
+		{% endif %}
+		<a id="projects-button" href="{{ path('bolsistas') }}" title="Gerenciar bolsistas">& Gerenciar Bolsistas</a><br /><br /><br />
+                        <a id="projects-button" href="{{ path('fornecedores') }}" title="Gerenciar fornecedores">& Gerenciar Fornecedores</a><br /><br /><br />
+		<p><b>Instruções:</b> Nesta seção é possível visualizar todos os projetos cadastrados e suas respectivas prestações de contas. Antes de iniciar uma prestação de contas (relatório), faz-se necessário cadastrar o projeto ao qual esta se vincula.</p> 
+		<p><b>Cadastrando Projetos:</b> Para cadastrar um novo projeto, clique no botão "Registrar Projeto". Para editar as informações de um projeto existente, clique no título do mesmo na lista "Meus Projetos".</p>
+		<p><b>Editando Prestações de Contas:</b> Para vincular uma nova prestação de contas (relatório) a um projeto já cadastrado, clique no botão "Iniciar Relatório". Para continuar editando um relatório existente, clique na Nota de Liberação desejada, listada em "Meus Projetos".</p>
+		<p><b>Atenção:</b> Antes de iniciar a documentação de um projeto, recomendamos a leitura dos seguintes documentos:
+			<ul>
+				<li><a href="http://www.fapesc.sc.gov.br/index.php?option=com_docman&task=doc_download&gid=247&Itemid=42">Guia Básico - Prestação de Contas;</a></li>
+				<li><a href="http://www.fapesc.sc.gov.br/index.php?option=com_content&view=article&id=41&Itemid=45">Decreto 2060/09;</a></li>
+				<li><a href="http://www.fapesc.sc.gov.br/index.php?option=com_docman&task=doc_download&gid=30&Itemid=42">Decreto 307/03.</a></li>
+
+			</ul>
+		</p>
+	</div><!-- #sidebar -->
+	
+	<div id="main-content">
+		<h1>:: Meus Projetos</h1>
+		
+		{% for projeto in projetos %}
+		<div class="project">
+			<div class="project-label">
+				<span class="project-title"><a href="{{ path('projetoDados', { 'idProjeto': projeto.idProjeto }) }}" title="Clique para editar informações do projeto">{{ projeto.titulo }}</a></span>
+				<span class="project-info">
+					<table width="70%">
+						<tr>
+							<td>Contrato: <b>{{ projeto.contrato }}</b></td>
+							<td>Chamada: <b>{{ projeto.chamada }}</b></td>
+							<td>Início em: <b>{{ projeto.inicio }}</b></td>
+						</tr>
+					</table>
+				</span>
+				<span class="project-delete">
+					<a href="{{ path('projetoDelete', { 'idProjeto': projeto.idProjeto }) }}" title="Excluir projeto" onclick="return confirm('Tem certeza que deseja excluir este projeto?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="ExcluirProjeto"></a>
+				</span>
+			</div>
+			<table class="project-report">
+				<tr>
+					<th colspan="2" >Nota de liquidação</th>
+					<th>Data NL</th>
+					<th>Rubrica</th>
+					<th>Relatório</th>
+					<th>Valor total</th>
+					<th>&nbsp;</th>
+				</tr>
+				{% for relatorio in projeto.relatorios %}
+				<tr>
+					<td style="text-align:center;"><img src="{{ asset('images/report.png') }}" alt="Relatórios"></td>
+					<td><a href="{{ path('relatorioDados', { 'idRelatorio': relatorio.idRelatorio  }) }}" title="Clique para editar informações do relatório">{{ relatorio.nota }}</a></td>
+					<td style="text-align:center;">{{ relatorio.liberacao }}</td>
+					<td style="text-align:center;">{{ relatorio.rubrica }}</td>
+					<td style="text-align:center;">{{ relatorio.tipo }}</td>
+					<td style="text-align:right;">{{ relatorio.valor }}</td>	
+					<td style="text-align:right;"><a href="{{ path('relatorioDelete', { 'idRelatorio': relatorio.idRelatorio }) }}" title="Excluir relatório" onclick="return confirm('Tem certeza que deseja excluir este relatório?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Excluir"></a></td>						
+				</tr>
+				{% else %}
+				<tr>
+					<td colspan="6">Nenhum relatório...</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div><!-- #project -->
+		{% else %}
+		<p>Nenhum projeto...</p>
+		{% endfor %}
+		
+	</div><!-- #main-content -->
+	
+</div><!-- #content -->
+{% endblock %}

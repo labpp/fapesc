@@ -1,0 +1,36 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block title "Plano de Metas" %}
+
+{% block content %}
+<div id="content">
+				
+	<div id="sidebar">
+		<a id="projects-button" href="{{ path('projetoMeta', { 'idProjeto': idProjeto, 'idMeta': 0 }) }}" title="Adicionar nova meta">+ Adicionar Meta</a><br /><br />
+		<p><b>Instruções:</b><br /><br />Cadastre as metas de trabalho e respectivos indicadores exatamente como informado na proposta de trabalho aprovada pela FAPESC.<br /><br />Para cadastrar uma nova meta, clique no botão "Adicionar Meta".<br /><br />Para editar uma meta já existente, basta clicar em sua descrição na listagem "Plano de Metas".<br /><br />O botão "X", em cinza, exclui uma meta definitivamente.</p>
+	</div><!-- #sidebar -->
+			
+	<div id="main-content">
+		<h1>:: Plano de Metas</h1>
+		<table id="goals" class="form" width="90%" cellspacing="5" cellpadding="5">
+			<tr>
+				<th width="30%" >Meta</th>
+				<th width="30%" >Indicadores</th>
+				<th width="3%"></th>
+			</tr>
+			{% for meta in metas %}
+			<tr>
+				<td ><a href="{{ path('projetoMeta', { 'idProjeto': idProjeto, 'idMeta': meta.id }) }}" title="Editar esta meta de trabalho">{{ meta.meta }}</a></td>
+				<td >{{ meta.indicador }}</td>
+				<td style="text-align:center;"><a href="{{ path('projetoMetaDelete', { 'idProjeto': idProjeto, 'idMeta': meta.id }) }}" title="Deletar meta" onclick="return confirm('Tem certeza que deseja excluir esta meta?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Deletar"></a></td>
+			</tr>
+			{% else %}
+			<tr>
+				<td colspan="2">Nenhuma meta...</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div><!-- #main-content -->			
+			
+</div><!-- #content -->
+{% endblock %}

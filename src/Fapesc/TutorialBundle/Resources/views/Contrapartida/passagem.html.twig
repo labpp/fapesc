@@ -1,0 +1,104 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block title "Contrapartidas - Passagem" %}
+
+{% block content %}
+<script type="text/javascript">
+    jQuery(function($){
+        $(".hora").mask("99/99/9999 99:99");
+        $(".dia").mask("99/99/9999");
+        $("#valor").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+    });
+    $(document).ready(function(){
+        $("form").validate({
+            rules: {
+                origem: "required",
+                saida: "required",
+                destino: "required",
+                chegada: "required",
+                tiquete: "required",
+                compra: "required",
+                valor: "required",
+                objetivo: "required",
+                resultado: "required"
+            },
+            messages: {
+                origem: "Digite a origem",
+                saida: "Digite a data e hora da saída",
+                destino: "Digite o destino",
+                chegada: "Digite a data e hora da chegada",
+                tiquete: "Digite o tíquete",
+                compra: "Digite a data da compra",
+                valor: "Digite o valor",
+                objetivo: "Digite o objetivo",
+                resultado: "Digite o resultado"
+            }
+        });
+    });
+</script>
+<div id="content">
+    <div id="sidebar">
+        <a id="projects-button" href="{{ path('fornecedores') }}" title="Gerenciar fornecedores">& Gerenciar Fornecedores</a><br /><br />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
+    </div><!-- #sidebar -->
+    <div id="main-content">
+        <h1>:: Contrapartidas - Passagem</h1>
+        <form class="form-container" action="{{ path('relatorioContrapartidaPassagemPost', { 'idRelatorio': idRelatorio, 'idContrapartida': idContrapartida }) }}" method="POST">
+            <table class="form" width="50%">
+                <tr>
+                    <td>Tipo: <br />
+                        <select name="tipo" title="Selecione o tipo de passagem">
+                            {% for item in tipoSelect %}
+                            <option value="{{ item.value }}" {% if item.value == tipo %} selected="selected" {% endif %}>{{ item.text }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>Fornecedor:<br />
+                        <select name="fornecedor">
+                            {% for item in fornecedores %}
+                            <option value="{{ item.idFornecedor }}" {% if item.idFornecedor == fornecedor.idFornecedor %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cadastro }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <table class="form" width="50%">
+                <tr>
+                    <td>Origem:<br /><input type="text" name="origem" value="{{ origem }}" title="Cidade de origem da viagem" /></td>
+                    <td>Saída:<br /><input type="text" name="saida" class="hora" value="{{ saida }}" /></td>
+                </tr>
+            </table>
+            <table class="form" width="50%">
+                <tr>
+                    <td>Destino: <br /> <input type="text" name="destino"  value="{{ destino }}" title="Cidade de destino da viagem" /></td>
+                    <td>Chegada: <br /> <input type="text" name="chegada" class="hora" value="{{ chegada }}" /></td>
+                </tr>
+            </table>
+            <table class="form" width="50%">
+                <tr>
+                    <td>Número do Tíquete:<br/><input type="text" name="tiquete" value="{{ tiquete }}" title="Informe o número ou localizador da passagem" /></td>
+                    <td>Data da Compra:<br/><input type="text" name="compra" class="dia" value="{{ compra }}" title="Informe a data da compra da passagem" /></td>
+                    <td>Valor:<br/><input type="text" name="valor" id="valor" value="{{ valor }}" title="Informe o valor da passagem" /></td>
+                </tr>
+            </table>
+            <table class="form" width="90%">
+                <tr>
+                    <td>Objetivos:
+                        <textarea name="objetivo" rows="10" cols="70" title="Escreva os objetivos associados ao uso da passagem">{{ objetivo }}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Resultados Alcançados:
+                        <textarea name="resultado" rows="10" cols="70" title="Descreva os resultados alcançados associados ao uso da passagem">{{ resultado }}</textarea>
+                    </td>
+                </tr>
+            </table>
+            <table class="submit" width="90%">
+                <tr>
+                    <td><input type="submit" value="Salvar" title=""/></td>
+                </tr>
+            </table>
+        </form>
+    </div><!-- #main-content -->			
+</div><!-- #content -->
+{% endblock %}

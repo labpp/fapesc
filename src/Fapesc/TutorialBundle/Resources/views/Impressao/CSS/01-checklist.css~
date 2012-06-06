@@ -1,0 +1,45 @@
+#checklist #introducao{
+	margin-top:3%;
+	margin-bottom:5%;
+	float:left;
+}
+#checklist #agradecimento{
+	top:5%;
+	float:left;
+	width:80%;
+}
+
+#checklist .texto{
+	text-align: justify;
+}
+#checklist #tabela{
+	margin-bottom:5%;
+	width: 93.5%;
+	height: 23.1%;
+	font-size: 16pt;
+	text-align: left;
+	float:left;
+}
+#checklist #legenda{
+	float:left;
+	margin-top:10%;
+	height:10%;
+	width:40%;
+	text-align:left;
+	font-size: 8pt;	
+}
+#checklist #assinatura{
+	float:left;
+	border-top: 1pt solid #000;
+	margin-top:12%;
+	margin-left:12%;
+	padding-top:4%;
+	font-size: 12pt;
+	height:15.8%;
+	width:34.64%;	
+	text-align:center;
+}
+
+#checklist .fontePadrao{
+	font-size:10pt;
+}

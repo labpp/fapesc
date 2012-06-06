@@ -1,0 +1,118 @@
+<div id="corpo">
+	<div id="dispendio">
+		<h1 class ="head" > LISTAGEM DE DISPÊNDIOS (DOCUMENTO FISCAL) </h1>
+		<div id="parte" class = "head" > IV </div>
+
+		<div id="fornecedor" class="linha2">
+				<div class="espacamentoEsq menor">
+					Fornecedor:
+				</div>	
+				<div class="maior">
+					{{ fornecedor }}
+				</div>
+			</div>
+		
+		<div id="cnpj" class="linha2">
+				<div class="espacamentoEsq menor">
+					CNPJ:
+				</div>	
+				<div class="maior">
+					{{ cnpj }}
+				</div>
+			</div>
+
+		<div id="distribuicao" class="linha3">
+				<div class="espacamentoEsq menor">
+					Distribuição do Dispêndio:
+				</div>	
+				<div class="maior">
+					{{ distribuicao }}
+				</div>
+		</div>
+
+		<div id="documentoFiscal" class="linha4">
+				<div class="espacamentoEsq menor">
+					Documento Fiscal:
+				</div>	
+				<div class="maior">
+					{{ documentoFiscal }}
+				</div>
+		</div>
+		<div id="serie" class="linha4">
+				<div class="espacamentoEsq menor">
+					Série:
+				</div>	
+				<div class="maior">
+					{{ serie }}
+				</div>
+		</div>
+		<div id="dataEmissao" class="linha4">
+				<div class="espacamentoEsq menor">
+					Data da Emissão:
+				</div>	
+				<div class="maior">
+					{{ dataEmissao }}
+				</div>
+		</div>
+		<div id="valor" class="linha4">
+				<div class="espacamentoEsq menor">
+					Valor:
+				</div>	
+				<div class="maior">
+					R$ {{ valor }}
+				</div>
+		</div>
+		<div id="noChequeRecibo" class="linha4">
+				<div class="espacamentoEsq menor">
+					No Cheque/Recibo Eletrônico:
+				</div>	
+				<div class="maior">
+					{{ noChequeRecibo }}
+				</div>
+		</div>
+		<div id="dataPagamento" class="linha4">
+				<div class="espacamentoEsq menor">
+					Data do Pagamento:
+				</div>	
+				<div class="maior">
+					{{ dataPagamento }}
+				</div>
+		</div>
+		<!--"Cabeçalho" do corpo -->
+
+		<!--texto central -->	
+		<div id="textoCentral">
+				<p>
+					Caro Coordenador, <br> 
+					cole aqui o recibo ou documento fiscal (ou recibo) No. {{ noChequeRecibo }}<br> 
+					emitido em {{ dataEmissao }} no valor de R$ {{ valor }}, por <br>
+					{{ fornecedor }}
+				</p>
+		
+		</div>
+		<!--texto central -->
+	</div><!--dispendio-->			
+	
+	
+	<div id="dispendioDiarias">
+		<table class="beneficiarios">
+			<tr>
+				<td>
+					<span class="espacamentoEsq menor">
+						Beneficiários:
+					</span><br>
+					{{ beneficiarios }}
+				</td>
+			</tr>
+			<tr>		
+				<td>
+					<span class="espacamentoEsq menor">
+						Justificativas:
+					</span><br>				
+						{{ justificativas }}				
+				</td>
+			</tr>	
+		</table>
+	</div> 
+
+</div> <!--corpo-->

@@ -1,0 +1,32 @@
+security:
+  encoders:
+    Fapesc\TutorialBundle\Entity\Usuario:
+      algorithm: sha1
+      iterations: 1
+      encode_as_base64: false
+
+  role_hierarchy:
+    ROLE_ADMIN: ROLE_USER
+
+  providers:
+    main:
+      entity: { class: Fapesc\TutorialBundle\Entity\Usuario, property: cpf }
+
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+    secured_area:
+      pattern: ^/
+      form_login:
+        login_path: /login
+        check_path: /loginPost
+        username_parameter: cpf
+        password_parameter: senha
+      logout: ~
+      anonymous: ~
+
+  access_control:
+    - { path: ^/(login|cadastrar|recuperar), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/, roles: ROLE_USER }

@@ -1,0 +1,70 @@
+<div id="relatorio3">
+	<div id="corpo">
+    		<table class="fontePadrao">
+			<tr>
+				<td class = "margemLateral retangulo" colspan="2">                    
+                    <div class="descricao menor">	Comentários / Justificativas sobre os resultados:	</div>
+                    <div id="texto"> 
+                       {{ resultado }}
+                	</div>
+				</td>
+       		</tr>
+            <tr>	
+             	<td class = "margemLateral retangulo" colspan="2"> 
+                    <div class="descricao menor">
+                        Bens de Capital – Os equipamentos e demais itens de capital prevists no plano de tarbalho foram adquiridos? Caso NEGATIVO, justifique:
+                    </div>
+                    <div id="texto" class="margemLateral fontePadrao"> 
+                       {{ justificativa }}			
+                    </div>
+                </td>
+  			</tr>
+            <tr>
+                <td class = "margemLateral retangulo" colspan="2"> 
+                    <div class="descricao menor">	
+                        Caso AFIRMATIVO, descreva as dificuldades enfrentadas quando da execução do projeto:
+                    </div>
+                    <div id="texto" class="margemLateral fontePadrao"> 
+                       {{ dificuldade }}			
+                    </div>
+            	</td>
+            </tr>
+            <tr>
+                <td class = "margemLateral retangulo" colspan="2">
+                    <div class="descricao menor">	
+                        Houve alteração na equipe executora do projeto? Caso AFIRMATIVO, especifique tais mudanças:		
+                    </div>
+                    <div id="texto" class="margemLateral fontePadrao"> 
+                        {{ alteracao }}
+                    </div>
+                </td>
+          	</tr>
+            <tr>
+                <td class="margemLateral" style="vertical-align:top;">
+                	<div class ="descricao menor">
+                    	Assinatura do Coordenador:
+                   	</div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    {{ dataExtenso }}
+                 </td>
+                 
+                 <td style="text-align:center;">
+                     <br />
+                     <br />
+                     <br />
+                     <br />
+			<div id="assinatura">
+			    <hr />
+			    {{ coordenador }}<br/>
+			    Coordenador do Projeto
+			</div>
+            	</td>                                               			
+	</tr>	
+		</table>			
+	</div>	
+</div>
+
+

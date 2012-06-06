@@ -1,0 +1,39 @@
+<div id="corpo">
+	<div id = "conciliacao">
+		<h1 class ="head" > CONCILIAÇÃO BANCÁRIA </h1>
+		<div id="tabela">
+			<table border=1 width=100% cellspacing=0 bordercolor='#000'  style=border-collapse:'collapse'>
+				<tr>
+					<td ><h2>Saldo da conta bancária {{ conta }} / agência {{ agencia }} – Banco {{ banco }} em {{ data }} </h2></td>
+					<td class="valor"> {{ valor }} </td>
+				</tr>
+				<tr> <td height=7pt COLSPAN=2> </td> </tr>
+				<tr>
+					<td id="chequesEmitidos" COLSPAN=2><h3> CHEQUES EMITIDOS E NÃO DESCONTADOS ATÉ A DATA FINAL DO PERÍODO </h3></td>
+				</tr>
+			</table>		
+			{{ tabela }}
+		 </div>
+		<div id="tabela">
+			<table border=1 width=100% cellspacing=0 bordercolor='#000'  style=border-collapse:'collapse'>
+				<tr>
+					<td class="direita"><h2>Total dos cheques não descontados em {{ data }} </h2></td>
+					<td class="valor"> {{ total }} </td>
+				</tr>
+				<tr>
+					<td class="direita">Saldo da conciliação bancária</td>
+					<td class="valor"> {{ saldo }} </td>
+				</tr>
+			</table>	
+		</div>
+		<div  class="retangulo">
+			<div id="assinatura"> 
+				{{ nome }} <br/>
+				CPF {{ cpf }}
+			</div>
+		</div>
+	</div>
+</div>	
+
+
+

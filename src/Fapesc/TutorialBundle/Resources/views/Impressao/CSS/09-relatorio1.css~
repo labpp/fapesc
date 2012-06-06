@@ -1,0 +1,93 @@
+/*#relatorio1 .linha1 {
+	margin-bottom:-0.2%;
+	height: 5%;
+	text-align:center;
+	border-bottom: 0.8pt solid #000;
+}
+#relatorio1 h1{
+	float:left;
+	width: 80%;
+}
+#relatorio1 #parte{
+	float:left;
+	border-left: 0.8pt solid #000;
+}
+*/
+#relatorio1 .linhas{
+	height:4%;
+	border-bottom: 0.8pt solid #000;
+	text-align:left;
+}
+
+#relatorio1 .linhaDivBaixo{
+	height:0.5%;
+	border-bottom: 0.8pt solid #000;
+}
+#relatorio1 .linhaDivCima{
+	height:0.5%;
+	border-bottom: 0.8pt solid #000;
+}
+#relatorio1 #projeto{
+	float:left;
+	width:70%;
+}
+#relatorio1 #coordenador{
+	float:left;
+	border-left: 0.8pt solid #000;
+}
+
+#relatorio1 #area{
+	float:left;
+	width:55%;
+}
+#relatorio1 #localizacao{
+	float:left;
+	border-left: 0.8pt solid #000;
+}
+
+#relatorio1 #instituicao{
+	float:left;
+}
+
+#relatorio1 #total{
+	float:left;
+	width:30%;
+}
+#relatorio1 #inicio{
+	float:left;
+	width:20%;
+	border-left: 0.8pt solid #000;
+}
+#relatorio1 #dataRelatorio{
+	float:left;
+	width:25%;
+	border-left: 0.8pt solid #000;
+}
+#relatorio1 #dataParcela{
+	float:left;	
+	border-left: 0.8pt solid #000;
+}
+
+#relatorio1 #total{
+	width:35%;
+	float:left;
+}
+#relatorio1 #custeio{
+	width:35%;
+	float:left;
+	border-left: 0.8pt solid #000;
+}
+#relatorio1 #capital{
+	float:left;
+	border-left: 0.8pt solid #000;
+}
+
+#relatorio1 #resumo{
+	position:relative;
+	height:1%;
+	border-bottom:0.8pt solid #000;
+}
+#relatorio1 #texto{
+	position:relative;
+	text-align:justify;
+}

@@ -1,0 +1,20 @@
+#plano #linhaPontilhada{
+	border-top: thin dotted;
+	position:relative;
+	left:3.5%;
+	width:100%;
+	margin-top:10%;
+}
+#plano #textoFinal{
+	position:relative;
+	width:100%;
+	display:table-cell;
+	vertical-align:middle;
+	padding-top:10%;
+	color:gray;
+	font-size: 20pt;
+	text-align: center;
+	
+}
+
+

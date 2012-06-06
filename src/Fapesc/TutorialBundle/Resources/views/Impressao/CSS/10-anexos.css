@@ -1,0 +1,69 @@
+#anexos .linha1 {
+	
+	height: 5%;
+	float:left;
+	text-align:center;
+	border-bottom: 0.8pt solid #000;
+	
+}
+
+#anexos #titulo {
+	width:85.8%;
+	text-align:center;
+	font-size:15pt;
+	padding-top:0.1%;
+}
+
+#anexos #parte {
+	width:14%;
+		left:86%;
+	font-size:20pt;
+
+	border-left: 0.8pt solid #000;
+		padding-top:0.1%;
+}
+
+#anexos #conteudo {
+	float:left;
+	margin-top:10%;
+	text-align:left;
+	text-align:justify;
+}
+
+#anexos .tamFont{
+	font-size:11pt;
+}
+
+#anexos table.anexos {
+
+	float:left;
+	margin-left:3.5%;
+	margin-top:30%;
+	width:92%;
+	border: 0.8pt solid #000;
+	border-collapse:collapse;
+}
+
+#anexos table.anexos tr td {
+	border:0.8pt solid #000;
+
+}
+
+#anexos .anex {
+	width:75%;
+	text-align:left;
+}
+
+#anexos #textoCentral{
+	display:block;
+	page-break-inside:avoid;
+	color:gray;
+	font-size: 15pt;
+	float:left;
+	margin-top:20%;
+	text-align: center;
+}
+
+#anexos td{
+	text-align:center;
+}

@@ -1,0 +1,65 @@
+#capa #titulo {
+	font-size:16pt;
+	text-align:center;
+
+	width:100%;
+	float:left;
+	margin-top:8%; 
+}
+
+
+#capa #subtitulos {
+	width:100%;	
+	float:left;
+	margin-top:8%;
+
+}
+
+#capa #subtitulos .espacamento {
+	text-align:center;
+	width:100%;
+	margin-top:2%;
+}
+
+#capa #subtitulos #chamada {
+	top:4%;
+	font-weight:900;
+}
+
+#capa #subtitulos #numContrato {
+	top:36%;
+	font-weight:900;
+}
+
+#capa #subtitulos #empenho {
+	top:70%;
+	font-weight:900;
+}
+
+#capa #projeto {
+	text-align:center;
+	width:100%;
+	float:left;
+	margin-top:24%;
+}
+
+#capa #coordenador {
+	text-align:center;
+	width:100%;
+	float:left;
+	margin-top:20%;
+}
+
+#capa #data {
+	text-align:center;
+	width:100%;
+	float:left;
+	float:left;
+	margin-top:20%;
+}
+
+#capa .tamFont{
+	font-size: 11pt;
+} 
+
+

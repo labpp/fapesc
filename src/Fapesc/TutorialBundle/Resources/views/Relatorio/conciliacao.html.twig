@@ -1,0 +1,67 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block title "Conciliacao" %}
+
+{% block content %}
+<div id="content">
+	<div id="sidebar">
+		<a id="projects-button" href="{{ path('relatorioExtrato', { 'idRelatorio': idRelatorio }) }}" title="Clique para editar dados do extrato">+ Editar extrato</a><br /><br /><br />
+		<a id="projects-button" href="{{ path('relatorioCheque', { 'idRelatorio': idRelatorio, 'idCheque': 0 }) }}" title="Adicionar novo cheque">+ Adicionar Cheque</a><br /><br />
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
+	</div><!-- #sidebar -->
+	<div id="main-content">
+		<h1>:: Conciliação Bancária</h1>
+		<div id="conc-panel">
+			<table style="padding-bottom: 8px;">
+				<tr>
+					<th>Data do Extrato</th>
+					<th>Saldo do Extrato:</th>
+				</tr>
+				<tr>
+					<td>{{ data }}</td>
+					<td title="Montante informado no saldo impresso">R$ {{ saldo }}</td>
+				</tr>
+			</table>
+		</div>
+		<h2>Cheques não compensados</h2>
+		<table id="budget-pledged" class="form" width="90%" cellspacing="5" cellpadding="5">
+			<tr>
+				<th width="30%">Número do Cheque</th>
+				<th width="20%">Data de Emissão</th>
+				<th width="20%">Data de Compensação</th>
+				<th width="30%">Valor</th>
+				<th width="3%"></th>
+			</tr>
+			{% for cheque in cheques %}
+			<tr>
+				<td><a href="{{ path('relatorioCheque', { 'idRelatorio': idRelatorio, 'idCheque': cheque.idCheque }) }}" title="Clique para editar dados do cheque">{{ cheque.numero }}</a></td>
+				<td style="text-align:center;">{{ cheque.emissao }}</td>
+				<td style="text-align:center;">{{ cheque.compensacao }}</td>
+				<td style="text-align:center;">R$ {{ cheque.valor }}</td>
+				<td style="text-align:center;"><a href="{{ path('relatorioChequeDelete', { 'idRelatorio': idRelatorio, 'idCheque': cheque.idCheque }) }}" title="Deletar cheque" onclick="return confirm('Tem certeza que deseja excluir este cheque?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Deletar"></a></td>
+			</tr>
+			{% else %}
+			<tr>
+				<td colspan="4">Nenhum cheque...</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<div class="total">
+			<table>
+				<tr>
+					<td width="225" style="text-align: right; padding-left: 4px; padding-right: 10px; font-weight: bold; background: #DDD">Total de cheques não compensados</td>
+					<td width="175" style="background: #EEEEEE; text-align: right;">R$ {{ total }}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="total">
+			<table>
+				<tr>
+					<td width="225" style="text-align: right; padding-right: 10px; font-weight: bold; background: #DDD">Saldo Real</td>
+					<td width="175" style="background: #EEEEEE; text-align: right;">R$ {{ real }}</td>
+				</tr>
+			</table>
+		</div>
+	</div><!-- #main-content -->
+</div><!-- #content -->
+{% endblock %}

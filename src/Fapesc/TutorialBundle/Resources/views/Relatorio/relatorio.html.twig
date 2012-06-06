@@ -1,0 +1,64 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block title "Relatório Técnico - Informações Gerais" %}
+
+{% block content %}
+<script type="text/javascript">
+	$().ready(function() {
+		$("form").validate({
+			rules: {
+				resultado: "required",
+				justificativa: "required",
+				dificuldade: "required",
+			},
+			messages: {
+				resultado: "Digite o resultado",
+				justificativa: "Digite a justificativa",
+				dificuldade: "Digite a dificuldade",
+			}
+		});
+	});
+</script>
+<div id="content">
+			
+	<div id="sidebar">
+		<p><b>Instruções:</b><br /><br />O Relatório Técnico pode ser "PARCIAL", se ainda existirem recursos de capital ou custeio para serem empenhados dentro do cronograma do projeto, ou "FINAL", se a Nota de Liberação a que se refere o presente Relatório Técnico encerra o orçamento do projeto.<br /><br />No relatório parcial, os campos devem ser preenchidos apenas no âmbito da aplicação dos recursos disponibilizados pela Nota de Liberação em questão.</p>
+	</div><!-- #sidebar -->
+
+	<div id="main-content">
+		<h1>:: Relatório Técnico</h1>
+		<form class="form-container" action="{{ path('relatorioRelatorioPost', { 'idRelatorio': idRelatorio }) }}" method="POST">
+			<table class="form" width="90%">
+				<tr>
+					<td>Resultados alcançados (até 1000 caracteres):<br />
+					<textarea name="resultado" rows="15" cols="70">{{ resultado }}</textarea>
+				</tr>
+			</table>
+			<table class="form" width="90%">
+				<tr>
+					<td>Os equipamentos e demais itens de capital previstos no plano de trabalho, foram adquiridos? Caso negativo, justifique:<br />
+					<textarea name="justificativa" rows="10" cols="70">{{ justificativa }}</textarea>
+				</tr>
+			</table>
+			<table class="form" width="90%">
+				<tr>
+					<td>Descreva as principais dificuldades enfrentadas quando da execução do projeto:<br />
+					<textarea name="dificuldade" rows="10" cols="70">{{ dificuldade }}</textarea>
+				</tr>
+			</table>
+			<table class="form" width="90%">
+				<tr>
+					<td>Houve alteração na equipe do projeto? Caso afirmativo, especifique as mudanças:<br />
+					<textarea name="alteracao" rows="10" cols="70">{{ alteracao }}</textarea>
+				</tr>
+			</table>				
+			<table class="submit" width="90%">
+				<tr>
+					<td><input type="submit" value="Salvar" title="" /></td>
+				</tr>
+			</table>
+		</form>					
+	</div><!-- #main-content -->			
+			
+</div><!-- #content -->
+{% endblock %}

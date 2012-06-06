@@ -1,0 +1,16 @@
+{% extends "FapescTutorialBundle:Usuario:index.html.twig" %}
+
+{% block title "Dados do Usuário" %}
+
+{% block content %}
+<div id="content">
+	<div id="sidebar">
+		<a id="projects-button" href="{{ path('senha') }}" >+ Alterar Senha</a><br /><br /><br />
+		<p><b>Instruções:</b><br /><br />Utilize o formulário ao lado para atualizar seus dados cadastrais.</p>
+	</div><!-- #sidebar -->
+	<div id="main-content">
+		<h1>:: Dados do Usuário</h1>
+		{% include "FapescTutorialBundle:Usuario:formDados.html.twig" with { "action" : action } %}
+	</div><!-- #main-content -->
+</div><!-- #content -->
+{% endblock %}

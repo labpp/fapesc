@@ -1,0 +1,36 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block title "Relatório Técnico - Plano de Metas" %}
+
+{% block content %}
+<div id="content">
+				
+	<div id="sidebar">
+		<!-- <a id="projects-button" href="{{ path('relatorioMeta', { 'idRelatorio': idRelatorio, 'idMeta': 0 }) }}" title="Adicionar nova meta">+ Adicionar meta</a><br /><br /> -->
+		<p><b>Instruções:</b><br /><br />O Plano de Metas listado nesta seção deve estar consonante com as informações contidas na proposta de trabalho aprovada pela FAPESC.<br /><br />Para editar o estado atual de uma meta, clique em sua descrição.<br /><br />Observação: Caso necessite editar a descrição de uma meta, acesse o link "Meus Projetos" (vide cabeçalho do site), selecione o título do projeto e, sem seguida, clique na aba "Plano de Metas".</p>
+	</div><!-- #sidebar -->
+			
+	<div id="main-content">
+		<h1>:: Plano de Metas</h1>
+		<table id="goals" class="form" width="90%" cellspacing="5" cellpadding="5">
+			<tr>
+				<th width="30%" >Meta</th>
+				<th width="10%" >Resultados</th>
+				<th width="30%" >Justificativas</th>
+			</tr>
+			{% for meta in metas %}
+			<tr>
+				<td ><a href="{{ path('relatorioMeta', { 'idRelatorio': idRelatorio, 'idMeta': meta.id }) }}" title="Editar meta de trabalho">{{ meta.meta }}</a></td>
+				<td style="text-align:center;">{{ meta.resultado }}</td>
+				<td >{{ meta.justificativa }}</td>
+			</tr>
+			{% else %}
+			<tr>
+				<td colspan="4">Nenhuma meta...</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div><!-- #main-content -->			
+			
+</div><!-- #content -->
+{% endblock %}
