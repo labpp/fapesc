@@ -1,3 +1,5 @@
+teste
+
 Symfony Standard Edition
 ========================
 
