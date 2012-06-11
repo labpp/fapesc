@@ -1,0 +1,33 @@
+{% extends "FapescTutorialBundle:Usuario:index.html.twig" %}
+
+{% block title "Pesquisadores" %}
+
+{% block content %}
+<div id="content">
+	<div id="sidebar">
+		<a id="projects-button" href="{{ path('pesquisador', { 'idPesquisador': 0 }) }}" title="Adicionar pesquisador">+ Adicionar Pesquisador</a><br /><br />
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
+	</div><!-- #sidebar -->
+	<div id="main-content">
+		<h1>:: Pesquisadores</h1>
+		<table id="budget-pledged" class="form" width="90%" cellspacing="5" cellpadding="5">
+			<tr>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Instituição</th>
+			</tr>
+			{% for pesquisador in pesquisadores %}
+			<tr>
+				<td><a href="{{ path('pesquisador', { 'idPesquisador': pesquisador.idPesquisador }) }}" title="Clique para editar dados do pesquisador">{{ pesquisador.nome }}</a></td>
+				<td>{{ pesquisador.cpf }}</td>
+				<td>{{ pesquisador.instituicao }}</td>
+			</tr>
+			{% else %}
+			<tr>
+				<td colspan="3">Nenhum pesquisador...</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div><!-- #main-content -->
+</div><!-- #content -->
+{% endblock %}

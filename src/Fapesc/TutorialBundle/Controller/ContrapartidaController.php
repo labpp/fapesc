@@ -14,6 +14,8 @@ use Fapesc\TutorialBundle\Entity\Fornecedor;
 use Fapesc\TutorialBundle\Entity\Bolsa;
 use Fapesc\TutorialBundle\Entity\Bolsista;
 use Fapesc\TutorialBundle\Entity\Passagem;
+use Fapesc\TutorialBundle\Entity\Salario;
+use Fapesc\TutorialBundle\Entity\Pesquisador;
 
 class ContrapartidaController extends RelatorioController {
 
@@ -64,6 +66,7 @@ class ContrapartidaController extends RelatorioController {
                 array("value" => "material", "text" => "Material de Consumo"),
                 array("value" => "passagem", "text" => "Passagem"),
                 array("value" => "bolsa", "text" => "Bolsa"),
+                array("value" => "salario", "text" => "Salários e Encargos"),
         );
         $dados["opcoes"] = $categorias;
         $dados["categorias"] = array();
@@ -127,6 +130,15 @@ class ContrapartidaController extends RelatorioController {
                             $dados["categorias"]["bolsa"]["categoria"] = "bolsa";
                             $dados["categorias"]["bolsa"]["itens"][] = $bolsa->toArray();
                             $dados["empenhado"] += $bolsa->getValor(true);
+                        }
+                        break;
+                    case "4": //salario
+                        $salario = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Salario")->find($contrapartida->getItem());
+                        if (is_object($salario)) {
+                            $dados["categorias"]["salario"]["descricao"] = "Salários e Encargos";
+                            $dados["categorias"]["salario"]["categoria"] = "salario";
+                            $dados["categorias"]["salario"]["itens"][] = $salario->toArray();
+                            $dados["empenhado"] += $salario->getProporcional(true);
                         }
                         break;
                 }
@@ -485,6 +497,42 @@ class ContrapartidaController extends RelatorioController {
         $em->flush();
         $this->contrapartidaInsert($idRelatorio, 3, $bolsa->getId());
         $this->get("session")->setFlash("sucesso", "Bolsa {$acao} com sucesso!");
+        return $this->forward("FapescTutorialBundle:Contrapartida:contrapartidas", array("idRelatorio" => $idRelatorio));
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/salario")
+     * @Template("FapescTutorialBundle:Contrapartida:salario.html.twig")
+     */
+    public function salarioAction($idRelatorio, $idContrapartida) {
+        $salario = ($idContrapartida == 0) ? new Salario() : $this->getDoctrine()->getRepository("FapescTutorialBundle:Salario")->find($idContrapartida);
+        $dados = $salario->toArray();
+        $dados["idRelatorio"] = $idRelatorio;
+        $dados["idContrapartida"] = $idContrapartida;
+        return array_merge($this->usuario(), $this->menu("relatorio", "contrapartidas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->pesquisadores(), $dados);
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/salario/post")
+     * @Template()
+     */
+    public function salarioPostAction($idRelatorio, $idContrapartida) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $salario = $em->getRepository("FapescTutorialBundle:Salario")->find($idContrapartida);
+        if (!is_object($salario)) { //inclui novo
+            $salario = new Salario();
+            $salario->populate($_POST);
+            $salario->setPesquisador($em->getRepository("FapescTutorialBundle:Pesquisador")->find($_POST["pesquisador"]));
+            $em->persist($salario);
+            $acao = "incluído";
+        } else { //edita existente
+            $salario->populate($_POST);
+            $salario->setPesquisador($em->getRepository("FapescTutorialBundle:Pesquisador")->find($_POST["pesquisador"]));
+            $acao = "alterado";
+        }
+        $em->flush();
+        $this->contrapartidaInsert($idRelatorio, 4, $salario->getId());
+        $this->get("session")->setFlash("sucesso", "Salário {$acao} com sucesso!");
         return $this->forward("FapescTutorialBundle:Contrapartida:contrapartidas", array("idRelatorio" => $idRelatorio));
     }
 

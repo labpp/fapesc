@@ -132,6 +132,20 @@ class FapescController extends Controller {
         return array("bolsistas" => $dados);
     }
 
+    protected function pesquisadores() {
+        $pesquisadores = $this->getDoctrine()->getRepository("FapescTutorialBundle:Pesquisador")->findAll();
+        if (empty($pesquisadores)) {
+            //$this->get("session")->setFlash("aviso", "Nenhum pesquisador cadastrado!");
+            //return $this->forward("FapescTutorialBundle:Pesquisador:pesquisador", array("idPesquisador" => 0));
+            throw new \Exception("Nenhum pesquisador cadastrado!");
+        } else {
+            foreach ($pesquisadores as $pesquisador) {
+                $dados[] = $pesquisador->toArray();
+            }
+        }
+        return array("pesquisadores" => $dados);
+    }
+
     /**
      * @Route("/")
      * @Template()

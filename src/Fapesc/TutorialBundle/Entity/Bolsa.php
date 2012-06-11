@@ -203,7 +203,7 @@ class Bolsa {
     }
 
     public function populate($data) {
-        $this->setDescricao(empty($data["descricao"]) ? "Sem descrição" : $data["descricao"]);
+        $this->setDescricao($data["descricao"]);
         $this->setInicio($data["inicio"]);
         $this->setFim($data["fim"]);
         $this->setData($data["data"]);

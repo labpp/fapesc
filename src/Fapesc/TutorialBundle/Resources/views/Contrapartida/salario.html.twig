@@ -1,0 +1,61 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block title "Contrapartidas - Salários e Encargos" %}
+
+{% block content %}
+<script type="text/javascript">
+    jQuery(function($){
+        $(".data").mask("99/9999");
+        $(".valor").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+    });
+    $(document).ready(function(){
+        $("form").validate({
+            rules: {
+                carga: "required",
+                data: "required",
+                bruto: "required",
+                proporcional: "required"
+            },
+            messages: {
+                carga: "Digite a carga horária",
+                data: "Digite o período de referência",
+                bruto: "Digite o vencimento bruto",
+                proporcional: "Digite o valor proporcional"
+            }
+        });
+    });
+</script>
+<div id="content">
+    <div id="sidebar">
+        <a id="projects-button" href="{{ path('pesquisadores') }}" title="Gerenciar pesquisadores">& Gerenciar Pesquisadores</a><br /><br />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
+    </div><!-- #sidebar -->
+    <div id="main-content">
+        <h1>:: Contrapartidas - Salários e Encargos</h1>
+        <form class="form-container" action="{{ path('relatorioContrapartidaSalarioPost', { 'idRelatorio': idRelatorio, 'idContrapartida': idContrapartida }) }}" method="POST">
+            <table class="form" width="90%">
+                <td width="15%">Pesquisador:<br />
+                    <select name="pesquisador">
+                        {% for item in pesquisadores %}
+                        <option value="{{ item.idPesquisador }}" {% if item.idPesquisador == pesquisador.idPesquisador %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cpf }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <tr>
+                    <td>Carga Horária:<br /><input type="text" name="carga" value="{{ carga }}" /> horas</td>
+                    <td>Período de Referência:<br /><input type="text" class="data" name="data" value="{{ data }}" /></td>
+                </tr>
+                <tr>
+                    <td>Vencimento Bruto:<br />R$ <input type="text" class="valor" name="bruto" value="{{ bruto }}" /></td>
+                    <td>Valor Proporcional:<br />R$ <input type="text" class="valor" name="proporcional" value="{{ proporcional }}" /></td>
+                </tr>					
+            </table>		
+            <table class="submit" width="90%">
+                <tr>
+                    <td><input type="submit" value="Incluir" title="" /></td>
+                </tr>
+            </table>
+        </form>			
+    </div><!-- #main-content -->			
+</div><!-- #content -->
+{% endblock %}

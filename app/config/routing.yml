@@ -141,6 +141,28 @@ fornecedorPost:
     _method: POST
     idFornecedor: \d+
 
+# pesquisador
+
+pesquisadores:
+  pattern: /pesquisadores
+  defaults: { _controller: FapescTutorialBundle:Pesquisador:pesquisadores }
+  requirements:
+    _method: GET
+
+pesquisador:
+  pattern: /pesquisador/{idPesquisador}
+  defaults: { _controller: FapescTutorialBundle:Pesquisador:pesquisador }
+  requirements:
+    _method: GET
+    idPesquisador: \d+
+
+pesquisadorPost:
+  pattern: /pesquisador/{idPesquisador}/post
+  defaults: { _controller: FapescTutorialBundle:Pesquisador:pesquisadorPost }
+  requirements:
+    _method: POST
+    idPesquisador: \d+
+
 # projeto
 
 projetoDados:
@@ -474,6 +496,14 @@ relatorioContrapartidaMaterialPost:
 relatorioContrapartidaPassagemPost:
   pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/passagem/post
   defaults: { _controller: FapescTutorialBundle:Contrapartida:passagemPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
+
+relatorioContrapartidaSalarioPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/salario/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:salarioPost }
   requirements:
     _method: POST
     idRelatorio: \d+

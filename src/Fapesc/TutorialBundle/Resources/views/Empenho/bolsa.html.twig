@@ -5,12 +5,30 @@
 {% block content %}
 <script type="text/javascript">
     jQuery(function($){
-    $(".data").mask("99/99/9999");
-    $("#valor").priceFormat({
-    prefix: '',
-    centsSeparator: ',',
-    thousandsSeparator: '.'
+        $(".data").mask("99/99/9999");
+        $("#valor").priceFormat({
+            prefix: '',
+            centsSeparator: ',',
+            thousandsSeparator: '.'
+        });
     });
+    $(document).ready(function(){
+        $("form").validate({
+            rules: {
+                descricao: "required",
+                inicio: "required",
+                fim: "required",
+                data: "required",
+                valor: "required"
+            },
+            messages: {
+                descricao: "Digite a descrição",
+                inicio: "Digite a data de início",
+                fim: "Digite a data de término",
+                data: "Digite a data de pagamento",
+                valor: "Digite o valor"
+            }
+        });
     });
 </script>
 <div id="content">
