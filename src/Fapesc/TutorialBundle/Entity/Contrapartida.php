@@ -23,7 +23,7 @@ class Contrapartida
 
     /**
      * @var integer $categoria
-     * 1: dispendio; 2: bolsa; 3: passagem; 4: diaria; 5:salario;
+     * 
      * @ORM\Column(name="categoria", type="integer")
      */
     private $categoria;

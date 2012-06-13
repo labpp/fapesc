@@ -360,43 +360,6 @@ class EmpenhoController extends RelatorioController {
     }
 
     /**
-     * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/aluguel")
-     * @Template("FapescTutorialBundle:Empenho:aluguel.html.twig")
-     */
-    public function aluguelAction($idRelatorio, $idEmpenho) {
-        $aluguel = ($idEmpenho == 0) ? new Dispendio() : $this->getDoctrine()->getRepository("FapescTutorialBundle:Dispendio")->findOneBy(array("id" => $idEmpenho, "categoria" => 6));
-        $dados = $aluguel->toArray();
-        $dados["idRelatorio"] = $idRelatorio;
-        $dados["action"] = $this->get("router")->generate("relatorioEmpenhoAluguelPost", array("idRelatorio" => $idRelatorio, "idEmpenho" => $idEmpenho));
-        return array_merge($this->usuario(), $this->menu("relatorio", "empenhos", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->fornecedores("cnpj"), $dados);
-    }
-
-    /**
-     * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/aluguel/post")
-     * @Template()
-     */
-    public function aluguelPostAction($idRelatorio, $idEmpenho) {
-        $em = $this->getDoctrine()->getEntityManager();
-        $aluguel = $em->getRepository("FapescTutorialBundle:Dispendio")->findOneBy(array("id" => $idEmpenho, "categoria" => 6));
-        if (!is_object($aluguel)) { //inclui novo
-            $aluguel = new Dispendio();
-            $aluguel->populate($_POST);
-            $aluguel->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
-            $aluguel->setCategoria(6);
-            $em->persist($aluguel);
-            $acao = "incluído";
-        } else { //edita existente
-            $aluguel->populate($_POST);
-            $aluguel->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
-            $acao = "alterado";
-        }
-        $em->flush();
-        $this->empenhoInsert($idRelatorio, 1, $aluguel->getId());
-        $this->get("session")->setFlash("sucesso", "Aluguel {$acao} com sucesso!");
-        return $this->forward("FapescTutorialBundle:Empenho:empenhos", array("idRelatorio" => $idRelatorio));
-    }
-
-    /**
      * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/material")
      * @Template("FapescTutorialBundle:Empenho:material.html.twig")
      */

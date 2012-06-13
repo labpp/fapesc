@@ -44,7 +44,7 @@
     });
 </script>
 <form class="form-container" action="{{ action }}" method="POST">
-    <table class="form" width="90%">
+    <table class="form">
         <tr>
             <td>Fornecedor:<br />
                 <select name="fornecedor">
@@ -55,27 +55,27 @@
             </td>
         </tr>					
     </table>
-    <table class="form" width="90%">
+    <table class="form">
         <tr>
-            <td>Descrição do serviço:<br /><input type="text" name="descricao" title="Descrição do serviço a ser empenhado, conforme recibo ou documento fiscal." maxlength="255" size="70" value="{{ descricao }}"/></td>
+            <td>Descrição do serviço:<br /><input type="text" name="descricao" title="Descrição do serviço a ser empenhado, conforme recibo ou documento fiscal." value="{{ descricao }}"/></td>
         </tr>
     </table>
-    <table class="form" width="90%">
+    <table class="form">
         <tr>
-            <td width="15%">Unidade:<br /><input type="text" name="unidade" title="Informe a unidade de quantificação do serviço (ex: mês, horas, dias, etc)." maxlength="15" size="18" value="{{ unidade }}" /></td>
-            <td width="5%">Quantidade:<br /><input type="text" name="quantidade" id="quantidade" class="trigger" title="Informe a quantidade de serviços adquiridos." maxlength="4" size="6" value="{{ quantidade }}"/></td>
-            <td width="15%">Valor unitário:<br /><input type="text" name="unitario" id="unitario" class="trigger" title="Informe o valor unitário do serviço." maxlength="10" size="20" value="{{ unitario }}" /></td>
-            <td width="50%">Valor total:<br /><input type="text" name="total" id="total" title="Informe o valor total do serviço, conforme recibo ou documento fiscal." maxlength="10" size="20" value="{{ total }}"/></td>
+            <td>Unidade:<br /><input type="text" name="unidade" title="Informe a unidade de quantificação do serviço (ex: mês, horas, dias, etc)." value="{{ unidade }}" /></td>
+            <td>Quantidade:<br /><input type="text" name="quantidade" id="quantidade" class="trigger" title="Informe a quantidade de serviços adquiridos." value="{{ quantidade }}"/></td>
+            <td>Valor unitário:<br /><input type="text" name="unitario" id="unitario" class="trigger" title="Informe o valor unitário do serviço." value="{{ unitario }}" /></td>
+            <td>Valor total:<br /><input type="text" name="total" id="total" title="Informe o valor total do serviço, conforme recibo ou documento fiscal." value="{{ total }}"/></td>
         </tr>
     </table>
-    <table class="form" width="90%">
+    <table class="form">
         <tr>
-            <td width="10%">Documento fiscal / Recibo:<br /><input type="text" name="documento" title="Informe o número do recibo ou documento fiscal." maxlength="10" size="20" value="{{ documento }}"/></td>
-            <td width="10%">Data de emissão:<br /><input type="text" name="data" id="data" title="Informe a data de emissão do recibo ou documento fiscal." maxlength="10" size="12" value="{{ data }}" /></td>
-            <td width="50%">Comprovante de transação:<br /><input type="text" name="comprovante" title="Informe o número do cheque o comprovante eletrônico de transação." maxlength="25" size="20" value="{{ comprovante }}"/></td>
+            <td>Documento fiscal / Recibo:<br /><input type="text" name="documento" title="Informe o número do recibo ou documento fiscal." value="{{ documento }}"/></td>
+            <td>Data de emissão:<br /><input type="text" name="data" id="data" title="Informe a data de emissão do recibo ou documento fiscal." /></td>
+            <td>Comprovante de transação:<br /><input type="text" name="comprovante" title="Informe o número do cheque o comprovante eletrônico de transação." value="{{ comprovante }}"/></td>
         </tr>
     </table>
-    <table class="submit" width="90%">
+    <table class="submit">
         <tr>
             <td><input type="submit" value="Salvar" title="" /></td>
         </tr>

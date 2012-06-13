@@ -366,43 +366,6 @@ class ContrapartidaController extends RelatorioController {
     }
 
     /**
-     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/aluguel")
-     * @Template("FapescTutorialBundle:Contrapartida:aluguel.html.twig")
-     */
-    public function aluguelAction($idRelatorio, $idContrapartida) {
-        $aluguel = ($idContrapartida == 0) ? new Dispendio() : $this->getDoctrine()->getRepository("FapescTutorialBundle:Dispendio")->findOneBy(array("id" => $idContrapartida, "categoria" => 6));
-        $dados = $aluguel->toArray();
-        $dados["idRelatorio"] = $idRelatorio;
-        $dados["action"] = $this->get("router")->generate("relatorioContrapartidaAluguelPost", array("idRelatorio" => $idRelatorio, "idContrapartida" => $idContrapartida));
-        return array_merge($this->usuario(), $this->menu("relatorio", "contrapartidas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->fornecedores("cnpj"), $dados);
-    }
-
-    /**
-     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/aluguel/post")
-     * @Template()
-     */
-    public function aluguelPostAction($idRelatorio, $idContrapartida) {
-        $em = $this->getDoctrine()->getEntityManager();
-        $aluguel = $em->getRepository("FapescTutorialBundle:Dispendio")->findOneBy(array("id" => $idContrapartida, "categoria" => 6));
-        if (!is_object($aluguel)) { //inclui novo
-            $aluguel = new Dispendio();
-            $aluguel->populate($_POST);
-            $aluguel->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
-            $aluguel->setCategoria(6);
-            $em->persist($aluguel);
-            $acao = "incluído";
-        } else { //edita existente
-            $aluguel->populate($_POST);
-            $aluguel->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
-            $acao = "alterado";
-        }
-        $em->flush();
-        $this->contrapartidaInsert($idRelatorio, 1, $aluguel->getId());
-        $this->get("session")->setFlash("sucesso", "Aluguel {$acao} com sucesso!");
-        return $this->forward("FapescTutorialBundle:Contrapartida:contrapartidas", array("idRelatorio" => $idRelatorio));
-    }
-
-    /**
      * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/material")
      * @Template("FapescTutorialBundle:Contrapartida:material.html.twig")
      */

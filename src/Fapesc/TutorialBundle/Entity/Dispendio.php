@@ -23,7 +23,7 @@ class Dispendio {
 
     /**
      * @var integer $categoria
-     * 1: bibliografia; 2: equipamento; 3: mobiliario; 4: pessoaFisica; 5: pessoaJuridica; 6: aluguel; 7: material;
+     * 
      * @ORM\Column(name="categoria", type="integer")
      */
     private $categoria;
@@ -134,7 +134,6 @@ class Dispendio {
             "mobiliario",
             "pessoaFisica",
             "pessoaJuridica",
-            "aluguel",
             "material",
         );
     }
