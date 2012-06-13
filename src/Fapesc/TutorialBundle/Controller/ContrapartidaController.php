@@ -63,7 +63,6 @@ class ContrapartidaController extends RelatorioController {
                 array("value" => "mobiliario", "text" => "Mobiliário"),
                 array("value" => "pessoaFisica", "text" => "Serviço Pessoa Física"),
                 array("value" => "pessoaJuridica", "text" => "Serviço Pessoa Jurídica"),
-                array("value" => "aluguel", "text" => "Aluguel"),
                 array("value" => "material", "text" => "Material de Consumo"),
                 array("value" => "bolsa", "text" => "Bolsa"),
                 array("value" => "passagem", "text" => "Passagem"),
