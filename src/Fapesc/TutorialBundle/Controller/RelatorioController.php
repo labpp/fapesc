@@ -245,6 +245,7 @@ class RelatorioController extends FapescController {
             $conciliacao->setData($_POST["data"]);
             $conciliacao->setSaldo($_POST["saldo"]);
             $conciliacao->setRelatorio($this->find($idRelatorio));
+            $this->find($idRelatorio)->setConciliacao($conciliacao);
             $em->persist($conciliacao);
             $acao = "incluído";
         } else { //edita existente
