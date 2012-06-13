@@ -23,7 +23,7 @@ class Contrapartida
 
     /**
      * @var integer $categoria
-     * 1: dispendio; 2: bolsa; 3: passagem; 4: salario
+     * 1: dispendio; 2: bolsa; 3: passagem; 4: diaria; 5:salario;
      * @ORM\Column(name="categoria", type="integer")
      */
     private $categoria;
@@ -49,26 +49,6 @@ class Contrapartida
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set tipo
-     *
-     * @param integer $tipo
-     */
-    public function setTipo($tipo)
-    {
-        $this->tipo = $tipo;
-    }
-
-    /**
-     * Get tipo
-     *
-     * @return integer 
-     */
-    public function getTipo()
-    {
-        return $this->tipo;
     }
 
     /**
@@ -141,7 +121,8 @@ class Contrapartida
             "1" => "dispendio",
             "2" => "bolsa",
             "3" => "passagem",
-            "4" => "salario",
+            "4" => "diaria",
+            "5" => "salario",
         );
     }
 

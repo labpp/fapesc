@@ -355,13 +355,13 @@ relatorioEmpenhoAluguelPost:
     idRelatorio: \d+
     idEmpenho: \d+
 
-#relatorioEmpenhoBolsa:
-#  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/bolsa
-#  defaults: { _controller: FapescTutorialBundle:Empenho:bolsa }
-#  requirements:
-#    _method: GET
-#    idRelatorio: \d+
-#    idEmpenho: \d+
+relatorioEmpenhoMaterialPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/material/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:materialPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idEmpenho: \d+
 
 relatorioEmpenhoBolsaPost:
   pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/bolsa/post
@@ -371,17 +371,17 @@ relatorioEmpenhoBolsaPost:
     idRelatorio: \d+
     idEmpenho: \d+
 
-relatorioEmpenhoMaterialPost:
-  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/material/post
-  defaults: { _controller: FapescTutorialBundle:Empenho:materialPost }
+relatorioEmpenhoPassagemPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/passagem/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:passagemPost }
   requirements:
     _method: POST
     idRelatorio: \d+
     idEmpenho: \d+
 
-relatorioEmpenhoPassagemPost:
-  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/passagem/post
-  defaults: { _controller: FapescTutorialBundle:Empenho:passagemPost }
+relatorioEmpenhoDiariaPost:
+  pattern: /relatorio/{idRelatorio}/empenho/{idEmpenho}/diaria/post
+  defaults: { _controller: FapescTutorialBundle:Empenho:diariaPost }
   requirements:
     _method: POST
     idRelatorio: \d+
@@ -469,13 +469,13 @@ relatorioContrapartidaAluguelPost:
     idRelatorio: \d+
     idContrapartida: \d+
 
-#relatorioContrapartidaBolsa:
-#  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/bolsa
-#  defaults: { _controller: FapescTutorialBundle:Contrapartida:bolsa }
-#  requirements:
-#    _method: GET
-#    idRelatorio: \d+
-#    idContrapartida: \d+
+relatorioContrapartidaMaterialPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/material/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:materialPost }
+  requirements:
+    _method: POST
+    idRelatorio: \d+
+    idContrapartida: \d+
 
 relatorioContrapartidaBolsaPost:
   pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/bolsa/post
@@ -485,17 +485,17 @@ relatorioContrapartidaBolsaPost:
     idRelatorio: \d+
     idContrapartida: \d+
 
-relatorioContrapartidaMaterialPost:
-  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/material/post
-  defaults: { _controller: FapescTutorialBundle:Contrapartida:materialPost }
+relatorioContrapartidaPassagemPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/passagem/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:passagemPost }
   requirements:
     _method: POST
     idRelatorio: \d+
     idContrapartida: \d+
 
-relatorioContrapartidaPassagemPost:
-  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/passagem/post
-  defaults: { _controller: FapescTutorialBundle:Contrapartida:passagemPost }
+relatorioContrapartidaDiariaPost:
+  pattern: /relatorio/{idRelatorio}/contrapartida/{idContrapartida}/diaria/post
+  defaults: { _controller: FapescTutorialBundle:Contrapartida:diariaPost }
   requirements:
     _method: POST
     idRelatorio: \d+

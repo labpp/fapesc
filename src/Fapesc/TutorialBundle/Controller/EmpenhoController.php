@@ -14,6 +14,7 @@ use Fapesc\TutorialBundle\Entity\Fornecedor;
 use Fapesc\TutorialBundle\Entity\Bolsa;
 use Fapesc\TutorialBundle\Entity\Bolsista;
 use Fapesc\TutorialBundle\Entity\Passagem;
+use Fapesc\TutorialBundle\Entity\Diaria;
 
 class EmpenhoController extends RelatorioController {
 
@@ -65,8 +66,9 @@ class EmpenhoController extends RelatorioController {
                 array("value" => "pessoaJuridica", "text" => "Serviço Pessoa Jurídica"),
                 array("value" => "aluguel", "text" => "Aluguel"),
                 array("value" => "material", "text" => "Material de Consumo"),
-                array("value" => "passagem", "text" => "Passagem"),
                 array("value" => "bolsa", "text" => "Bolsa"),
+                array("value" => "passagem", "text" => "Passagem"),
+                array("value" => "diaria", "text" => "Diária"),
             ),
         );
         $dados["opcoes"] = $categorias[$relatorio->getRubrica(true)];
@@ -117,7 +119,16 @@ class EmpenhoController extends RelatorioController {
                             }
                         }
                         break;
-                    case "2": //passagem
+                    case "2": //bolsa
+                        $bolsa = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Bolsa")->find($empenho->getItem());
+                        if (is_object($bolsa) && ($relatorio->getRubrica() == 2)) {
+                            $dados["categorias"]["bolsa"]["descricao"] = "Bolsas";
+                            $dados["categorias"]["bolsa"]["categoria"] = "bolsa";
+                            $dados["categorias"]["bolsa"]["itens"][] = $bolsa->toArray();
+                            $dados["empenhado"] += $bolsa->getValor(true);
+                        }
+                        break;
+                    case "3": //passagem
                         $passagem = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Passagem")->find($empenho->getItem());
                         if (is_object($passagem) && ($relatorio->getRubrica() == 2)) {
                             $dados["categorias"]["passagem"]["descricao"] = "Passagens";
@@ -126,13 +137,13 @@ class EmpenhoController extends RelatorioController {
                             $dados["empenhado"] += $passagem->getValor(true);
                         }
                         break;
-                    case "3": //bolsa
-                        $bolsa = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Bolsa")->find($empenho->getItem());
-                        if (is_object($bolsa) && ($relatorio->getRubrica() == 2)) {
-                            $dados["categorias"]["bolsa"]["descricao"] = "Bolsas";
-                            $dados["categorias"]["bolsa"]["categoria"] = "bolsa";
-                            $dados["categorias"]["bolsa"]["itens"][] = $bolsa->toArray();
-                            $dados["empenhado"] += $bolsa->getValor(true);
+                    case "4": //diaria
+                        $diaria = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Diaria")->find($empenho->getItem());
+                        if (is_object($diaria) && ($relatorio->getRubrica() == 2)) {
+                            $dados["categorias"]["diaria"]["descricao"] = "Diárias";
+                            $dados["categorias"]["diaria"]["categoria"] = "diaria";
+                            $dados["categorias"]["diaria"]["itens"][] = $diaria->toArray();
+                            $dados["empenhado"] += $diaria->getValor(true);
                         }
                         break;
                 }
@@ -423,42 +434,6 @@ class EmpenhoController extends RelatorioController {
     }
 
     /**
-     * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/passagem")
-     * @Template("FapescTutorialBundle:Empenho:passagem.html.twig")
-     */
-    public function passagemAction($idRelatorio, $idEmpenho) {
-        $passagem = ($idEmpenho == 0) ? new Passagem() : $this->getDoctrine()->getRepository("FapescTutorialBundle:Passagem")->find($idEmpenho);
-        $dados = $passagem->toArray();
-        $dados["idRelatorio"] = $idRelatorio;
-        $dados["idEmpenho"] = $idEmpenho;
-        return array_merge($this->usuario(), $this->menu("relatorio", "empenhos", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->fornecedores("cnpj"), $dados);
-    }
-
-    /**
-     * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/passagem/post")
-     * @Template()
-     */
-    public function passagemPostAction($idRelatorio, $idEmpenho) {
-        $em = $this->getDoctrine()->getEntityManager();
-        $passagem = $em->getRepository("FapescTutorialBundle:Passagem")->find($idEmpenho);
-        if (!is_object($passagem)) { //inclui novo
-            $passagem = new Passagem();
-            $passagem->populate($_POST);
-            $passagem->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
-            $em->persist($passagem);
-            $acao = "incluída";
-        } else { //edita existente
-            $passagem->populate($_POST);
-            $passagem->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
-            $acao = "alterada";
-        }
-        $em->flush();
-        $this->empenhoInsert($idRelatorio, 2, $passagem->getId());
-        $this->get("session")->setFlash("sucesso", "Passagem {$acao} com sucesso!");
-        return $this->forward("FapescTutorialBundle:Empenho:empenhos", array("idRelatorio" => $idRelatorio));
-    }
-
-    /**
      * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/bolsa")
      * @Template("FapescTutorialBundle:Empenho:bolsa.html.twig")
      */
@@ -489,8 +464,78 @@ class EmpenhoController extends RelatorioController {
             $acao = "alterada";
         }
         $em->flush();
-        $this->empenhoInsert($idRelatorio, 3, $bolsa->getId());
+        $this->empenhoInsert($idRelatorio, 2, $bolsa->getId());
         $this->get("session")->setFlash("sucesso", "Bolsa {$acao} com sucesso!");
+        return $this->forward("FapescTutorialBundle:Empenho:empenhos", array("idRelatorio" => $idRelatorio));
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/passagem")
+     * @Template("FapescTutorialBundle:Empenho:passagem.html.twig")
+     */
+    public function passagemAction($idRelatorio, $idEmpenho) {
+        $passagem = ($idEmpenho == 0) ? new Passagem() : $this->getDoctrine()->getRepository("FapescTutorialBundle:Passagem")->find($idEmpenho);
+        $dados = $passagem->toArray();
+        $dados["idRelatorio"] = $idRelatorio;
+        $dados["idEmpenho"] = $idEmpenho;
+        return array_merge($this->usuario(), $this->menu("relatorio", "empenhos", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->fornecedores("cnpj"), $dados);
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/passagem/post")
+     * @Template()
+     */
+    public function passagemPostAction($idRelatorio, $idEmpenho) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $passagem = $em->getRepository("FapescTutorialBundle:Passagem")->find($idEmpenho);
+        if (!is_object($passagem)) { //inclui novo
+            $passagem = new Passagem();
+            $passagem->populate($_POST);
+            $passagem->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
+            $em->persist($passagem);
+            $acao = "incluída";
+        } else { //edita existente
+            $passagem->populate($_POST);
+            $passagem->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
+            $acao = "alterada";
+        }
+        $em->flush();
+        $this->empenhoInsert($idRelatorio, 3, $passagem->getId());
+        $this->get("session")->setFlash("sucesso", "Passagem {$acao} com sucesso!");
+        return $this->forward("FapescTutorialBundle:Empenho:empenhos", array("idRelatorio" => $idRelatorio));
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/diaria")
+     * @Template("FapescTutorialBundle:Empenho:diaria.html.twig")
+     */
+    public function diariaAction($idRelatorio, $idEmpenho) {
+        $diaria = ($idEmpenho == 0) ? new Diaria() : $this->getDoctrine()->getRepository("FapescTutorialBundle:Diaria")->find($idEmpenho);
+        $dados = $diaria->toArray();
+        $dados["idRelatorio"] = $idRelatorio;
+        $dados["idEmpenho"] = $idEmpenho;
+        return array_merge($this->usuario(), $this->menu("relatorio", "empenhos", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->bolsistas(), $dados);
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/empenho/{idEmpenho}/diaria/post")
+     * @Template()
+     */
+    public function diariaPostAction($idRelatorio, $idEmpenho) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $diaria = $em->getRepository("FapescTutorialBundle:Diaria")->find($idEmpenho);
+        if (!is_object($diaria)) { //inclui novo
+            $diaria = new Diaria();
+            $diaria->populate($_POST);
+            $em->persist($diaria);
+            $acao = "incluída";
+        } else { //edita existente
+            $diaria->populate($_POST);
+            $acao = "alterada";
+        }
+        $em->flush();
+        $this->empenhoInsert($idRelatorio, 4, $diaria->getId());
+        $this->get("session")->setFlash("sucesso", "Diaria {$acao} com sucesso!");
         return $this->forward("FapescTutorialBundle:Empenho:empenhos", array("idRelatorio" => $idRelatorio));
     }
 

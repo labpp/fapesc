@@ -41,6 +41,44 @@
         </form>
 
         {% for categoria in categorias %}
+        {% if categoria.categoria == "salario" %}
+        <p style="font-size:12px;"><b>:: {{ categoria.descricao }}</b></p>
+        <table id="budget-pledged" class="form" width="90%" cellspacing="5" cellpadding="5">
+            <tr>
+                <th width="30%">Pesquisador</th>
+                <th width="5%">Período</th>
+                <th width="16%">Valor Proporcional</th>
+                <th width="3%"></th>
+            </tr>
+            {% for item in categoria.itens %}
+            <tr>
+                <td><a href="{{ path('relatorioContrapartida', { 'idRelatorio': idRelatorio, 'idContrapartida': item.id, 'categoria': categoria.categoria }) }}" title="Clique para editar item empenhado">{{ item.pesquisador.nome }}</a></td>
+                <td>{{ item.data }}</td>
+                <td style="text-align:right;">R$ {{ item.proporcional }}</td>
+                <td style="text-align:center;"><a href="{{ path('relatorioContrapartidaDelete', { 'idRelatorio': idRelatorio, 'idContrapartida': item.id, 'categoria': categoria.categoria }) }}" title="Deletar item" onclick="return confirm('Tem certeza que deseja excluir este item?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Deletar"></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        {% if categoria.categoria == "diaria" %}
+        <p style="font-size:12px;"><b>:: {{ categoria.descricao }}</b></p>
+        <table id="budget-pledged" class="form" width="90%" cellspacing="5" cellpadding="5">
+            <tr>
+                <th width="30%">Beneficiario</th>
+                <th width="5%">Instituição</th>
+                <th width="16%">Valor</th>
+                <th width="3%"></th>
+            </tr>
+            {% for item in categoria.itens %}
+            <tr>
+                <td><a href="{{ path('relatorioEmpenho', { 'idRelatorio': idRelatorio, 'idEmpenho': item.id, 'categoria': categoria.categoria }) }}" title="Clique para editar item empenhado">{{ item.beneficiario }}</a></td>
+                <td>{{ item.instituicao }}</td>
+                <td style="text-align:right;">R$ {{ item.valor }}</td>
+                <td style="text-align:center;"><a href="{{ path('relatorioEmpenhoDelete', { 'idRelatorio': idRelatorio, 'idEmpenho': item.id, 'categoria': categoria.categoria }) }}" title="Deletar item" onclick="return confirm('Tem certeza que deseja excluir este item?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Deletar"></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else  %}
         {% if categoria.categoria == "passagem" %}
         <p style="font-size:12px;"><b>:: {{ categoria.descricao }}</b></p>
         <table id="budget-pledged" class="form" width="90%" cellspacing="5" cellpadding="5">
@@ -83,25 +121,6 @@
             {% endfor %}
         </table>
         {% else %}
-        {% if categoria.categoria == "salario" %}
-        <p style="font-size:12px;"><b>:: {{ categoria.descricao }}</b></p>
-        <table id="budget-pledged" class="form" width="90%" cellspacing="5" cellpadding="5">
-            <tr>
-                <th width="30%">Pesquisador</th>
-                <th width="5%">Período</th>
-                <th width="16%">Valor Proporcional</th>
-                <th width="3%"></th>
-            </tr>
-            {% for item in categoria.itens %}
-            <tr>
-                <td><a href="{{ path('relatorioContrapartida', { 'idRelatorio': idRelatorio, 'idContrapartida': item.id, 'categoria': categoria.categoria }) }}" title="Clique para editar item empenhado">{{ item.pesquisador.nome }}</a></td>
-                <td>{{ item.data }}</td>
-                <td style="text-align:right;">R$ {{ item.proporcional }}</td>
-                <td style="text-align:center;"><a href="{{ path('relatorioContrapartidaDelete', { 'idRelatorio': idRelatorio, 'idContrapartida': item.id, 'categoria': categoria.categoria }) }}" title="Deletar item" onclick="return confirm('Tem certeza que deseja excluir este item?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Deletar"></a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
         <p style="font-size:12px;"><b>:: {{ categoria.descricao }}</b></p>
         <table id="budget-pledged" class="form" width="90%" cellspacing="5" cellpadding="5">
             <tr>
@@ -121,6 +140,7 @@
             </tr>
             {% endfor %}
         </table>
+        {% endif %}
         {% endif %}
         {% endif %}
         {% endif %}

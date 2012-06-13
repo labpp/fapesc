@@ -14,6 +14,7 @@ use Fapesc\TutorialBundle\Entity\Fornecedor;
 use Fapesc\TutorialBundle\Entity\Bolsa;
 use Fapesc\TutorialBundle\Entity\Bolsista;
 use Fapesc\TutorialBundle\Entity\Passagem;
+use Fapesc\TutorialBundle\Entity\Diaria;
 use Fapesc\TutorialBundle\Entity\Salario;
 use Fapesc\TutorialBundle\Entity\Pesquisador;
 
@@ -64,8 +65,9 @@ class ContrapartidaController extends RelatorioController {
                 array("value" => "pessoaJuridica", "text" => "Serviço Pessoa Jurídica"),
                 array("value" => "aluguel", "text" => "Aluguel"),
                 array("value" => "material", "text" => "Material de Consumo"),
-                array("value" => "passagem", "text" => "Passagem"),
                 array("value" => "bolsa", "text" => "Bolsa"),
+                array("value" => "passagem", "text" => "Passagem"),
+                array("value" => "diaria", "text" => "Diária"),
                 array("value" => "salario", "text" => "Salários e Encargos"),
         );
         $dados["opcoes"] = $categorias;
@@ -114,16 +116,7 @@ class ContrapartidaController extends RelatorioController {
                             $dados["empenhado"] += $dispendio->getTotal(true);
                         }
                         break;
-                    case "2": //passagem
-                        $passagem = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Passagem")->find($contrapartida->getItem());
-                        if (is_object($passagem)) {
-                            $dados["categorias"]["passagem"]["descricao"] = "Passagens";
-                            $dados["categorias"]["passagem"]["categoria"] = "passagem";
-                            $dados["categorias"]["passagem"]["itens"][] = $passagem->toArray();
-                            $dados["empenhado"] += $passagem->getValor(true);
-                        }
-                        break;
-                    case "3": //bolsa
+                    case "2": //bolsa
                         $bolsa = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Bolsa")->find($contrapartida->getItem());
                         if (is_object($bolsa)) {
                             $dados["categorias"]["bolsa"]["descricao"] = "Bolsas";
@@ -132,7 +125,25 @@ class ContrapartidaController extends RelatorioController {
                             $dados["empenhado"] += $bolsa->getValor(true);
                         }
                         break;
-                    case "4": //salario
+                    case "3": //passagem
+                        $passagem = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Passagem")->find($contrapartida->getItem());
+                        if (is_object($passagem)) {
+                            $dados["categorias"]["passagem"]["descricao"] = "Passagens";
+                            $dados["categorias"]["passagem"]["categoria"] = "passagem";
+                            $dados["categorias"]["passagem"]["itens"][] = $passagem->toArray();
+                            $dados["empenhado"] += $passagem->getValor(true);
+                        }
+                        break;
+                    case "4": //diaria
+                        $diaria = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Diaria")->find($contrapartida->getItem());
+                        if (is_object($diaria) && ($relatorio->getRubrica() == 2)) {
+                            $dados["categorias"]["diaria"]["descricao"] = "Diárias";
+                            $dados["categorias"]["diaria"]["categoria"] = "diaria";
+                            $dados["categorias"]["diaria"]["itens"][] = $diaria->toArray();
+                            $dados["empenhado"] += $diaria->getValor(true);
+                        }
+                        break;
+                    case "5": //salario
                         $salario = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Salario")->find($contrapartida->getItem());
                         if (is_object($salario)) {
                             $dados["categorias"]["salario"]["descricao"] = "Salários e Encargos";
@@ -429,42 +440,6 @@ class ContrapartidaController extends RelatorioController {
     }
 
     /**
-     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/passagem")
-     * @Template("FapescTutorialBundle:Contrapartida:passagem.html.twig")
-     */
-    public function passagemAction($idRelatorio, $idContrapartida) {
-        $passagem = ($idContrapartida == 0) ? new Passagem() : $this->getDoctrine()->getRepository("FapescTutorialBundle:Passagem")->find($idContrapartida);
-        $dados = $passagem->toArray();
-        $dados["idRelatorio"] = $idRelatorio;
-        $dados["idContrapartida"] = $idContrapartida;
-        return array_merge($this->usuario(), $this->menu("relatorio", "contrapartidas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->fornecedores("cnpj"), $dados);
-    }
-
-    /**
-     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/passagem/post")
-     * @Template()
-     */
-    public function passagemPostAction($idRelatorio, $idContrapartida) {
-        $em = $this->getDoctrine()->getEntityManager();
-        $passagem = $em->getRepository("FapescTutorialBundle:Passagem")->find($idContrapartida);
-        if (!is_object($passagem)) { //inclui novo
-            $passagem = new Passagem();
-            $passagem->populate($_POST);
-            $passagem->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
-            $em->persist($passagem);
-            $acao = "incluída";
-        } else { //edita existente
-            $passagem->populate($_POST);
-            $passagem->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
-            $acao = "alterada";
-        }
-        $em->flush();
-        $this->contrapartidaInsert($idRelatorio, 2, $passagem->getId());
-        $this->get("session")->setFlash("sucesso", "Passagem {$acao} com sucesso!");
-        return $this->forward("FapescTutorialBundle:Contrapartida:contrapartidas", array("idRelatorio" => $idRelatorio));
-    }
-
-    /**
      * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/bolsa")
      * @Template("FapescTutorialBundle:Contrapartida:bolsa.html.twig")
      */
@@ -495,8 +470,78 @@ class ContrapartidaController extends RelatorioController {
             $acao = "alterada";
         }
         $em->flush();
-        $this->contrapartidaInsert($idRelatorio, 3, $bolsa->getId());
+        $this->contrapartidaInsert($idRelatorio, 2, $bolsa->getId());
         $this->get("session")->setFlash("sucesso", "Bolsa {$acao} com sucesso!");
+        return $this->forward("FapescTutorialBundle:Contrapartida:contrapartidas", array("idRelatorio" => $idRelatorio));
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/passagem")
+     * @Template("FapescTutorialBundle:Contrapartida:passagem.html.twig")
+     */
+    public function passagemAction($idRelatorio, $idContrapartida) {
+        $passagem = ($idContrapartida == 0) ? new Passagem() : $this->getDoctrine()->getRepository("FapescTutorialBundle:Passagem")->find($idContrapartida);
+        $dados = $passagem->toArray();
+        $dados["idRelatorio"] = $idRelatorio;
+        $dados["idContrapartida"] = $idContrapartida;
+        return array_merge($this->usuario(), $this->menu("relatorio", "contrapartidas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->fornecedores("cnpj"), $dados);
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/passagem/post")
+     * @Template()
+     */
+    public function passagemPostAction($idRelatorio, $idContrapartida) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $passagem = $em->getRepository("FapescTutorialBundle:Passagem")->find($idContrapartida);
+        if (!is_object($passagem)) { //inclui novo
+            $passagem = new Passagem();
+            $passagem->populate($_POST);
+            $passagem->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
+            $em->persist($passagem);
+            $acao = "incluída";
+        } else { //edita existente
+            $passagem->populate($_POST);
+            $passagem->setFornecedor($em->getRepository("FapescTutorialBundle:Fornecedor")->find($_POST["fornecedor"]));
+            $acao = "alterada";
+        }
+        $em->flush();
+        $this->contrapartidaInsert($idRelatorio, 3, $passagem->getId());
+        $this->get("session")->setFlash("sucesso", "Passagem {$acao} com sucesso!");
+        return $this->forward("FapescTutorialBundle:Contrapartida:contrapartidas", array("idRelatorio" => $idRelatorio));
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/diaria")
+     * @Template("FapescTutorialBundle:Contrapartida:diaria.html.twig")
+     */
+    public function diariaAction($idRelatorio, $idContrapartida) {
+        $diaria = ($idContrapartida == 0) ? new Diaria() : $this->getDoctrine()->getRepository("FapescTutorialBundle:Diaria")->find($idContrapartida);
+        $dados = $diaria->toArray();
+        $dados["idRelatorio"] = $idRelatorio;
+        $dados["idContrapartida"] = $idContrapartida;
+        return array_merge($this->usuario(), $this->menu("relatorio", "contrapartidas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->bolsistas(), $dados);
+    }
+
+    /**
+     * @Route("/relatorio/{idRelatorio}/contrapartida/{idContrapartida}/diaria/post")
+     * @Template()
+     */
+    public function diariaPostAction($idRelatorio, $idContrapartida) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $diaria = $em->getRepository("FapescTutorialBundle:Diaria")->find($idContrapartida);
+        if (!is_object($diaria)) { //inclui novo
+            $diaria = new Diaria();
+            $diaria->populate($_POST);
+            $em->persist($diaria);
+            $acao = "incluída";
+        } else { //edita existente
+            $diaria->populate($_POST);
+            $acao = "alterada";
+        }
+        $em->flush();
+        $this->contrapartidaInsert($idRelatorio, 4, $diaria->getId());
+        $this->get("session")->setFlash("sucesso", "Diaria {$acao} com sucesso!");
         return $this->forward("FapescTutorialBundle:Contrapartida:contrapartidas", array("idRelatorio" => $idRelatorio));
     }
 

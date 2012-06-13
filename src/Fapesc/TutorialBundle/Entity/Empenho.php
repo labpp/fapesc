@@ -23,7 +23,7 @@ class Empenho {
 
     /**
      * @var integer $categoria
-     * 1: dispendio; 2: bolsa; 3: passagem;
+     * 1: dispendio; 2: bolsa; 3: passagem; 4: diaria;
      * @ORM\Column(name="categoria", type="integer")
      */
     private $categoria;
@@ -78,6 +78,7 @@ class Empenho {
             "1" => "dispendio",
             "2" => "bolsa",
             "3" => "passagem",
+            "4" => "diaria",
         );
     }
 
