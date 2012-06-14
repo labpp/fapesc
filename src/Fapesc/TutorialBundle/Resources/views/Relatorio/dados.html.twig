@@ -6,11 +6,7 @@
 <script type="text/javascript">
     jQuery(function($){
         $(".data").mask("99/99/9999");
-        $("#valor").priceFormat({
-            prefix: '',
-            centsSeparator: ',',
-            thousandsSeparator: '.'
-        });
+        $("#valor").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
     });
     $().ready(function() {
         $("form").validate({
@@ -30,48 +26,46 @@
     });
 </script>
 <div id="content">
-
     <div id="sidebar">
         <p><b>Instruções:</b><br /><br />Deve-se proceder uma prestação de contas distinta para cada Nota de Liberação existente.<br /><br />Cada Nota de Liberação possui um número de identificação, um tipo (custeio ou capital), um valor contigenciado e uma data de liberação dos recursos. Tais informações estão contidas no e-mail "Comunicado de Repasse", enviado ao coordenador do projeto pela Gerência de Projetos da FAPESC.<br /><br />Como "custeio", entende-se a aplicação dos recursos na contratação de serviços em geral, pagamento de bolsas, compra de material de consumo, bem como passagens e diárias.  Dispêndios com equipamentos, mobiliário e bibliografia são caracterizados como de "capital".<br /><br />Se a Nota de Liberação se refere ao último dos empenhos previstos na proposta de trabalho, deve-se definir o "Tipo de relatório" como final.<br /><br />O preenchimento de todos os campos desta seção é obrigatório.</p>
     </div><!-- #sidebar -->
-
     <div id="main-content">
         <h1>:: Informações Gerais</h1>
         <form class="form-container" action="{{ path('relatorioDadosPost', { 'idRelatorio': idRelatorio }) }}" method="POST">
-            <table class="form" width="90%">
+            <table class="form">
                 <tr>
-                    <td width="28%">Projeto:<br />
-                        <select name="projeto" title="Selecione o projeto aque se refere este relatório." style="width:500px;">
+                    <td>Projeto:<br />
+                        <select name="projeto" title="Selecione o projeto aque se refere este relatório.">
                             {% for projeto in projetos %}
-                            <option value="{{ projeto.value }}" {% if projeto.value == projeto %} selected="selected" {% endif %}>{{ projeto.text }}</option>
+                            <option value="{{ projeto.idProjeto }}" {% if projeto.idProjeto == projeto %} selected="selected" {% endif %}>{{ projeto.titulo }}</option>
                             {% endfor %}
                         </select>
                     </td>
                 </tr>
             </table>
-            <table class="form" width="90%">
+            <table class="form">
                 <tr>
                     <td>Nota de liquidação:<br /><input type="text" name="nota" title="Informe o número da Nota de Liquidação referente ao relatório." value="{{ nota }}" /></td>
                     <td>Data de liberação:<br /><input type="text" class="data" name="liberacao" title="Informe a data de liberação dos recursos." value="{{ liberacao }}" /></td>
                     <td>Data de vigência:<br /><input type="text" class="data" name="vigencia" title="Informe a data de vigência dos recursos." value="{{ vigencia }}" /></td>
                 </tr>
             </table>
-            <table class="form" width="90%">
+            <table class="form">
                 <tr>
-                    <td width="28%">Rubrica:<br />
+                    <td>Rubrica:<br />
                         <select name="rubrica" title="Selecione o tipo de rubrica relativa aos recursos oriundos da Nota de Liquidação.">
                             {% for item in rubricaSelect %}
                             <option value="{{ item.value }}" {% if item.value == rubrica %} selected="selected" {% endif %}>{{ item.text }}</option>
                             {% endfor %}
                         </select>
                     </td>
-                    <td>Valor NL:<br />R$ <input type="text" id="valor" name="valor" title="Informe o montante total relativo à Nota de Liquidação." size="20" value="{{ valor }}" /></td>
+                    <td>Valor NL:<br />R$ <input type="text" id="valor" name="valor" title="Informe o montante total relativo à Nota de Liquidação." value="{{ valor }}" /></td>
                 </tr>
             </table>
-            <table class="form" width="90%">
+            <table class="form">
                 <tr>
-                    <td width="28%">Tipo de relatório:<br />
-                        <select name="tipo" title="Selecione o tipo de relatório." style="width:300px;">
+                    <td>Tipo de relatório:<br />
+                        <select name="tipo" title="Selecione o tipo de relatório.">
                             {% for item in tipoSelect %}
                             <option value="{{ item.value }}" {% if item.value == tipo%} selected="selected" {% endif %}>{{ item.text }}</option>
                             {% endfor %}
@@ -79,7 +73,7 @@
                     </td>
                 </tr>
             </table>
-            <table class="submit" width="90%">
+            <table class="submit">
                 <tr>
                     <td><input type="submit" value="Salvar" title="" /></td>
                 </tr>

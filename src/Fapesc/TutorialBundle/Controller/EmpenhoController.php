@@ -56,12 +56,12 @@ class EmpenhoController extends RelatorioController {
         $dados["idRelatorio"] = $idRelatorio;
         $dados["orcamento"] = $relatorio->getValor();
         $categorias = array(
-            "Capital" => array(
+            "1" => array(
                 array("value" => "bibliografia", "text" => "Bibliografia"),
                 array("value" => "equipamento", "text" => "Equipamento"),
                 array("value" => "mobiliario", "text" => "Mobiliário"),
             ),
-            "Custeio" => array(
+            "2" => array(
                 array("value" => "pessoaFisica", "text" => "Serviço Pessoa Física"),
                 array("value" => "pessoaJuridica", "text" => "Serviço Pessoa Jurídica"),
                 array("value" => "material", "text" => "Material de Consumo"),
@@ -70,7 +70,7 @@ class EmpenhoController extends RelatorioController {
                 array("value" => "diaria", "text" => "Diária"),
             ),
         );
-        $dados["opcoes"] = $categorias[$relatorio->getRubrica(true)];
+        $dados["opcoes"] = $categorias[$relatorio->getRubrica()];
         $dados["categorias"] = array();
         $dados["empenhado"] = 0;
         $empenhos = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Empenho")->findBy(array("relatorio" => $idRelatorio));

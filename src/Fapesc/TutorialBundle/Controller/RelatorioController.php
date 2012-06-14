@@ -38,14 +38,16 @@ class RelatorioController extends FapescController {
         $relatorio = ($idRelatorio == 0) ? new Relatorio() : $this->find($idRelatorio);
         $dados = $relatorio->toArray();
         $projetos = $this->getDoctrine()->getRepository("FapescTutorialBundle:Projeto")->findBy(array("usuario" => $this->get("security.context")->getToken()->getUser()->getId(), "ativo" => true));
-        if (empty($projetos)) {
-            $dados["projetos"] = array();
-        } else {
-            foreach ($projetos as $projeto) {
-                $dados["projetos"][] = array("value" => $projeto->getId(), "text" => $projeto->getTitulo());
-            }
-        }
-        return array_merge($this->usuario(), $this->menu("relatorio", "dados", $idRelatorio), $this->info($relatorio->getProjeto()->getId(), $idRelatorio), $dados);
+        $dados["projetos"] = array();
+        if (!empty($projetos))
+            foreach ($projetos as $projeto)
+                $dados["projetos"][] = $projeto->toArray();
+        return array_merge(
+            $this->usuario(), 
+            $this->menu("relatorio", "dados", $idRelatorio),
+            $this->info($relatorio->getProjeto()->getId(), $idRelatorio),
+            $dados
+        );
     }
 
     /**

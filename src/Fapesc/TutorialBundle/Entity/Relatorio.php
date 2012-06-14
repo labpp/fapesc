@@ -150,8 +150,8 @@ class Relatorio {
      *
      * @return string
      */
-    public function getRubrica($extenso = false) {
-        return ($extenso) ? (($this->rubrica == 1) ? "Capital" : "Custeio") : $this->rubrica;
+    public function getRubrica() {
+        return $this->rubrica;
     }
 
     public function getRubricas() {
@@ -190,8 +190,8 @@ class Relatorio {
      *
      * @return string
      */
-    public function getTipo($extenso = false) {
-        return ($extenso) ? (($this->tipo == 1) ? "Parcial" : "Final") : $this->tipo;
+    public function getTipo() {
+        return $this->tipo;
     }
 
     public function getTipos() {
@@ -471,7 +471,7 @@ class Relatorio {
             "nota" => $this->getNota(),
             "liberacao" => $this->getLiberacao(),
             "vigencia" => $this->getVigencia(),
-            "rubrica" => $this->getRubrica(true),
+            "rubrica" => $this->getRubrica(),
             "rubricas" => $this->getRubricas(),
             "rubricaSelect" => $this->getRubricaSelect(),
             "valor" => $this->getValor(),
@@ -485,7 +485,7 @@ class Relatorio {
             "projeto" => $this->getProjeto()->getId(),
         );
     }
-    
+
     public function populateDados($dados) {
         $this->setNota($dados["nota"]);
         $this->setLiberacao($dados["liberacao"]);
@@ -494,7 +494,7 @@ class Relatorio {
         $this->setValor($dados["valor"]);
         $this->setTipo($dados["tipo"]);
     }
-    
+
     public function populateRelatorio($dados) {
         $this->setResultado($dados["resultado"]);
         $this->setJustificativa($dados["justificativa"]);
