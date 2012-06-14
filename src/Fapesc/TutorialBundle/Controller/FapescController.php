@@ -9,30 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-/*
-  use Fapesc\TutorialBundle\Entity\Usuario;
-  use Fapesc\TutorialBundle\Entity\Projeto;
-  use Fapesc\TutorialBundle\Entity\Meta;
-  use Fapesc\TutorialBundle\Entity\Relatorio;
-  use Fapesc\TutorialBundle\Entity\Resultado;
-  use Fapesc\TutorialBundle\Entity\PessoaFisica;
-  use Fapesc\TutorialBundle\Entity\PessoaJuridica;
-  use Fapesc\TutorialBundle\Entity\Material;
-  use Fapesc\TutorialBundle\Entity\Aluguel;
-  use Fapesc\TutorialBundle\Entity\Obra;
-  use Fapesc\TutorialBundle\Entity\Diaria;
-  use Fapesc\TutorialBundle\Entity\Passagem;
-  use Fapesc\TutorialBundle\Entity\Mobiliario;
-  use Fapesc\TutorialBundle\Entity\Equipamento;
-  use Fapesc\TutorialBundle\Entity\Bibliografia;
-  use Fapesc\TutorialBundle\Entity\Bolsa;
-  use Fapesc\TutorialBundle\Entity\Bolsista;
-  use Fapesc\TutorialBundle\Entity\Pagamento;
-  use Fapesc\TutorialBundle\Entity\Outro;
-  use Fapesc\TutorialBundle\Entity\Conciliacao;
-  use Fapesc\TutorialBundle\Entity\Cheque;
- */
-
 class FapescController extends Controller {
 
     protected function usuario() {

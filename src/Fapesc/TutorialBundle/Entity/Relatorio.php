@@ -154,11 +154,12 @@ class Relatorio {
         return $this->rubrica;
     }
 
-    public function getRubricas() {
-        return array(
+    public function getRubricas($rubrica = false) {
+        $rubricas = array(
             "1" => "Capital",
             "2" => "Custeio",
         );
+        return $rubrica ? $rubricas[$rubrica] : $rubricas;
     }
 
     public function getRubricaSelect() {
