@@ -30,7 +30,7 @@ class ImpressaoController extends FapescController {
         $mpdf = $this->imprimeRelatorio($idRelatorio);
         $relatorio = $this->getDoctrine()->getRepository("FapescTutorialBundle:Relatorio")->find($idRelatorio);
         $projeto = $relatorio->getProjeto();
-        $arquivo = $projeto->getTitulo() . "-" . $relatorio->getNota() . "-" . $relatorio->getLiberacao() . "-" . $relatorio->getRubrica(true);
+        $arquivo = $projeto->getTitulo() . " - " . $relatorio->getNota() . " - " . $relatorio->getLiberacao("dmY") . " - " . $relatorio->getRubricas($relatorio->getRubrica());
         return new Response($mpdf->Output($arquivo, 'D'));
     }
 
@@ -164,7 +164,7 @@ class ImpressaoController extends FapescController {
             "local" => $projeto->getMunicipio() . "/" . $projeto->getRegiao() . "/" . $projeto->getSdr(),
             "instituicao" => $projeto->getUsuario()->getInstituicao(),
             "valorTotal" => "R$ " . $projeto->getOrcamento(),
-            "inicio" => $projeto->getInicio()->format("d/m/Y"),
+            "inicio" => $projeto->getInicio(),
             "dataRelatorio" => "#definir",
             "dataParcela" => "#definir",
             "partipacaoTotal" => "R$ " . $total,
