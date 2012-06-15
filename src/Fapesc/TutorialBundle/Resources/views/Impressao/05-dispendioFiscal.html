@@ -1,12 +1,11 @@
 <div id="corpo">
 	<div id="dispendio">
-		<h1 class ="head" > LISTAGEM DE DISPÊNDIOS (DOCUMENTO FISCAL) </h1>
-		<div id="parte" class = "head" > IV </div>
+		<h1 class ="head" > LISTAGEM DE DISPÊNDIOS </h1>
 		<div id="fornecedor" class="linha2">
 				<div class="espacamentoEsq menor">
 					Fornecedor:
 				</div>	
-				<div class="maior">
+				<div class="espacamentoEsq maior">
 					{{ fornecedor }}
 				</div>
 			</div>
@@ -15,17 +14,17 @@
 				<div class="espacamentoEsq menor">
 					CNPJ:
 				</div>	
-				<div class="maior">
+				<div class="espacamentoEsq maior">
 					{{ cnpj }}
 				</div>
 			</div>
 
-		<div id="distribuicao" class="linha3">
+		<div id="descricao" class="linha3">
 				<div class="espacamentoEsq menor">
 					Distribuição do Dispêndio:
 				</div>	
-				<div class="maior">
-					{{ distribuicao }}
+				<div class="espacamentoEsq maior">
+					{{ descricao }}
 				</div>
 		</div>
 
@@ -33,23 +32,15 @@
 				<div class="espacamentoEsq menor">
 					Documento Fiscal:
 				</div>	
-				<div class="maior">
+				<div class="espacamentoEsq maior">
 					{{ documentoFiscal }}
-				</div>
-		</div>
-		<div id="serie" class="linha4">
-				<div class="espacamentoEsq menor">
-					Série:
-				</div>	
-				<div class="maior">
-					{{ serie }}
 				</div>
 		</div>
 		<div id="dataEmissao" class="linha4">
 				<div class="espacamentoEsq menor">
 					Data da Emissão:
 				</div>	
-				<div class="maior">
+				<div class="espacamentoEsq maior">
 					{{ dataEmissao }}
 				</div>
 		</div>
@@ -57,7 +48,7 @@
 				<div class="espacamentoEsq menor">
 					Valor:
 				</div>	
-				<div class="maior">
+				<div class="espacamentoEsq maior">
 					R$ {{ valor }}
 				</div>
 		</div>
@@ -65,7 +56,7 @@
 				<div class="espacamentoEsq menor">
 					No Cheque/Recibo Eletrônico:
 				</div>	
-				<div class="maior">
+				<div class="espacamentoEsq maior">
 					{{ noChequeRecibo }}
 				</div>
 		</div>
@@ -73,7 +64,7 @@
 				<div class="espacamentoEsq menor">
 					Data do Pagamento:
 				</div>	
-				<div class="maior">
+				<div class="espacamentoEsq maior">
 					{{ dataPagamento }}
 				</div>
 		</div>

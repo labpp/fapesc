@@ -36,8 +36,7 @@
 	height:3%;
 }
 
-#dispendio #distribuicao {	
-	width: 100%;
+#dispendio #descricao {	
 	text-align:left;	
 }
 
@@ -48,44 +47,37 @@
 }
 
 #dispendio #documentoFiscal {
-	width:14%;
-	text-align:center;
-}
-
-#dispendio #serie {
-	border-left: 0.8pt solid #000;
-	width:14%;
+	width:20%;
 	text-align:center;
 }
 
 #dispendio #dataEmissao {
 	border-left: 0.8pt solid #000;
-	width:18%;
+	width:20%;
 	text-align:center;
 }
 
 #dispendio #valor {
 	border-left: 0.8pt solid #000;
-	width:18%;
+	width:20%;
 	text-align:center;
 }
 
 #dispendio #noChequeRecibo {
 	border-left: 0.8pt solid #000;
-	width:18%;
+	width:20%;
 	text-align:center;
 }
 
 #dispendio #dataPagamento {
 	border-left: 0.8pt solid #000;
-	width:17.2%;
+	width:19.2%;
 	text-align:center;
 }
 
 #dispendio #textoCentral{
 	color:gray;
 	font-size: 14pt;
-	width:100%;
 	float:left;
 	text-align: center;
 	margin-top:35%;
