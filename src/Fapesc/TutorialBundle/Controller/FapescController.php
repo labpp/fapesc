@@ -137,7 +137,9 @@ class FapescController extends Controller {
     public function inicioAction() {
         $projetos = $this->getDoctrine()
                 ->getRepository("FapescTutorialBundle:Projeto")
-                ->findBy(array("usuario" => $this->get("security.context")->getToken()->getUser()->getId(), "ativo" => true));
+                ->findBy(
+                        array("usuario" => $this->get("security.context")->getToken()->getUser()->getId(), "ativo" => true),
+                        array("inicio" => "DESC"));
         if (empty($projetos)) {
             $dados["projetos"] = array();
         } else {
@@ -145,7 +147,9 @@ class FapescController extends Controller {
                 $dados["projetos"][$projeto->getId()] = $projeto->toArray();
                 $relatorios = $this->getDoctrine()
                         ->getRepository("FapescTutorialBundle:Relatorio")
-                        ->findBy(array("projeto" => $projeto->getId(), "ativo" => true));
+                        ->findBy(
+                                array("projeto" => $projeto->getId(), "ativo" => true),
+                                array("liberacao" => "DESC"));
                 if (empty($relatorios)) {
                     $dados["projetos"][$projeto->getId()]["relatorios"] = array();
                 } else {

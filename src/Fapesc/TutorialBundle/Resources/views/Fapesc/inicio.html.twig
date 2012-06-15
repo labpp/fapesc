@@ -58,9 +58,9 @@
 					<td style="text-align:center;"><img src="{{ asset('images/report.png') }}" alt="Relatórios"></td>
 					<td><a href="{{ path('relatorioDados', { 'idRelatorio': relatorio.idRelatorio  }) }}" title="Clique para editar informações do relatório">{{ relatorio.nota }}</a></td>
 					<td style="text-align:center;">{{ relatorio.liberacao }}</td>
-					<td style="text-align:center;">{{ relatorio.rubrica }}</td>
-					<td style="text-align:center;">{{ relatorio.tipo }}</td>
-					<td style="text-align:right;">{{ relatorio.valor }}</td>	
+					<td style="text-align:center;">{{ relatorio.rubricas[relatorio.rubrica] }}</td>
+					<td style="text-align:center;">{{ relatorio.tipos[relatorio.tipo] }}</td>
+					<td style="text-align:right;">R$ {{ relatorio.valor }}</td>	
 					<td style="text-align:right;"><a href="{{ path('relatorioDelete', { 'idRelatorio': relatorio.idRelatorio }) }}" title="Excluir relatório" onclick="return confirm('Tem certeza que deseja excluir este relatório?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Excluir"></a></td>						
 				</tr>
 				{% else %}

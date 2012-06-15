@@ -5,47 +5,39 @@
 {% block content %}
 <script type="text/javascript">
     jQuery(function($){
-    $("#contrato").mask("999999-9999");
-    $(".data").mask("99/99/9999");
-    $('#orcamento').priceFormat({
-    prefix: '',
-    centsSeparator: ',',
-    thousandsSeparator: '.'
-    });
+        $("#contrato").mask("999999-9999");
+        $(".data").mask("99/99/9999");
+        $('#orcamento').priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
     });
     $().ready(function() {
-    $("form").validate({
-    rules: {
-    contrato: {
-    required: true,
-    minlength: 11
-    },
-    titulo: "required",
-    chamada: "required",
-    area: "required",
-    municipio: "required",
-    regiao: "required",
-    sdr: "required",
-    inicio: "required",
-    termino: "required",
-    orcamento: "required"
-    },
-    messages: {
-    contrato: {
-    required: "Digite o contrato",
-    minlength: "Digite um número de contrato válido"
-    },
-    titulo: "Digite o título",
-    chamada: "Digite a chamada",
-    area: "Digite a área",
-    municipio: "Digite o município",
-    regiao: "Digite a região",
-    sdr: "Digite o SDR",
-    inicio: "Digite a data de início",
-    termino: "Digite a data de término",
-    orcamento: "Digite o orçamento"
-    }
-    });
+        $("form").validate({
+            rules: {
+                contrato: {
+                    required: true,
+                    minlength: 11
+                },
+                titulo: "required",
+                chamada: "required",
+                area: "required",
+                regiao: "required",
+                inicio: "required",
+                termino: "required",
+                orcamento: "required"
+            },
+            messages: {
+                contrato: {
+                    required: "Digite o contrato",
+                    minlength: "Digite um número de contrato válido"
+                },
+                titulo: "Digite o título",
+                chamada: "Digite a chamada",
+                area: "Digite a área",
+                regiao: "Digite a região",
+                inicio: "Digite a data de início",
+                termino: "Digite a data de término",
+                orcamento: "Digite o orçamento"
+            }
+        });
     });
 </script>
 <div id="content">
@@ -63,9 +55,21 @@
             <table class="form" width="90%">
                 <tr><td colspan="3" >Área do conhecimento / Sub-área:<br /><input type="text" name="area" title="Informe a área do conhecimento relativa ao projeto" maxlength="100" size="50" value="{{ area }}" /></td></tr>
                 <tr>
-                    <td width="41%">Localização (município):<br /><input type="text" name="municipio" title="Entre com o nome do município ou distrito, sem abreviaturas." maxlength="50" size="30" value="{{ municipio }}" /></td>
+                    <td>Localização (município):<br />
+                        <select name="municipio" title="Selecione o nome do município ou distrito.">
+                            {% for item in municipioSelect %}
+                            <option value="{{ item.value }}" {% if item.value == municipio %} selected="selected" {% endif %}>{{ item.text }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
                     <td>Região (IBGE):<br /><input type="text" name="regiao" title="Entre com o nome da região de abrangência." maxlength="50" size="25" value="{{ regiao }}" /></td>
-                    <td>SDR:<br /><input type="text" name="sdr" title="Entre com o nome da SDR de abrangência." maxlength="50" size="25" value="{{ sdr }}" /></td>
+                    <td>SDR:<br />
+                        <select name="sdr" title="Selecione o nome da SDR de abrangência.">
+                            {% for item in sdrSelect %}
+                            <option value="{{ item.value }}" {% if item.value == sdr %} selected="selected" {% endif %}>{{ item.text }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
                 </tr>
             </table>
             <table class="form" width="90%">
