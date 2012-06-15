@@ -5,7 +5,7 @@
 			<table border=1 width=100% cellspacing=0 bordercolor='#000'  style=border-collapse:'collapse'>
 				<tr>
 					<td ><h2>Saldo da conta bancária {{ conta }} / agência {{ agencia }} – Banco {{ banco }} em {{ data }} </h2></td>
-					<td class="valor"> {{ valor }} </td>
+					<td class="valor"> {{ saldo }} </td>
 				</tr>
 				<tr> <td height=7pt COLSPAN=2> </td> </tr>
 				<tr>
@@ -22,7 +22,7 @@
 				</tr>
 				<tr>
 					<td class="direita">Saldo da conciliação bancária</td>
-					<td class="valor"> {{ saldo }} </td>
+					<td class="valor"> {{ diferenca }} </td>
 				</tr>
 			</table>	
 		</div>
