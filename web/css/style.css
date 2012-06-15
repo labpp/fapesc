@@ -10,518 +10,575 @@ Version: 1.0
 /*@import reset.css*/
 
 body {
-	margin: 0;
-	background: #FFFFFF url(../images/body-background.png) repeat-x;
-	color: #333333;
-	font-size: 11px;
-	font-family: Helvetica, Arial, sans-serif;
-	/*line-height: 23px;*/
+    margin: 0;
+    background: #FFFFFF url(../images/body-background.png) repeat-x;
+    color: #333333;
+    font-size: 11px;
+    font-family: Helvetica, Arial, sans-serif;
+    /*line-height: 23px;*/
 }
 
 a {
-	color: #AA0000;
-	text-decoration: none;
+    color: #AA0000;
+    text-decoration: none;
 }
 
 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 a img{
-	border: 0;
+    border: 0;
 }
 
 
 h1 {
-	padding-bottom: 25px;
-	font-size: 18px;
-	color: #000000;
+    padding-bottom: 25px;
+    font-size: 18px;
+    color: #000000;
 }
 
 h2 {
-	font-size: 16px;
-	margin-bottom: 0px;
+    font-size: 16px;
+    margin-bottom: 0px;
 }
 
 table {
-	font-size: 11px;
-	margin-bottom: 20px;
+    font-size: 11px;
+    margin-bottom: 20px;
 }
 
 #wrapper {
-	width: 980px;
-	margin: 0 auto;
+    width: 980px;
+    margin: 0 auto;
 }
 
 /* --- Header and Navigation --- */
 
 #header {
-	float: left;
-	width: 100%;
-	height: 71px;
-	background: #FFFFFF url(../images/header-background.png);
+    float: left;
+    width: 100%;
+    height: 71px;
+    background: #FFFFFF url(../images/header-background.png);
 }
 
 #header-left {
-	float: left;
-	width: 30%;
-	padding-top: 18px;
+    float: left;
+    width: 30%;
+    padding-top: 18px;
 }
 
 #header-center {
-	float: left;
-	width: 30%;
-	padding-top: 22px;
-	text-align: right;
+    float: left;
+    width: 30%;
+    padding-top: 22px;
+    text-align: right;
 }
 
 #header-right {
-	float: left;
-	width: 38%;
-	padding-top: 22px;
-	text-align: right;
+    float: left;
+    width: 38%;
+    padding-top: 22px;
+    text-align: right;
 }
 
 #header-right ul{
-	display: inline;
-	list-style-type: none;
+    display: inline;
+    list-style-type: none;
 }
 
 #header-right li{
-	display: inline;
-	padding-left: 4px;
-	padding-right: 5px;
-	border-right: #CCC dotted 1px;
+    display: inline;
+    padding-left: 4px;
+    padding-right: 5px;
+    border-right: #CCC dotted 1px;
 }
 
 /* --- Content --- */
 
 #content {
-	float: left;
-	width: 100%;
-	background: #FFFFFF;
-	margin-top: 30px;
-	margin-bottom: 100px;
+    float: left;
+    width: 100%;
+    background: #FFFFFF;
+    margin-top: 30px;
+    margin-bottom: 100px;
 }
 
 #login-content {
-	float: left;
-	width: 100%;
-	background: #FFFFFF;
-	margin-top: 50px;
-	margin-bottom: 100px;
+    float: left;
+    width: 100%;
+    background: #FFFFFF;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 #title {
-	float: left;
-	width: 90%;
-	margin-top: 25px;
-	padding-left: 20px;
-	padding-bottom: 10px;
-	/*margin-bottom: 40px;*/
-	border-left: #CCCCCC solid 8px;
-	border-bottom: #CCCCCC dotted 1px;
+    float: left;
+    width: 90%;
+    margin-top: 25px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    /*margin-bottom: 40px;*/
+    border-left: #CCCCCC solid 8px;
+    border-bottom: #CCCCCC dotted 1px;
 }
 
 #project-title {
-	float: left;
-	width: 70%;
-	font-size: 14px;
-	font-weight: bold;
+    float: left;
+    width: 70%;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 #report-title {
-	float: left;
-	width: 70%;
-	font-size: 18px;
-	font-weight: bold;
+    float: left;
+    width: 70%;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 #notification-box {
-	/*float: right;*/
-	position:absolute;
-		top:135px;
-		right:275px;
-	width: 29%;
-	padding-right:10px;
+    /*float: right;*/
+    position:absolute;
+    top:135px;
+    right:275px;
+    width: 29%;
+    padding-right:10px;
 }
 
 #main-content {
-	float: left;
-	width: 70%;
-	padding-left: 45px;	
-	border-left: #CCC dotted 1px;
+    float: left;
+    width: 70%;
+    padding-left: 45px;	
+    border-left: #CCC dotted 1px;
 }
 
 #sidebar {
-	float: left;
-	width: 22%;
-	padding-right: 25px;
-	text-align: justify;
+    float: left;
+    width: 22%;
+    padding-right: 25px;
+    text-align: justify;
 }
 
 /* --- Forms and Controls --- */
 
 table.form {
-	font-size: 11px;
-	padding-bottom: 20px;
-	margin-bottom: 20px;
-	border-bottom: #DDD dotted 1px;
+    font-size: 11px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: #DDD dotted 1px;
 }
 
 table.form input {
-	background: #EEEEEE;
-	border: #AAAAAA solid 1px
+    background: #EEEEEE;
+    border: #AAAAAA solid 1px
 }
 
 table.form  td {
-	padding-top: 3px;
-	padding-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 table.submit {
-	text-align: right;
+    text-align: right;
 }
 
 label.error {
-	display: block;
-	clear: both;
-	color: red;
-	font-weight: bold;
-	padding: 3px;
+    display: block;
+    clear: both;
+    color: red;
+    font-weight: bold;
+    padding: 3px;
+}
+
+/* pure form */
+form fieldset {
+    border: 1px dotted #eee;
+    margin: 3% 1%;
+}
+
+form div {
+    float: left;
+    margin: 1%;
+    padding: 1%;
+    width: 97%;
+}
+
+form div.coluna2 {
+    width: 46%;
+}
+
+form div.coluna3 {
+    width: 29%;
+}
+
+form div.coluna3c {
+    width: 63%;
+}
+
+form div.coluna4 {
+    width: 20%;
+}
+
+form div label {
+    float: left;
+    clear: both;
+}
+
+form div input, form div textarea, form div select {
+    float: left;
+    clear: both;
+    width: 98%;
+}
+
+form div input[type=text], form div input[type=password], form div textarea {
+    border: 0;
+    background: #eee;
+    padding: 5px;
+}
+
+form div input[type=text].data {
+    text-align: center;
+}
+
+form div input[type=text].dinheiro {
+    text-align: right;
+}
+
+form div input[type=submit] {
+    float: right;
+    clear: both;
+    width: 100px;
+    height: 50px;
 }
 
 /* --- Content - Home and My Projects --- */
 
 #login-title {
-	font-size: 16px;
+    font-size: 16px;
 }
 
 #sidebar.login-sidebar {
-	float: left;
-	width: 30%;
-	margin-top: 70px;
-	padding-left: 200px;
+    float: left;
+    width: 30%;
+    margin-top: 70px;
+    padding-left: 200px;
 }
 
 #main-content.login-main-content {
-	float: left;
-	width: 30%;
-	margin-top: 70px;
-	margin-left: -20px;
+    float: left;
+    width: 30%;
+    margin-top: 70px;
+    margin-left: -20px;
 }
 
 table.project-report {
-	width: 96%;
-	padding-left: 25px;
+    width: 96%;
+    padding-left: 25px;
 }
 
 .project {
-	float: left;
-	width: 100%;
-	font-size: 11px;
-	margin-right: 100px;
-	margin-bottom: 20px;
+    float: left;
+    width: 100%;
+    font-size: 11px;
+    margin-right: 100px;
+    margin-bottom: 20px;
 }
 
 .project-label {
-	float: left;
-	width: 92%;
-	background: #EEEEEE url(../images/project.png) 10px 5px no-repeat;
-	padding-left: 34px;
+    float: left;
+    width: 92%;
+    background: #eee url(../images/project.png) 10px 50% no-repeat;
+    padding: 10px 0 10px 35px;
 }
 
 .project-title {
-	float: left;
-	width: 95%;
-	padding-top: 5px;
-	font-size: 12px;
-	font-weight: bold;
+    float: left;
+    width: 80%;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 5px;
 }
 
 .project-info {
-	float: left;
-	width: 95%;
-	margin-top: 1px;
-	margin-bottom: -10px;
+    float: left;
+    width: 80%;
 }
 
-img[alt=Excluir] {
-	float:right;
+.project-delete {
+    float: right;
+    padding: 15px;
 }
-img[alt=ExcluirProjeto] {
-	float:right;
-	padding-right:11px;
-}
+
 .project-report  th{
-	border-bottom:#DDDDDD dotted 1px;"
+    border-bottom:#DDDDDD dotted 1px;"
 }
 
 .project-report  td{
-	padding-top: 3px;
-	padding-bottom: 3px;
-	border-bottom:#DDDDDD dotted 1px;"
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom:#DDDDDD dotted 1px;"
 }
 
 a#projects-registry {
-	width: 60px;	
-	padding-top: 8px;
-	padding-bottom: 8px;
-	padding-left: 35px;
-	padding-right: 12px;
-	font-size: 12px;
-	text-align: center;
-	background: #AA0000 url(../images/project-registry.png) 8px 9px no-repeat;
+    width: 60px;	
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 35px;
+    padding-right: 12px;
+    font-size: 12px;
+    text-align: center;
+    background: #AA0000 url(../images/project-registry.png) 8px 9px no-repeat;
 }
 
 a#projects-registry {
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 a#projects-registry:hover{
-	color: #FFFFFF;
-	background: #999999 url(../images/project-registry.png) 8px 9px no-repeat;
+    color: #FFFFFF;
+    background: #999999 url(../images/project-registry.png) 8px 9px no-repeat;
 }
 
 a#new-report {
-	width: 60px;	
-	padding-top: 8px;
-	padding-bottom: 8px;
-	padding-left: 35px;
-	padding-right: 21px;
-	font-size: 12px;
-	text-align: center;
-	background: #AA0000 url(../images/new-report.png) 12px 8px no-repeat;
+    width: 60px;	
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 35px;
+    padding-right: 21px;
+    font-size: 12px;
+    text-align: center;
+    background: #AA0000 url(../images/new-report.png) 12px 8px no-repeat;
 }
 
 a#new-report {
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 a#new-report:hover{
-	color: #FFFFFF;
-	background: #999999 url(../images/new-report.png) 12px 8px no-repeat;
+    color: #FFFFFF;
+    background: #999999 url(../images/new-report.png) 12px 8px no-repeat;
 }
 
 p#new-report {
-	padding-top: 20px;
+    padding-top: 20px;
 }
 
 /* --- Content - My Reports --- */
 
 #navigation {
-	float: left;
-	width: 100%;
-	height: 25px;
-	/*background: #DDDDDD url(../images/navigation-background.png);*/
-	padding-top: 25px;
-	font-size: 12px;
+    float: left;
+    width: 100%;
+    height: 25px;
+    /*background: #DDDDDD url(../images/navigation-background.png);*/
+    padding-top: 25px;
+    font-size: 12px;
 }
 
 #navigation ul{
-	display: inline;
-	padding-top: 10px;
-	list-style-type: none;
+    display: inline;
+    padding-top: 10px;
+    list-style-type: none;
 }
 
 #navigation li{
-	display: inline;
+    display: inline;
 }
 
 #navigation a{
-	background: #AAAAAA;
-	padding-top: 8px;
-	padding-bottom: 6px;
-	padding-left: 10px;
-	padding-right: 10px;
-	color: #FFFFFF;
+    background: #AAAAAA;
+    padding-top: 8px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #FFFFFF;
 }
 
 #navigation a#active{
-	background: #FFFFFF;
-	color: #666666;
+    background: #FFFFFF;
+    color: #666666;
 }
 
 a#projects-button {
-	width: 60px;
-	background: #AA0000;
-	padding-top: 8px;
-	padding-bottom: 8px;
-	padding-left: 12px;
-	padding-right: 12px;
-	font-size: 14px;
-	text-align: center;
+    width: 60px;
+    background: #AA0000;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 14px;
+    text-align: center;
 }
 
 a#projects-button{
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 a#projects-button:hover{
-	color: #FFFFFF;
-	background: #999999;
+    color: #FFFFFF;
+    background: #999999;
 }
 
 #goals {
-	padding-bottom: 1px;
-	border-bottom:#FFFFFF dotted 1px;"
+    padding-bottom: 1px;
+    border-bottom:#FFFFFF dotted 1px;"
 }
 
 #goals td {
-	padding-top: 15px;
-	padding-bottom: 15px;
-	border-bottom:#CCCCCC dotted 1px;"
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom:#CCCCCC dotted 1px;"
 }
 
 #goals th {
-	background: #DDDDDD;
-	padding-bottom:5px;
-	border-bottom:#AAAAAA dotted 1px;"
+    background: #DDDDDD;
+    padding-bottom:5px;
+    border-bottom:#AAAAAA dotted 1px;"
 }
 
 #budget-panel {
-	float: left;
-	width: 60%;
-	height: 52px;
-	background: #CCCCCC;
-	margin-left: 5px;
-	margin-bottom: 20px;
-	margin-left: 200px;
+    float: left;
+    width: 60%;
+    height: 52px;
+    background: #CCCCCC;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    margin-left: 200px;
 }
 
 #conc-panel {
-	width: 40%;
-	height: 52px;
-	background: #CCCCCC;
-	margin-left: 5px;
-	margin-bottom: 20px;
-	margin-left: 340px;
-	border-bottom: #CCCCCC dotted 1px;
+    width: 40%;
+    height: 52px;
+    background: #CCCCCC;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    margin-left: 340px;
+    border-bottom: #CCCCCC dotted 1px;
 }
 
 #conc-panel th {
-	width: 150px;
-	padding-top:4px;
-	padding-bottom:4px;
-	padding-left:4px;
-	text-align: left;
-	font-size: 8px;
-	background: #DDDDDD;
+    width: 150px;
+    padding-top:4px;
+    padding-bottom:4px;
+    padding-left:4px;
+    text-align: left;
+    font-size: 8px;
+    background: #DDDDDD;
 }
 
 #conc-panel td {
-	padding-top:6px;
-	padding-bottom:6px;
-	padding-right:5px;
-	text-align: right;
-	font-size: 14px;
-	background: #EEEEEE;
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-right:5px;
+    text-align: right;
+    font-size: 14px;
+    background: #EEEEEE;
 }
 
 .total {
-	border-top:#CCCCCC dotted 1px;
-	float: left;
-	width: 420px;
-	height: 30px;
-	background: #CCCCCC;
-	margin-left: 5px;
-	margin-bottom: 20px;
-	margin-left: 200px;
-	margin-right: 20px;
+    border-top:#CCCCCC dotted 1px;
+    float: left;
+    width: 420px;
+    height: 30px;
+    background: #CCCCCC;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    margin-left: 200px;
+    margin-right: 20px;
 }
 
 .total td {
-	padding-top:6px;
-	padding-bottom:6px;
-	padding-right:5px;
-	text-align: right;
-	font-size: 12px;
-	background: #EEEEEE;
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-right:5px;
+    text-align: right;
+    font-size: 12px;
+    background: #EEEEEE;
 }
 
 #budget-panel th {
-	width: 150px;
-	padding-top:4px;
-	padding-bottom:4px;
-	padding-left:4px;
-	text-align: left;
-	font-size: 8px;
-	background: #DDDDDD;
+    width: 150px;
+    padding-top:4px;
+    padding-bottom:4px;
+    padding-left:4px;
+    text-align: left;
+    font-size: 8px;
+    background: #DDDDDD;
 }
 
 #budget-panel td {
-	padding-top:6px;
-	padding-bottom:6px;
-	padding-right:5px;
-	text-align: right;
-	font-size: 14px;
-	background: #EEEEEE;
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-right:5px;
+    text-align: right;
+    font-size: 14px;
+    background: #EEEEEE;
 }
 
 #budget-pledged {
-	padding-bottom: 1px;
-	border-bottom:#FFFFFF dotted 1px;"
+    padding-bottom: 1px;
+    border-bottom:#FFFFFF dotted 1px;"
 }
 
 #budget-pledged td {
-	padding-top: 15px;
-	padding-bottom: 15px;
-	border-bottom:#CCCCCC dotted 1px;"
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom:#CCCCCC dotted 1px;"
 }
 
 #budget-pledged th {
-	background: #DDDDDD;
-	padding-bottom:5px;
-	border-bottom:#AAAAAA dotted 1px;"
+    background: #DDDDDD;
+    padding-bottom:5px;
+    border-bottom:#AAAAAA dotted 1px;"
 }
 
 
 /* --- Footer --- */
 
 #footer {
-	clear: both;
-	width: 100%;
-	height: 25px;
-	border-top: #AAA solid 1px;
-	text-align: center;
+    clear: both;
+    width: 100%;
+    height: 25px;
+    border-top: #AAA solid 1px;
+    text-align: center;
 }
 
 /* --- Notifications --- */
 
 .notification {
-	/*float: left;
-	padding-top: 4px;
-	padding-bottom: 4px; 
-	margin-top: 80px;
-	margin-left: -190px;*/
-	width: 70%;	
-	height:100%;
-	padding-top: 5px;
-	padding-bottom:5px;
-	text-align: center;
+    /*float: left;
+    padding-top: 4px;
+    padding-bottom: 4px; 
+    margin-top: 80px;
+    margin-left: -190px;*/
+    width: 70%;	
+    height:100%;
+    padding-top: 5px;
+    padding-bottom:5px;
+    text-align: center;
 }
 
 .notification-content {
-	color: #333333;
-	font-size: 10px;
-	font-weight: bold;
+    color: #333333;
+    font-size: 10px;
+    font-weight: bold;
 }
 
 .notification-content a {
-	color: #333333;
-	text-decoration: underline;
+    color: #333333;
+    text-decoration: underline;
 }
 
 #ok-bar {
-	background: #addda6; /*ok*/
-	
+    background: #addda6; /*ok*/
+
 }
 
 #error-bar {
-	background: #fda9a9; /*error*/
+    background: #fda9a9; /*error*/
 
 }
 
 #attention-bar {
-	background: #fbf2c2; /*atention*/	
+    background: #fbf2c2; /*atention*/	
 }

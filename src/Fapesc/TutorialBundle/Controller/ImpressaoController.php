@@ -20,7 +20,7 @@ class ImpressaoController extends FapescController {
      */
     public function impressaoAction($idRelatorio) {
         $dados["idRelatorio"] = $idRelatorio;
-        return array_merge($this->usuario(), $this->menu("relatorio", "impressao", $idRelatorio), $this->info($this->findRelatorio($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
+        return array_merge($this->usuario(), $this->menu("relatorio", "impressao", $idRelatorio), $this->info($this->getDoctrine()->getRepository("FapescTutorialBundle:Relatorio")->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }
 
     /**
@@ -34,6 +34,7 @@ class ImpressaoController extends FapescController {
         return new Response($mpdf->Output($arquivo, 'D'));
     }
 
+    /*
     private function findRelatorio($idRelatorio) {
         $relatorio = $this->getDoctrine()
                 ->getRepository("FapescTutorialBundle:Relatorio")
@@ -41,14 +42,12 @@ class ImpressaoController extends FapescController {
         if (!is_object($relatorio))
             throw new Exception("Relatório inválido!");
         //@TODO assegurar somente [relatórios > projetos > usuário]
-
         return $relatorio;
     }
+     */
 
     private function imprimeRelatorio($idRelatorio) {
-        $relatorio = $this->getDoctrine()
-                ->getRepository("FapescTutorialBundle:Relatorio")
-                ->find($idRelatorio);
+        $relatorio = $this->getDoctrine()->getRepository("FapescTutorialBundle:Relatorio")->find($idRelatorio);
         $projeto = $relatorio->getProjeto();
         define('_IMPRESSAO', '../src/Fapesc/TutorialBundle/Resources/views/Impressao/');
 
@@ -125,9 +124,7 @@ class ImpressaoController extends FapescController {
     }
 
     private function criaPaginas($idRelatorio) {
-        $relatorio = $this->getDoctrine()
-                ->getRepository("FapescTutorialBundle:Relatorio")
-                ->find($idRelatorio);
+        $relatorio = $this->getDoctrine()->getRepository("FapescTutorialBundle:Relatorio")->find($idRelatorio);
         $projeto = $relatorio->getProjeto();
         $contrapartida = $this->geraTabelaEmpenhosContrapartida($idRelatorio, "Contrapartida");
         $empenho = $this->geraTabelaEmpenhosContrapartida($idRelatorio, "Empenho");
