@@ -19,7 +19,6 @@
                 titulo: "required",
                 chamada: "required",
                 area: "required",
-                regiao: "required",
                 inicio: "required",
                 termino: "required",
                 orcamento: "required"
@@ -32,7 +31,6 @@
                 titulo: "Digite o título",
                 chamada: "Digite a chamada",
                 area: "Digite a área",
-                regiao: "Digite a região",
                 inicio: "Digite a data de início",
                 termino: "Digite a data de término",
                 orcamento: "Digite o orçamento"
@@ -55,15 +53,21 @@
             <table class="form" width="90%">
                 <tr><td colspan="3" >Área do conhecimento / Sub-área:<br /><input type="text" name="area" title="Informe a área do conhecimento relativa ao projeto" maxlength="100" size="50" value="{{ area }}" /></td></tr>
                 <tr>
-                    <td>Localização (município):<br />
+                    <td>Localização (Município):<br />
                         <select name="municipio" title="Selecione o nome do município ou distrito.">
                             {% for item in municipioSelect %}
                             <option value="{{ item.value }}" {% if item.value == municipio %} selected="selected" {% endif %}>{{ item.text }}</option>
                             {% endfor %}
                         </select>
                     </td>
-                    <td>Região (IBGE):<br /><input type="text" name="regiao" title="Entre com o nome da região de abrangência." maxlength="50" size="25" value="{{ regiao }}" /></td>
-                    <td>SDR:<br />
+                    <td>Região (IBGE):<br />
+                        <select name="regiao" title="Selecione o nome da região de abrangência.">
+                            {% for item in regiaoSelect %}
+                            <option value="{{ item.value }}" {% if item.value == regiao %} selected="selected" {% endif %}>{{ item.text }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>Secretaria de Desenvolvimento Regional (SDR):<br />
                         <select name="sdr" title="Selecione o nome da SDR de abrangência.">
                             {% for item in sdrSelect %}
                             <option value="{{ item.value }}" {% if item.value == sdr %} selected="selected" {% endif %}>{{ item.text }}</option>

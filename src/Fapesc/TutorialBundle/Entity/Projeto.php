@@ -58,9 +58,9 @@ class Projeto {
     private $municipio;
 
     /**
-     * @var string $regiao
+     * @var integer $regiao
      *
-     * @ORM\Column(name="regiao", type="string", length=255, nullable="true")
+     * @ORM\Column(name="regiao", type="integer")
      */
     private $regiao;
 
@@ -572,6 +572,26 @@ class Projeto {
     public function getRegiao() {
         return $this->regiao;
     }
+    
+    public function getRegioes($regiao = false) {
+        $regioes = array(
+            "1" => "Litoral",
+            "2" => "Nordeste",
+            "3" => "Vale do Itajaí",
+            "4" => "Planalto Norte",
+            "5" => "Planalto Serrano",
+            "6" => "Sul",
+            "7" => "Meio-Oeste",
+            "8" => "Oeste",
+        );
+        return $regiao ? $regioes[$regiao] : $regioes;
+    }
+    
+    public function getRegiaoSelect() {
+        foreach ($this->getRegioes() as $key => $value)
+            $regioes[] = array("value" => $key, "text" => $value);
+        return $regioes;
+    }
 
     /**
      * Set sdr
@@ -852,6 +872,8 @@ class Projeto {
             "municipios" => $this->getMunicipios(),
             "municipioSelect" => $this->getMunicipioSelect(),
             "regiao" => $this->getRegiao(),
+            "regioes" => $this->getRegioes(),
+            "regiaoSelect" => $this->getRegiaoSelect(),
             "sdr" => $this->getSdr(),
             "sdrs" => $this->getSdrs(),
             "sdrSelect" => $this->getSdrSelect(),
