@@ -40,33 +40,24 @@
 }
 #relatorio1 #inicio{
 	float:left;
-	width:20%;
+	width:15%;
 	border-left: 0.8pt solid #000;
 }
 #relatorio1 #dataRelatorio{
 	float:left;
-	width:25%;
+	width:13%;
 	border-left: 0.8pt solid #000;
 }
-#relatorio1 #dataParcela{
-	float:left;	
-	border-left: 0.8pt solid #000;
-}
-
-#relatorio1 #total{
-	width:35%;
-	float:left;
-}
-#relatorio1 #custeio{
-	width:35%;
+#relatorio1 #dataNL{
+	width:19%;
 	float:left;
 	border-left: 0.8pt solid #000;
 }
-#relatorio1 #capital{
+#relatorio1 #valorNL{
+	width:18%;
 	float:left;
 	border-left: 0.8pt solid #000;
 }
-
 #relatorio1 #resumo{
 	position:relative;
 	height:1%;
