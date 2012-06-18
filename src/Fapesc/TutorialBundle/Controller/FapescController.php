@@ -67,7 +67,7 @@ class FapescController extends Controller {
             if (!is_object($relatorio)) {
                 throw new \Exception("Relatório inválido!");
             }
-            $info["relatorio"] = "NL " . $relatorio->getNota() . " - " . $relatorio->getLiberacao() . " - " . $relatorio->getRubrica(true);
+            $info["relatorio"] = "NL " . $relatorio->getNota() . " - " . $relatorio->getLiberacao() . " - " . $relatorio->getRubricas($relatorio->getRubrica());
         }
         return array("info" => $info);
     }

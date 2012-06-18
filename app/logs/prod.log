@@ -1309,3 +1309,8 @@
 [2012-06-14 15:31:33] request.INFO: Matched route "fapesc_tutorial_contrapartida_contrapartidadelete" (parameters: "_controller": "Fapesc\TutorialBundle\Controller\ContrapartidaController::contrapartidaDeleteAction", "idRelatorio": "5", "idContrapartida": "5", "categoria": "bibliografia", "_route": "fapesc_tutorial_contrapartida_contrapartidadelete") [] []
 [2012-06-14 15:31:33] request.CRITICAL: InvalidArgumentException: NULL (uncaught exception) at /var/www/fapesc/vendor/doctrine/lib/Doctrine/ORM/EntityManager.php line 478 [] []
 [2012-06-14 15:31:33] security.DEBUG: Write SecurityContext in the session [] []
+[2012-06-18 09:33:14] security.DEBUG: Read SecurityContext from the session [] []
+[2012-06-18 09:33:14] security.DEBUG: Reloading user from user provider. [] []
+[2012-06-18 09:33:14] security.DEBUG: Username "896.170.610-15" was reloaded from user provider. [] []
+[2012-06-18 09:33:14] request.ERROR: Symfony\Component\HttpKernel\Exception\NotFoundHttpException: No route found for "GET /projeto/0/undefined" (uncaught exception) at /var/www/fapesc/app/cache/prod/classes.php line 4546 [] []
+[2012-06-18 09:33:14] security.DEBUG: Write SecurityContext in the session [] []
