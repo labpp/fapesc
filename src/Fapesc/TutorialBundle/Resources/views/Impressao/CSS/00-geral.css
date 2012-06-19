@@ -103,9 +103,10 @@ h1{
   	color: #000;
 	
 }
-#plano .tabela1 th, .tabela1 td{
+#plano .tabela1 th, .tabela1 td, .tabela1 tr{
   	padding: 1pt;
 	text-align:center;
+        border:0.8pt solid #000;
 }
 
 #plano .descricao5{
@@ -151,7 +152,7 @@ h1{
 	padding-right: 2%;
 	text-align:right;	
 }
-#plano .bolsista{
+#plano .nome{
 	border-left:0.8pt solid #000;
 	border-top:0.8pt solid #000;
 	border-right:0.8pt solid #000;
@@ -175,7 +176,10 @@ h1{
 	width:30%;
 	text-align:left;
 }
-
+#plano .carga{
+	border-top:0.8pt solid #000;
+	width:5%;
+}
 #folhaBranca p{
 	float:left;
 	margin-top:40%;

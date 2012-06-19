@@ -1,0 +1,23 @@
+#dispendioDiarias #dataAq{
+	width:18%;
+	float:left;
+}
+#dispendioDiarias #trecho{
+	width:30%;
+	border-left:0.8pt solid #000;
+	float:left;
+}
+#dispendioDiarias #saidaChegada{
+	width:30%;
+	border-left:0.8pt solid #000;
+	float:left;
+}
+#dispendioDiarias #vTotal{
+	width:18%;
+	border-left:0.8pt solid #000;
+	float:left;
+}
+
+#dispendioDiarias .centro{
+	text-align:center;
+}

@@ -22,7 +22,17 @@ class ImpressaoController extends FapescController {
         $dados["idRelatorio"] = $idRelatorio;
         return array_merge($this->usuario(), $this->menu("relatorio", "impressao", $idRelatorio), $this->info($this->findRelatorio($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }
+    private function findRelatorio($idRelatorio)
+	{
+		$relatorio = $this->getDoctrine()
+			->getRepository("FapescTutorialBundle:Relatorio")
+			->find($idRelatorio);
+		if (!is_object($relatorio))
+			throw new Exception("Relatório inválido!");
+		//@TODO assegurar somente [relatórios > projetos > usuário]
 
+		return $relatorio;
+	}
     /**
      * @Route("/relatorio/{idRelatorio}/imprimir")
      */
@@ -43,7 +53,7 @@ class ImpressaoController extends FapescController {
 
         require_once("../vendor/mpdf/mPDF.php");
 
-        $mpdf = new \mPDF('pt', 'A4', 12, '', 8, 8, 51, 20, 9, 9);
+        $mpdf = new \mPDF('pt', 'A4', 12, '', 8, 8, 53, 20, 9, 9);
         $mpdf->SetDisplayMode('fullpage');
         $titulosPaginas = array("00-cabecalho",
             "00-rodape",
@@ -56,7 +66,8 @@ class ImpressaoController extends FapescController {
             "03-conciliacao",
             "*-dispendio",
             "*-dispendioDiarias",
-            "*-declaracaoDiarias",);
+            "*-declaracaoDiarias",
+            "*-dispendioPassagem",);
         foreach ($titulosPaginas as $value) {
             $stylesheet = file_get_contents(_IMPRESSAO . 'CSS/' . $value . '.css');
             $mpdf->WriteHTML($stylesheet, 1);
@@ -115,10 +126,13 @@ class ImpressaoController extends FapescController {
         $empenho = $this->geraTabelaEmpenhosContrapartida($idRelatorio, "Empenho");
         $total = $contrapartida[0] + $empenho[0];
         $paginas = array();
-        $dados = $relatorio->getTipos();
-
+        $tipos = $relatorio->getTipos();
+        $municipios =  $projeto->getMunicipios();
+        $regioes = $projeto->getRegioes();
+        $sdrs = $projeto->getSdrs();
+        $cidade = $cidade[$numero];
         $dados = array(//capa
-            "tipo" => strtoupper($dados[$relatorio->getTipo()]),
+            "tipo" => strtoupper($tipos[$relatorio->getTipo()]),
             "chamada" => $projeto->getChamada(),
             "contrato" => $projeto->getContrato(),
             "empenho" => $relatorio->getNota(),
@@ -141,9 +155,8 @@ class ImpressaoController extends FapescController {
         $dados = array(//relatorio1
             "projeto" => $projeto->getTitulo(),
             "coordenador" => $projeto->getUsuario()->getNome(),
-            "parte" => "II",
             "area" => $projeto->getArea(),
-            "local" => $projeto->getMunicipios(true) . "/" . $projeto->getRegioes(true) . "/" . $projeto->getSdrs(true),
+            "local" => $municipios[$projeto->getMunicipio()] . "/" . $regioes[$projeto->getRegiao()] . "/" . $sdrs[$projeto->getSdr()],
             "instituicao" => $projeto->getUsuario()->getInstituicao(),
             "valorTotal" => "R$ " . $projeto->getOrcamento(),
             "inicio" => $projeto->getInicio(),
@@ -160,7 +173,7 @@ class ImpressaoController extends FapescController {
 
         $paginas[] = array(0 => $this->escreve("02-relatorio2", $dados), false);
         $dados = array(//relatorio3
-            "dataExtenso" => $projeto->getMunicipios(true) . ", " . date("d/m/Y"),
+            "dataExtenso" => $municipios[$projeto->getMunicipio()] . ", " . date("d/m/Y"),
             "coordenador" => $projeto->getUsuario()->getNome(),
             "resultado" => $relatorio->getResultado(),
             "justificativa" => $relatorio->getJustificativa(),
@@ -321,7 +334,7 @@ class ImpressaoController extends FapescController {
         }
         $tam = sizeof($my_array);
         $contaSub = 1;
-        for ($j = 1; $j <= $tam; $j++) {
+        for ($j = 1; $j <= 10; $j++) {
             $contDados = sizeof($my_array[$j]);
             if ($contDados != 0) {
                 $colunas = $titulos[$j];
@@ -330,6 +343,7 @@ class ImpressaoController extends FapescController {
                 $tabelas .= $subTitulo;
                 $footer[1] = $colunas[2] - 1;
                 $header[1] = $colunas[2];
+                $header[2] = $colunas[3];
                 $vtotal = $total[$j];
                 $tabelas .= $this->geraTabela($this->geraHeader($header), $my_array[$j], $this->geraFooter($footer, $vtotal), $this->geraClass($header));
             }
@@ -339,7 +353,7 @@ class ImpressaoController extends FapescController {
 
     function dadosTabelas($idRelatorio, $pagina) {//$pagina = "Contrapartida" ou "Empenho"
         $my_array = array();
-        $total = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        $total = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         $itens = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:" . $pagina)->findBy(array("relatorio" => $idRelatorio));
         if (!empty($itens)) {
             foreach ($itens as $item) {
@@ -353,7 +367,7 @@ class ImpressaoController extends FapescController {
                             $valor = $dispendio->getTotal(true);
                             switch ($dispendio->getCategoria()) {
                                 case "1": //bibliografia
-                                    $dados = array($dispendio->getData(), $dispendio->getDescricao(), $dispendio->getQuantidade(), "R$ " . $dispendio->getUnitario(), "R$ " . $dispendio->getTotal());
+                                    $dados = array($dispendio->getData(), $dispendio->getDescricao(), $dispendio->getQuantidade(), "R$ " . $dispendio->getUnitario() ,"R$ " . $dispendio->getTotal());
                                     $k = 3;
                                     break;
                                 case "2": //equipamento
@@ -366,8 +380,8 @@ class ImpressaoController extends FapescController {
                                     break;
                                 case "4": //pessoaFisica
                                     $dados = array($dispendio->getData(), $dispendio->getDescricao(), "R$ " . $dispendio->getTotal());
-                                    break;
                                     $k = 4;
+                                    break;
                                 case "5": //pessoaJuridica
                                     $dados = array($dispendio->getData(), $dispendio->getDescricao(), "R$ " . $dispendio->getTotal());
                                     $k = 5;
@@ -419,7 +433,7 @@ class ImpressaoController extends FapescController {
                     case "5": //salario
                         $salario = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Salario")->find($item->getItem());
                         if (is_object($salario)) {
-                            $valor = $diaria->getProporcional(true);
+                            $valor = $salario->getProporcional(true);
                             $salario = $salario->toArray();
                             $pesquisador = $salario["pesquisador"];
                             $dados = array($salario["data"], $pesquisador["nome"], $salario["carga"], $salario["data"], "R$ " . $salario["bruto"], "R$ " . $salario["proporcional"]);
@@ -515,6 +529,7 @@ class ImpressaoController extends FapescController {
                             "vTotal" => "R$ " . $passagem["total"],
                             "mensagem" => "Caro Coordenados,</br> fixe aqui o bilhete de passagem / cartão de embarque referente ao trecho" . $passagem["descrição"] . ", emitido pela companhia " . $passagem["fornecedor"]["nome"] . " em " . $passagem["compra"] . ", no valor de R$ " . $passagem["total"] . " e seu respectivo comprovante de pagamento.",
                         );
+                         $paginas[] = array($this->escreve("*-dispendioPassagem", $dados), false);
                         break;
                     case "4"://diaria
                         $precoDiaria = $item[1]->getValor(true) / $item[1]->getQuantidade(true);
@@ -528,7 +543,7 @@ class ImpressaoController extends FapescController {
                             "diarias" => $diaria["quantidade"],
                             "objetivos" => $diaria["objetivos"],
                             "resultados" => $diaria["resultados"],
-                            "dataExtenso" => $projeto->getMunicipios(true) . ", " . date("d/m/Y"),
+                            "dataExtenso" => $municipios[$projeto->getMunicipio()] . ", " . date("d/m/Y"),
                         );
                         $paginas[] = array($this->escreve("*-declaracaoDiarias", $dados), false);
                         $dados = array(
@@ -587,7 +602,7 @@ class ImpressaoController extends FapescController {
 							    <td class='vTotal'>		Valor Total     	</td>";
                     } else {//bolsa
                         $header .= "<td class='data'>	        Data de Pag.	</td>
-							    <td class='bolsista'>	Bolsista 	</td>
+							    <td class='nome'>	Bolsista 	</td>
 						            <td class='data2'>		Período 	</td>
 							    <td class='vTotal'>		Valor Total     </td>";
                     }
@@ -595,7 +610,7 @@ class ImpressaoController extends FapescController {
                 case 5:
                     if ($pagina[2] == 1) {//equipamento ou mobiliario ou bibliografia ou material de consumo
                         $header .= "<td class='data'>	        Data de Aquisição	</td>
-							    <td class='descricao5'>	Descricação		</td>
+							    <td class='descricao5'>	Descrição		</td>
 						            <td class='qtd'>		Quantidade 		</td>
 						            <td class='vUnit'>		Valor Unitário	 	</td>
 							    <td class='vTotal'>		Valor Total     	</td>";
