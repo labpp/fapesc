@@ -64,21 +64,14 @@ class ImpressaoController extends FapescController
 					 "00-geral",
 					 "00-capa",
 					 "01-checklist",
-					 "09-relatorio1",
-					 "09-relatorio2",
-					 "09-relatorio3",
-					 "02-planoAplicacao",
-					 "03-contrapartida",
-					 "05-dispendioFiscal",
-					 "06-dispendioDiarias",
-					 "07-dispendioPagamento",
-					 "07-declaracaoDiarias",
-					 "08-dispendioPrecos",
-					 "paginaBranca",
-					 "conciliacao",);	
-		foreach ($titulosPaginas as $key => $value){
-			if($value == "05-dispendioFiscal")
-				$value = "05-dispendio";
+					 "02-relatorio1",
+					 "02-relatorio2",
+					 "02-relatorio3",
+				         "03-conciliacao",
+					 "*-dispendio",
+					 "*-dispendioDiarias",
+					 "*-declaracaoDiarias",);	
+		foreach ($titulosPaginas as $value){
 			$stylesheet = file_get_contents(_IMPRESSAO.'CSS/'.$value.'.css');
 			$mpdf->WriteHTML($stylesheet,1);
 		}
@@ -174,13 +167,13 @@ private function escreve($pagina,$dados){
 				"valorNL" => "R$ " . $relatorio->getValor(),
 				"resumo" =>  $projeto->getResumo(),
 			);
-		$paginas[] = array(0 => $this->escreve("09-relatorio1",$dados) , false);
+		$paginas[] = array(0 => $this->escreve("02-relatorio1",$dados) , false);
 		$dados = array(//relatorio2
 				"tabela" => $this->geraRelatorio($relatorio),
 			);
 		
 
-		$paginas[] = array(0 => $this->escreve("09-relatorio2",$dados) , false);
+		$paginas[] = array(0 => $this->escreve("02-relatorio2",$dados) , false);
 		$dados = array(//relatorio3
 				"dataExtenso" => $projeto->getMunicipios(true).", ".date("d/m/Y"),
 				"coordenador" => $projeto->getUsuario()->getNome(),
@@ -189,7 +182,7 @@ private function escreve($pagina,$dados){
 				"dificuldade" => $relatorio->getDificuldade(),
 				"alteracao" => $relatorio->getAlteracao(),
 			);
-		$paginas[] = array(0 => $this->escreve("09-relatorio3",$dados) , false);
+		$paginas[] = array(0 => $this->escreve("02-relatorio3",$dados) , false);
 		$conciliacao = $this->geraConciliacao($relatorio);
 		$msgs = array(
 				0 => "Caro Coordenador, substitua esta folha pela cópia impressa do balancete TC28 referente à nota de liberação ".$relatorio->getNota(),
@@ -221,32 +214,34 @@ private function escreve($pagina,$dados){
 			);
 		for($i = 0 ; $i <= 7 ; $i++){
 			if($i == 6)
-				$paginas[] = array(0 => $this->escreve("conciliacao",$msgs[$i]) , false);	//conciliacao bancaria
+				$paginas[] = array(0 => $this->escreve("03-conciliacao",$msgs[$i]) , false);	//conciliacao bancaria
 			else
-				$paginas[] = array(0 => $this->escreve("paginaBranca",array("textoPaginaBranca"=>$msgs[$i])) , true);
+				$paginas[] = array(0 => $this->escreve("*-paginaBranca",array("textoPaginaBranca"=>$msgs[$i])) , true);
 			
 		}
-		$dados = array(//planoAplicao
-				"tabela" => $empenho[1],
-			);
-		$paginas[] = array(0 => $this->escreve("02-planoAplicacao",$dados) , false);
-
-		$folhasCabecalho = $this->paginasDispendio($idRelatorio,"Empenho");//$dados contem todas as paginas preenchidas para colar os documentos
+		if($empenho[0] != 0){
+			$dados = array(//planoAplicao
+					"tabela" => $empenho[1],
+				);
+			$paginas[] = array(0 => $this->escreve("04-planoAplicacao",$dados) , false);
+			$folhasCabecalho = $this->paginasDispendio($idRelatorio,"Empenho");//$dados contem todas as paginas preenchidas para colar os documentos
+		
 		foreach($folhasCabecalho as $folha)
 			$paginas[] = array(0 => $folha[0] , $folha[1]);
+		}
+		if($contrapartida[0] != 0){
+			$dados = array(//contrapartida
+					"tabela" => $contrapartida[1],
+				);
+			$paginas[] = array(0 => $this->escreve("05-contrapartida",$dados) , false);
 
-		$dados = array(//contrapartida
-				"tabela" => $contrapartida[1],
-			);
-		$paginas[] = array(0 => $this->escreve("03-contrapartida",$dados) , false);
-
-		$folhasCabecalho = $this->paginasDispendio($idRelatorio,"Contrapartida");//$dados contem todas as paginas preenchidas para colar os documentos
-		foreach($folhasCabecalho as $folha)
-			$paginas[] = array(0 => $folha[0] , $folha[1]);
-
+			$folhasCabecalho = $this->paginasDispendio($idRelatorio,"Contrapartida");//$dados contem todas as paginas preenchidas para colar os documentos
+			foreach($folhasCabecalho as $folha)
+				$paginas[] = array(0 => $folha[0] , $folha[1]);
+		}
 		$msg = "Caro Coordenador, substitua essa folha pela cópia impressa do pedido de registro de patrimônio dos itens adquiridos pela execução da nota de liberação " . $relatorio->getNota() . ".";
 		if($relatorio->getRubrica() == 1)//se for do tipo capital,imprime essa pagina
-			$paginas[] = array(0 => $this->escreve("paginaBranca",array("textoPaginaBranca"=>$msg)) , true);
+			$paginas[] = array(0 => $this->escreve("*-paginaBranca",array("textoPaginaBranca"=>$msg)) , true);
 
 		return $paginas;
 	}
@@ -324,15 +319,15 @@ private function escreve($pagina,$dados){
 		$my_array = $dados[1];
 		
 		$titulos = array(
-				1  => array( 1 => "Equipamentos" , 5) ,
-				2  => array( 1 => "Mobiliário" , 5),
-				3  => array( 1 => "Bibliografia" , 5),
+				1  => array( 1 => "Equipamentos" , 5 , 1) ,
+				2  => array( 1 => "Mobiliário" , 5 , 1),
+				3  => array( 1 => "Bibliografia" , 5 , 1),
 				4  => array( 1 => "Serviços – Pessoa Física" , 3),
 				5  => array( 1 => "Serviços – Pessoa Jurídica" , 3),
-				6  => array( 1 => "Passagens" , 4 , 1),
-				7  => array( 1 => "Diárias" , 5),
+				6  => array( 1 => "Passagens" , 4, 1),
+				7  => array( 1 => "Diárias" , 5 , 2),
 				8  => array( 1 => "Bolsas", 4 , 2),
-				9  => array( 1 => "Material de Consumo" , 5),
+				9  => array( 1 => "Material de Consumo" , 5 , 1),
 				10 => array( 1 => "Salários e Encargos" , 6),
 			);
 		$tabelas = "";
@@ -378,7 +373,7 @@ private function escreve($pagina,$dados){
 		                    switch ($dispendio->getCategoria()) {
 		                        case "1": //bibliografia
 		                           $dados = array($dispendio->getData() , $dispendio->getDescricao() , $dispendio->getQuantidade() ,"R$ ". $dispendio->getUnitario(),"R$ ".$dispendio->getTotal());
-					   $k = 2;
+					   $k = 3;
 		                           break;
 		                        case "2": //equipamento
 		                           $dados = array($dispendio->getData() , $dispendio->getDescricao() , $dispendio->getQuantidade() ,"R$ ". $dispendio->getUnitario(),"R$ ".$dispendio->getTotal());
@@ -386,7 +381,7 @@ private function escreve($pagina,$dados){
 		                           break;
 		                        case "3": //mobiliario
 		                           $dados = array($dispendio->getData() , $dispendio->getDescricao() , $dispendio->getQuantidade() ,"R$ ". $dispendio->getUnitario(),"R$ ".$dispendio->getTotal());
-					   $k = 3;
+					   $k = 2;
 		                           break;
 		                        case "4": //pessoaFisica
 		                           $dados = array($dispendio->getData() , $dispendio->getDescricao() ,"R$ ". $dispendio->getTotal());
@@ -487,7 +482,7 @@ private function escreve($pagina,$dados){
 		            case "3": //passagem
 		                $passagem = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Passagem")->find($item->getItem());
 		                if (is_object($passagem))
-				    $dados = array($passagemArray->getCompra() ,  $passagem , 3);
+				    $dados = array($passagem->getCompra() ,  $passagem , 3);
 		                break;
 			    case "4": //diaria
 		                $diaria = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Diaria")->find($item->getItem());
@@ -521,7 +516,7 @@ private function escreve($pagina,$dados){
 						"dataPagamento" => $dispendio["data"],
 
 					);
-				$paginas[] = array($this->escreve("05-dispendioFiscal",$dados),false);
+				$paginas[] = array($this->escreve("*-dispendioFiscal",$dados),false);
 			}
 			else{
 				switch($item[2]){
@@ -529,32 +524,46 @@ private function escreve($pagina,$dados){
 					$nome = $item[1]->getBolsista()->getNome();
 					$periodo = $bolsa->getInicio(false) . " a " . $bolsa->getFim(false);
 					$msg = "Caro Coordenador, substitua esta folha pelos recibos de pagamento de bolsas(e respectivos comprovantes de depósito) em benefício de $nome, referente ao período $periodo.";
-			                $paginas[] = array(0 => $this->escreve("paginaBranca",array("textoPaginaBranca"=>$msg)) , true);
+			                $paginas[] = array(0 => $this->escreve("*-paginaBranca",array("textoPaginaBranca"=>$msg)) , true);
 					break;	
 				
 				case "3"://passagem
-					//TODO
-					$refazerEssaParte = true;
+					$saidaChegada = $item[1]->getSaida("d/m/Y") . " - " . $item[1]->getChegada("d/m/Y");
+					$passagem = $item[1]->toArray();
+					$dados = array(
+							"data" => $passagem["compra"],
+							"trecho" => $passagem["descrição"],
+							"saidaChegada" => $saidaChegada,
+							"vTotal" =>"R$ " . $passagem["total"],
+							"mensagem" => "Caro Coordenados,</br> fixe aqui o bilhete de passagem / cartão de embarque referente ao trecho" . $passagem["descrição"] . ", emitido pela companhia " . $passagem["fornecedor"]["nome"] . " em " . $passagem["compra"] . ", no valor de R$ " . $passagem["total"] . " e seu respectivo comprovante de pagamento.",
+						);
 					break;
 				case "4"://diaria
+					$precoDiaria = $item[1]->getValor(true) / $item[1]->getQuantidade(true);
+				   	$precoDiaria = "R$ " . number_format($precoDiaria, 2, ",", ".");
 					$diaria = $item[1]->toArray();
 					$dados = array(
+							"beneficiario" => $diaria["beneficiario"],
+							"cpf" => $diaria["cpf"],
+							"numero" => $projeto->getContrato(),
+							"valor" => $diaria["valor"],
+							"diarias" => $diaria["quantidade"],
 							"objetivos" => $diaria["objetivos"],
 							"resultados" => $diaria["resultados"],
 							"dataExtenso" => $projeto->getMunicipios(true).", ".date("d/m/Y") ,
 						);
-					$paginas[] = array($this->escreve("07-declaracaoDiarias",$dados),false);
+					$paginas[] = array($this->escreve("*-declaracaoDiarias",$dados),false);
 					$dados = array(	    
 						"mensagem" => "Caro Coordenador, substitua esta folha pelos recibos de pagamento de bolsas(e respectivos comprovantes de depósito) em benefício de $nome, referente ao período $periodo.",//TODO
 						"data" => $diaria["inicio"],
 						"objetivo" => $diaria["objetivos"],
-						"diaria" => $diaria["total"]/$diaria["quantidade"],
+						"diaria" => $precoDiaria,
 						"quantidade" => $diaria["quantidade"],
-						"vTotal" => $diaria["valor"],
+						"vTotal" => "R$ " . $diaria["valor"],
 					);
 					$qtdPaginas = $diaria["documentos"];
 					for($i = 0 ; $i < $qtdPaginas ; $i++)
-						$paginas[] = array($this->escreve("06-dispendioDiarias",$dados),false);
+						$paginas[] = array($this->escreve("*-dispendioDiarias",$dados),false);
 					break;
 		                }
 			}
