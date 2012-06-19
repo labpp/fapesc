@@ -135,7 +135,7 @@ class ContrapartidaController extends RelatorioController {
                         break;
                     case "4": //diaria
                         $diaria = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Diaria")->find($contrapartida->getItem());
-                        if (is_object($diaria) && ($relatorio->getRubrica() == 2)) {
+                        if (is_object($diaria)) {
                             $dados["categorias"]["diaria"]["descricao"] = "Diárias";
                             $dados["categorias"]["diaria"]["categoria"] = "diaria";
                             $dados["categorias"]["diaria"]["itens"][] = $diaria->toArray();
@@ -156,7 +156,12 @@ class ContrapartidaController extends RelatorioController {
         }
         $dados["disponivel"] = number_format($relatorio->getValor(true) - $dados["empenhado"], 2, ",", ".");
         $dados["empenhado"] = number_format($dados["empenhado"], 2, ",", ".");
-        return array_merge($this->usuario(), $this->menu("relatorio", "contrapartidas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
+        return array_merge(
+                $this->usuario(), 
+                $this->menu("relatorio", "contrapartidas", $idRelatorio), 
+                $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), 
+                $dados
+        );
     }
 
     /**
@@ -538,7 +543,7 @@ class ContrapartidaController extends RelatorioController {
             $acao = "alterado";
         }
         $em->flush();
-        $this->contrapartidaInsert($idRelatorio, 4, $salario->getId());
+        $this->contrapartidaInsert($idRelatorio, 5, $salario->getId());
         $this->get("session")->setFlash("sucesso", "Salário {$acao} com sucesso!");
         return $this->forward("FapescTutorialBundle:Contrapartida:contrapartidas", array("idRelatorio" => $idRelatorio));
     }
