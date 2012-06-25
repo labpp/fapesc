@@ -5,24 +5,24 @@
 {% block content %}
 <script type="text/javascript">
     jQuery(function($){
-    $(".data").mask("99/99/9999");
-    $("#valor").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+        $(".data").mask("99/99/9999");
+        $("#valor").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
     });
     $().ready(function() {
-    $("form").validate({
-    rules: {
-    nota: "required",
-    liberacao: "required",
-    vigencia: "required",
-    valor: "required",
-    },
-    messages: {
-    nota: "Digite a nota de liquidação",
-    liberacao: "Digite a data de liberação",
-    vigencia: "Digite a data de vigência",
-    valor: "Digite o valor",
-    }
-    });
+        $("form").validate({
+            rules: {
+                nota: "required",
+                liberacao: "required",
+                vigencia: "required",
+                valor: "required",
+            },
+                messages: {
+                nota: "Digite a nota de liquidação",
+                liberacao: "Digite a data de liberação",
+                vigencia: "Digite a data de vigência",
+                valor: "Digite o valor",
+            }
+        });
     });
 </script>
 <div id="content">
