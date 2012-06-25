@@ -1,6 +1,6 @@
 <div id="corpo">
 	<div id="dispendio">
-		<h1 class ="head" > LISTAGEM DE DISPÊNDIOS </h1>
+		<h1 class ="head" > {{ titulo }} </h1>
 		<div id="fornecedor" class="linha2">
 				<div class="espacamentoEsq menor">
 					Fornecedor:
@@ -21,7 +21,7 @@
 
 		<div id="descricao" class="linha3">
 				<div class="espacamentoEsq menor">
-					Distribuição do Dispêndio:
+					Descrição {{ descricaoTit }}:
 				</div>	
 				<div class="espacamentoEsq maior">
 					{{ descricao }}
@@ -74,7 +74,7 @@
 		<div id="textoCentral">
 				<p>
 					Caro Coordenador, <br> 
-					cole aqui o recibo ou documento fiscal (ou recibo) No. {{ noChequeRecibo }}<br> 
+					cole aqui o documento comprobatório No. {{ noChequeRecibo }}<br> 
 					emitido em {{ dataEmissao }} no valor de R$ {{ valor }}, por <br>
 					{{ fornecedor }}
 				</p>

@@ -81,7 +81,8 @@
 	float:left;
 	text-align: center;
 	margin-top:35%;
-	
+        width:80%;
+        margin-left:10%;
 }
 
 #dispendio .maior{

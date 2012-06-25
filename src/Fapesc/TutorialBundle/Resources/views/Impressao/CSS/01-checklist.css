@@ -24,19 +24,16 @@
 	float:left;
 	margin-top:10%;
 	height:10%;
-	width:40%;
+	width:30%;
 	text-align:left;
 }
-#checklist #assinatura{
-	float:left;
-	border-top: 1pt solid #000;
-	margin-top:12%;
-	margin-left:12%;
-	padding-top:4%;
-	font-size: 12pt;
-	height:15.8%;
-	width:34.64%;	
+#checklist .ass{
+        float:left;
+	width:40%;
 	text-align:center;
+	margin-left:15%;
+	margin-top:10%;
+        border-top:0.8pt solid #000;
 }
 
 #checklist .fontePadrao{

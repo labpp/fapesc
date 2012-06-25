@@ -1,35 +1,39 @@
 <div id = "corpo" >
-	<div id = "declaracaoDiarias">
-		<h1 class ="head" > DECLARAÇÃO DE DIÁRIAS </h1>
-		<div class="linha2">
-			<div id="beneficiario">
-				<div class="espacamentoEsq menor"> BENEFICIÁRIO </div>
-				<div class="espacamentoEsq maior"> {{ beneficiario }} </div>
-			</div>
-			<div id="cpf">
-				<div class="espacamentoEsq menor"> CPF </div>
-				<div class="espacamentoEsq maior"> {{ cpf }} </div>
-			</div>
-		</div>
-		<div id="declaracao" class="espacamentoEsq">
-			Declaro, junto à <strong>FUNDAÇÃO DE APOIO À PESQUISA CIENTÍFICA E TECNOLÓGICA - FAPESC</strong>, que recebi parte dos recursos de custeio para o projeto de pesquisa aprovado através do contrato nº {{ numero }}, no valor de R$ {{ valor }} referente a {{ diarias }} diárias conforme relatório abaixo:
-		</div>
+    <div id = "declaracaoDiarias">
+        <h1 class ="head" > DECLARAÇÃO DE DIÁRIAS </h1>
+        <div class="linha2">
+            <div id="beneficiario">
+                <div class="espacamentoEsq menor"> BENEFICIÁRIO </div>
+                <div class="espacamentoEsq maior"> {{ beneficiario }} </div>
+            </div>
+            <div id="cpf">
+                <div class="espacamentoEsq menor"> CPF </div>
+                <div class="espacamentoEsq maior"> {{ cpf }} </div>
+            </div>
+        </div>
+        <div id="declaracao" class="espacamentoEsq">
+            Declaro, junto à <strong>FUNDAÇÃO DE APOIO À PESQUISA CIENTÍFICA E TECNOLÓGICA - FAPESC</strong>, que recebi parte dos recursos de custeio para o projeto de pesquisa aprovado através do contrato nº {{ numero }}, no valor de R$ {{ valor }} referente a {{ diarias }} diárias conforme relatório abaixo:
+        </div>
 
-		<div id="objetivo">OBJETIVO: {{ objetivos }}</div>
-		<div id="resultados">RESULTADOS OBTIDOS COM O DESLOCAMENTO: {{ resultados }}</div>	
+        <div id="objetivo">OBJETIVO:<br/> {{ objetivos }}</div>
+        <div id="resultados">RESULTADOS OBTIDOS COM O DESLOCAMENTO:<br/> {{ resultados }}</div>	
 
-		
-		<div id="data"><b>{{ dataExtenso }}</b></div>
-		<div id="ass"><b>Assinatura</b></div>
-		
-		<div id="decreto">
-			<p>
-				<b>Decreto Estadual Nº 1607, de 15 de agosto de 2008</b><br>
-				   Artigo 3º. A Diária será concedida por dia de deslocamento, assim entendido o período de 24 horas.<br>
-				   § 1º Será concedida diária integral para período de deslocamento igual ou superior a 12 horas. <br>
-				   § 2º Será concedida meia diária quando o período de deslocamento for igual ou superior a 4 (quatro) horas e inferior a 12 (doze) horas.
-			
-			</p>
-		</div>
-	</div>
+
+        <div id="data"><b>{{ dataExtenso }}</b></div>
+        <div id="ass">
+            {{ beneficiario }}<br/>
+            {{ cpf }}<br/>
+            Beneficiário
+        </div>
+
+        <div id="decreto">
+            <p>
+                <b>Decreto Estadual Nº 1607, de 15 de agosto de 2008</b><br>
+                Artigo 3º. A Diária será concedida por dia de deslocamento, assim entendido o período de 24 horas.<br>
+                § 1º Será concedida diária integral para período de deslocamento igual ou superior a 12 horas. <br>
+                § 2º Será concedida meia diária quando o período de deslocamento for igual ou superior a 4 (quatro) horas e inferior a 12 (doze) horas.
+
+            </p>
+        </div>
+    </div>
 </div>

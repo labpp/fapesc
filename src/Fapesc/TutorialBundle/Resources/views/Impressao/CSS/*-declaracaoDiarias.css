@@ -16,6 +16,8 @@
 
 #declaracaoDiarias #declaracao{
 	float:left;
+        margin-top:0.75%;
+        margin-bottom:0.75%;
 	font-size: 8pt;
 }
 

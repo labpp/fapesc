@@ -1,93 +1,100 @@
 <div id="checklist">
-	<div id="corpo">
-			<span> </span> <!-- Marcação para o margin-top -->
-			<div id="introducao" class="texto margemLateral fontePadrao" >
-				<p>	Prezado {{ nome }},<br/></p>
-				<p>	Em observância à lei estadual 0000, de {{ data }}, apresentamos o relatório parcial de atividades e respectiva prestção
-					de contas referentes ao projeto {{ projeto }}, contrato no. {{ contrato }} cujos recursos provêm do empenho {{ empenho }}, de {{ data }}.<br/></p>
-				<p>	O presente relatório e respectiva prestação de contas é composta dos seguintes documentos:</p>
-			</div>
-			<div id="tabela" class = "margemLateral">  
-				<table  border=1 height ="100%" cellspacing=0 bordercolor="#999999"  style="border-collapse: collapse">
-					<tr >
-						<td width="5%"> A </td>
-						<td width="5%"> B </td>
-						<td width="5%"> C </td>
-						<td align = "center" >Documentos</td>
-					</tr>
-				  	<tr>
-				   		<td></td>
-				    		<td></td>
-				    		<td></td>
-				    		<td>Relatório Técnico Parcial;</td>
-				   	</tr>
-				    	<tr>
-				    		<td></td>
-				    		<td></td>
-				    		<td></td>
-				    		<td>Memorando de devolução dos recursos remanescentes, incluindo cheque ou comprovante de depósito do montante a ser 					devolvido;</td>
-					</tr>  
-				    	<tr>
-				    		<td></td>
-				    		<td></td>
-				    		<td></td>
-				    		<td>Memorando de alteração orçamentária,constando deferimento por parte da Gerência de projetos da FAPESC;</td>
-				    	</tr>  
-				    	<tr>
-				    		<td></td>
-				    		<td></td>
-				    		<td></td>
-				    		<td>Balancete TC28 referente a aplicação dos recursos do empenho {{ empenho }};</td>
-				    	</tr>  
-				    	<tr>
-				    		<td></td>
-				    		<td></td>
-				    		<td></td>
-				    		<td>Extrato bancário — Conta corrente (numero), Agência (numero);</td>
-				    	</tr>  
-				    	<tr>
-				    		<td></td>
-				    		<td></td>
-				    		<td></td>
-				    		<td>Listagem de bens de capital;</td>
-				    	</tr> 
-				    	<tr>
-				    		<td></td>
-				    		<td></td>
-				    		<td></td>
-				    		<td>Comprovantes de despesas, comprovantes de empenho dos recursos e respectivo orçamentos e/ou consultas de preço;</td>
-				    	</tr>  
-				    	<tr>
-				    		<td></td>
-				    		<td></td>
-				    		<td></td>
-				    		<td>Comprovantes e recibos de empenho da contrapartida;</td>
-				    	</tr>    
-				</table>
-			  </div>
-	
-			  <div id="agradecimento" class="texto margemLateral fontePadrao"> Atenciosamente, </div>
-			<div id='legenda' class="margemLateral legenda">
-			<table>
-				<tr>
-					<td>LEGENDA:</td>
-				</tr>
-				<tr>
-					<td>A — Uso do coordenador do projeto;</td>
-				</tr>
-				<tr>
-					<td>B — Uso do protocolo da FAPESC;</td>
-				</tr>
-				<tr>
-					<td>C — Uso da Gerência de Projetos da FAPESC;</td>
-				</tr>
-			</table>
-			</div>
-			 	   
-			<div id="assinatura">
-			    {{ coordenador }}<br/>
-			    Coordenador do Projeto
-			</div>
-	</div>
+    <div id="corpo">
+        <span> </span> <!-- Marcação para o margin-top -->
+        <div id="introducao" class="texto margemLateral fontePadrao" >
+            <p>	Prezado {{ nome }},<br/></p>
+            <p>	Em observância ao decreto nº 2.060/09, apresentamos o relatório parcial de atividades e respectiva prestção
+                de contas referentes ao projeto {{ projeto }}, termo de outorga nº. {{ contrato }} cujos recursos provêm da nota de liberação {{ empenho }}, de {{ data }}.<br/></p>
+            <p>	O presente relatório e respectiva prestação de contas é composta dos seguintes documentos:</p>
+        </div>
+        <div id="tabela" class = "margemLateral">  
+            <table  border=1 height ="100%" cellspacing=0 bordercolor="#999999"  style="border-collapse: collapse">
+                <tr >
+                    <td width="5%"> A </td>
+                    <td width="5%"> B </td>
+                    <td width="5%"> C </td>
+                    <td align = "center" >Documentos</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Relatório Técnico {{ tipo }};</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Balancete TC28 referente a aplicação dos recursos da nota de liberação {{ empenho }};</td>
+                </tr>  
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Termo de outorga nº {{ contrato }};</td>
+                </tr>  
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Plano de trabalho aprovado;</td>
+                </tr>  
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Memorando de alteração orçamentária</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Extrato bancário — Conta corrente {{ conta }}, Agência {{ agencia }} e demonstrantivos de rendimento;</td>
+                </tr>  
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Comprovantes de devolução dos recursos remanescentes;</td>
+                </tr> 
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Documentos comprobatórios de empenho dos recursos;</td>
+                </tr>  
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Documentos comprobatórios de empenho da contrapartida;</td>
+                </tr>    
+            </table>
+        </div>
+
+        <div id="agradecimento" class="texto margemLateral fontePadrao"> Atenciosamente, </div>
+        <div id='legenda' class="margemLateral legenda">
+            <table>
+                <tr>
+                    <td>LEGENDA:</td>
+                </tr>
+                <tr>
+                    <td>A — Uso do coordenador do projeto;</td>
+                </tr>
+                <tr>
+                    <td>B — Uso do protocolo da FAPESC;</td>
+                </tr>
+                <tr>
+                    <td>C — Uso da Gerência de Projetos da FAPESC;</td>
+                </tr>
+            </table>
+        </div>
+        <div id="assinatura" class="ass">
+            {{ coordenador }}<br/>
+            {{ cpf }}<br/>
+            Coordenador do Projeto
+        </div>
+    </div>
 </div>
+
 

@@ -52,14 +52,12 @@
 
 #capa #data {
 	text-align:center;
-	width:100%;
 	float:left;
-	float:left;
-	margin-top:20%;
+	margin-top:15%;
 }
 
 #capa .tamFont{
-	font-size: 11pt;
+	font-size: 13pt;
 } 
 #capa .titulo{
 	font-size: 17pt;
