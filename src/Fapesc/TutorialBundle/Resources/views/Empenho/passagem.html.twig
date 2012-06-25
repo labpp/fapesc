@@ -6,8 +6,8 @@
 <script type="text/javascript">
     jQuery(function($){
         $(".hora").mask("99/99/9999 99:99");
-        $(".dia").mask("99/99/9999");
-        $("#valor").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+        $(".data").mask("99/99/9999");
+        $(".dinheiro").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
     });
     $(document).ready(function(){
         $("form").validate({
@@ -42,62 +42,65 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
     </div><!-- #sidebar -->
     <div id="main-content">
-        <h1>:: Empenho de Recursos - Passagem</h1>
-        <form class="form-container" action="{{ path('relatorioEmpenhoPassagemPost', { 'idRelatorio': idRelatorio, 'idEmpenho': idEmpenho }) }}" method="POST">
-            <table class="form" width="50%">
-                <tr>
-                    <td>Tipo: <br />
-                        <select name="tipo" title="Selecione o tipo de passagem">
-                            {% for item in tipoSelect %}
-                            <option value="{{ item.value }}" {% if item.value == tipo %} selected="selected" {% endif %}>{{ item.text }}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                    <td>Fornecedor:<br />
-                        <select name="fornecedor">
-                            {% for item in fornecedores %}
-                            <option value="{{ item.idFornecedor }}" {% if item.idFornecedor == fornecedor.idFornecedor %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cadastro }}</option>
-                            {% endfor %}
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <table class="form" width="50%">
-                <tr>
-                    <td>Origem:<br /><input type="text" name="origem" value="{{ origem }}" title="Cidade de origem da viagem" /></td>
-                    <td>Saída:<br /><input type="text" name="saida" class="hora" value="{{ saida }}" /></td>
-                </tr>
-            </table>
-            <table class="form" width="50%">
-                <tr>
-                    <td>Destino: <br /> <input type="text" name="destino"  value="{{ destino }}" title="Cidade de destino da viagem" /></td>
-                    <td>Chegada: <br /> <input type="text" name="chegada" class="hora" value="{{ chegada }}" /></td>
-                </tr>
-            </table>
-            <table class="form" width="50%">
-                <tr>
-                    <td>Número do Tíquete:<br/><input type="text" name="tiquete" value="{{ tiquete }}" title="Informe o número ou localizador da passagem" /></td>
-                    <td>Data da Compra:<br/><input type="text" name="compra" class="dia" value="{{ compra }}" title="Informe a data da compra da passagem" /></td>
-                    <td>Valor:<br/><input type="text" name="valor" id="valor" value="{{ valor }}" title="Informe o valor da passagem" /></td>
-                </tr>
-            </table>
-            <table class="form" width="90%">
-                <tr>
-                    <td>Objetivos:
-                        <textarea name="objetivo" rows="10" cols="70" title="Escreva os objetivos associados ao uso da passagem">{{ objetivo }}</textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Resultados Alcançados:
-                        <textarea name="resultado" rows="10" cols="70" title="Descreva os resultados alcançados associados ao uso da passagem">{{ resultado }}</textarea>
-                    </td>
-                </tr>
-            </table>
-            <table class="submit" width="90%">
-                <tr>
-                    <td><input type="submit" value="Salvar" title=""/></td>
-                </tr>
-            </table>
+        <form class="" action="{{ path('relatorioEmpenhoPassagemPost', { 'idRelatorio': idRelatorio, 'idEmpenho': idEmpenho }) }}" method="POST">
+            <fieldset>
+                <legend>Passagem</legend>
+                <div class="coluna3c">
+                    <label>Fornecedor:</label>
+                    <select name="fornecedor">
+                        {% for item in fornecedores %}
+                        <option value="{{ item.idFornecedor }}" {% if item.idFornecedor == fornecedor.idFornecedor %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cadastro }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="coluna3">
+                    <label>Tipo:</label>
+                    <select name="tipo" title="Selecione o tipo de passagem">
+                        {% for item in tipoSelect %}
+                        <option value="{{ item.value }}" {% if item.value == tipo %} selected="selected" {% endif %}>{{ item.text }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="coluna3c">
+                    <label>Origem:</label>
+                    <input type="text" name="origem" value="{{ origem }}" title="Cidade de origem da viagem" />
+                </div>
+                <div class="coluna3">
+                    <label>Saída:</label>
+                    <input type="text" name="saida" class="hora" value="{{ saida }}" />
+                </div>
+                <div class="coluna3c">
+                    <label>Destino: </label>
+                    <input type="text" name="destino"  value="{{ destino }}" title="Cidade de destino da viagem" />
+                </div>
+                <div class="coluna3">
+                    <label>Chegada: </label>
+                    <input type="text" name="chegada" class="hora" value="{{ chegada }}" />
+                </div>
+                <div class="coluna3">
+                    <label>Número do Tíquete:</label>
+                    <input type="text" name="tiquete" value="{{ tiquete }}" title="Informe o número ou localizador da passagem" />
+                </div>
+                <div class="coluna3">
+                    <label>Data da Compra:</label>
+                    <input type="text" name="compra" class="data" value="{{ compra }}" title="Informe a data da compra da passagem" />
+                </div>
+                <div class="coluna3">
+                    <label>Valor: (R$)</label>
+                    <input type="text" name="valor" id="valor" class="dinheiro" value="{{ valor }}" title="Informe o valor da passagem" />
+                </div>
+                <div>
+                    <label>Objetivos:</label>
+                    <textarea name="objetivo" title="Escreva os objetivos associados ao uso da passagem">{{ objetivo }}</textarea>
+                </div>
+                <div>
+                    <label>Resultados Alcançados:</label>
+                    <textarea name="resultado" title="Descreva os resultados alcançados associados ao uso da passagem">{{ resultado }}</textarea>
+                </div>
+            </fieldset>
+            <div>
+                <input type="submit" value="Salvar" />
+            </div>
         </form>
     </div><!-- #main-content -->			
 </div><!-- #content -->

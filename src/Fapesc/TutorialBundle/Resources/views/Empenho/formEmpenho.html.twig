@@ -1,19 +1,10 @@
 <script type="text/javascript">
     jQuery(function($){
-        $("#data").mask("99/99/9999");
-        $('#unitario').priceFormat({
-            prefix: '',
-            centsSeparator: ',',
-            thousandsSeparator: '.'
-        });
-        $('#total').priceFormat({
-            prefix: '',
-            centsSeparator: ',',
-            thousandsSeparator: '.'
-        });
+        $(".data").mask("99/99/9999");
+        $(".dinheiro").priceFormat({ prefix: "", centsSeparator: ",", thousandsSeparator: "." });
     });
     function calcula() {
-        $("#total").val($("#quantidade").val().replace(/[^0-9]+/g,"") * $("#unitario").val().replace(/[^0-9]+/g,"")).priceFormat({prefix: '', centsSeparator: ',', thousandsSeparator: '.'});
+        $("#total").val($("#quantidade").val().replace(/[^0-9]+/g,"") * $("#unitario").val().replace(/[^0-9]+/g,"")).priceFormat({prefix: "", centsSeparator: ",", thousandsSeparator: "."});
     }
     $(document).ready(function(){
         $(".trigger").keyup(function(){
@@ -43,41 +34,50 @@
         });
     });
 </script>
-<form class="form-container" action="{{ action }}" method="POST">
-    <table class="form">
-        <tr>
-            <td>Fornecedor:<br />
-                <select name="fornecedor">
-                    {% for item in fornecedores %}
-                    <option value="{{ item.idFornecedor }}" {% if item.idFornecedor == fornecedor.idFornecedor %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cadastro }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>					
-    </table>
-    <table class="form">
-        <tr>
-            <td>Descrição do serviço:<br /><input type="text" name="descricao" title="Descrição do serviço a ser empenhado, conforme recibo ou documento fiscal." value="{{ descricao }}"/></td>
-        </tr>
-    </table>
-    <table class="form">
-        <tr>
-            <td>Unidade:<br /><input type="text" name="unidade" title="Informe a unidade de quantificação do serviço (ex: mês, horas, dias, etc)." value="{{ unidade }}" /></td>
-            <td>Quantidade:<br /><input type="text" name="quantidade" id="quantidade" class="trigger" title="Informe a quantidade de serviços adquiridos." value="{{ quantidade }}"/></td>
-            <td>Valor unitário:<br /><input type="text" name="unitario" id="unitario" class="trigger" title="Informe o valor unitário do serviço." value="{{ unitario }}" /></td>
-            <td>Valor total:<br /><input type="text" name="total" id="total" title="Informe o valor total do serviço, conforme recibo ou documento fiscal." value="{{ total }}"/></td>
-        </tr>
-    </table>
-    <table class="form">
-        <tr>
-            <td>Documento fiscal / Recibo:<br /><input type="text" name="documento" title="Informe o número do recibo ou documento fiscal." value="{{ documento }}"/></td>
-            <td>Data de emissão:<br /><input type="text" name="data" id="data" title="Informe a data de emissão do recibo ou documento fiscal." /></td>
-            <td>Comprovante de transação:<br /><input type="text" name="comprovante" title="Informe o número do cheque o comprovante eletrônico de transação." value="{{ comprovante }}"/></td>
-        </tr>
-    </table>
-    <table class="submit">
-        <tr>
-            <td><input type="submit" value="Salvar" title="" /></td>
-        </tr>
-    </table>
+<form class="" action="{{ action }}" method="POST">
+    <fieldset>
+        <div>
+            <label>Fornecedor:</label>
+            <select name="fornecedor">
+                {% for item in fornecedores %}
+                <option value="{{ item.idFornecedor }}" {% if item.idFornecedor == fornecedor.idFornecedor %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cadastro }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Descrição do serviço:</label>
+            <input type="text" name="descricao" title="Descrição do serviço a ser empenhado, conforme recibo ou documento fiscal." value="{{ descricao }}"/>
+        </div>
+        <div class="coluna2">
+            <label>Unidade:</label>
+            <input type="text" name="unidade" title="Informe a unidade de quantificação do serviço (ex: mês, horas, dias, etc)." value="{{ unidade }}" />
+        </div>
+        <div class="coluna2">
+            <label>Quantidade:</label>
+            <input type="text" name="quantidade" id="quantidade" class="trigger" title="Informe a quantidade de serviços adquiridos." value="{{ quantidade }}"/>
+        </div>
+        <div class="coluna2">
+            <label>Valor unitário:</label>
+            <input type="text" name="unitario" id="unitario" class="dinheiro trigger" title="Informe o valor unitário do serviço." value="{{ unitario }}" />
+        </div>
+        <div class="coluna2">
+            <label>Valor total:</label>
+            <input type="text" name="total" class="dinheiro" id="total" title="Informe o valor total do serviço, conforme recibo ou documento fiscal." value="{{ total }}"/>
+        </div>
+        <div class="coluna3">
+            <label>Documento fiscal / Recibo:</label>
+            <input type="text" name="documento" title="Informe o número do recibo ou documento fiscal." value="{{ documento }}"/>
+        </div>
+        <div class="coluna3">
+            <label>Data de emissão:</label>
+            <input type="text" name="data" class="data" title="Informe a data de emissão do recibo ou documento fiscal." value="{{ data }}" />
+        </div>
+        <div class="coluna3">
+            <label>Comprovante de divansação:</label>
+            <input type="text" name="comprovante" title="Informe o número do cheque o comprovante eledivônico de divansação." value="{{ comprovante }}"/>
+        </div>
+    </fieldset>
+    <div>
+        <input type="submit" value="Salvar" />
+    </div>
 </form>
