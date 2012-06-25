@@ -563,6 +563,12 @@ relatorioChequeDelete:
     idRelatorio: \d+
     idCheque: \d+
 
+relatorioTc28:
+  pattern: /relatorio/{idRelatorio}/tc28
+  defaults: { _controller: FapescTutorialBundle:Relatorio:tc28 }
+  requirements:
+    idRelatorio: \d+
+
 relatorioImpressao:
   pattern: /relatorio/{idRelatorio}/impressao
   defaults: { _controller: FapescTutorialBundle:Impressao:impressao }

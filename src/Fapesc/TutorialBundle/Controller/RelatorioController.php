@@ -308,6 +308,18 @@ class RelatorioController extends FapescController {
     }
 
     /**
+     * @Route("/relatorio/{idRelatorio}/tc28")
+     * @Template("FapescTutorialBundle:Relatorio:tc28.html.twig")
+     */
+    public function tc28Action($idRelatorio) {
+            return array_merge(
+                    $this->usuario(), 
+                    $this->menu("relatorio", "tc28", $idRelatorio), 
+                    $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio)
+            );
+    }
+
+    /**
      * @Route("/relatorio/{idRelatorio}/delete")
      * @Template()
      */

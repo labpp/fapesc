@@ -30,6 +30,7 @@ class FapescController extends Controller {
                 "empenhos" => "Empenho de Recursos",
                 "contrapartidas" => "Contrapartidas",
                 "conciliacao" => "Conciliação Bancária",
+                "tc28" => "TC28",
                 "impressao" => "Impressão",
             ),
         );
