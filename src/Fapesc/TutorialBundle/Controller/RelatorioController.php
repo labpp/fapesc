@@ -320,6 +320,18 @@ class RelatorioController extends FapescController {
     }
 
     /**
+     * @Route("/relatorio/{idRelatorio}/devolucao")
+     * @Template("FapescTutorialBundle:Relatorio:devolucao.html.twig")
+     */
+    public function devolucaoAction($idRelatorio) {
+            return array_merge(
+                    $this->usuario(), 
+                    $this->menu("relatorio", "devolucao", $idRelatorio), 
+                    $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio)
+            );
+    }
+
+    /**
      * @Route("/relatorio/{idRelatorio}/delete")
      * @Template()
      */

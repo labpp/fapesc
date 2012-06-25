@@ -569,6 +569,12 @@ relatorioTc28:
   requirements:
     idRelatorio: \d+
 
+relatorioDevolucao:
+  pattern: /relatorio/{idRelatorio}/devolucao
+  defaults: { _controller: FapescTutorialBundle:Relatorio:devolucao }
+  requirements:
+    idRelatorio: \d+
+
 relatorioImpressao:
   pattern: /relatorio/{idRelatorio}/impressao
   defaults: { _controller: FapescTutorialBundle:Impressao:impressao }
