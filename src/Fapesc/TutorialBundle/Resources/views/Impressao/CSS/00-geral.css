@@ -59,7 +59,7 @@ body {
 /*Elementos mais utilizados*/
 .assinatura{
 	border-top:0.8pt solid black;
-	font-size: 16pt;
+	font-size: 14pt;
 	width: 40%;
 }
 .legenda{
@@ -125,7 +125,7 @@ h1{
 	border-top:0.8pt solid #000;
 }
 #plano .itens{
-	text-align: left;
+	text-align: center;
 	border-left:0.8pt solid #000;
 	border-top:0.8pt solid #000;		
 	border-bottom:0.8pt solid #000;

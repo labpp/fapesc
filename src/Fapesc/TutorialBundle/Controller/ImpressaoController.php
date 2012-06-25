@@ -22,17 +22,18 @@ class ImpressaoController extends FapescController {
         $dados["idRelatorio"] = $idRelatorio;
         return array_merge($this->usuario(), $this->menu("relatorio", "impressao", $idRelatorio), $this->info($this->findRelatorio($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }
-    private function findRelatorio($idRelatorio)
-	{
-		$relatorio = $this->getDoctrine()
-			->getRepository("FapescTutorialBundle:Relatorio")
-			->find($idRelatorio);
-		if (!is_object($relatorio))
-			throw new Exception("Relatório inválido!");
-		//@TODO assegurar somente [relatórios > projetos > usuário]
 
-		return $relatorio;
-	}
+    private function findRelatorio($idRelatorio) {
+        $relatorio = $this->getDoctrine()
+                ->getRepository("FapescTutorialBundle:Relatorio")
+                ->find($idRelatorio);
+        if (!is_object($relatorio))
+            throw new Exception("Relatório inválido!");
+        //@TODO assegurar somente [relatórios > projetos > usuário]
+
+        return $relatorio;
+    }
+
     /**
      * @Route("/relatorio/{idRelatorio}/imprimir")
      */
@@ -124,10 +125,9 @@ class ImpressaoController extends FapescController {
         $projeto = $relatorio->getProjeto();
         $contrapartida = $this->geraTabelaEmpenhosContrapartida($idRelatorio, "Contrapartida");
         $empenho = $this->geraTabelaEmpenhosContrapartida($idRelatorio, "Empenho");
-        $total = $contrapartida[0] + $empenho[0];
         $paginas = array();
         $tipos = $relatorio->getTipos();
-        $municipios =  $projeto->getMunicipios();
+        $municipios = $projeto->getMunicipios();
         $regioes = $projeto->getRegioes();
         $sdrs = $projeto->getSdrs();
         $cidade = $cidade[$numero];
@@ -150,6 +150,10 @@ class ImpressaoController extends FapescController {
             "empenho" => $relatorio->getNota(),
             "chamada" => $projeto->getChamada(),
             "coordenador" => $projeto->getUsuario()->getNome(),
+            "cpf" => $projeto->getUsuario()->getCpf(),
+            "conta" => $projeto->getConta(),
+            "agencia" => $projeto->getAgencia(),
+            "tipo" => $tipos[$relatorio->getTipo()],
         );
         $paginas[] = array(0 => $this->escreve("01-checklist", $dados), false);
         $dados = array(//relatorio1
@@ -173,8 +177,9 @@ class ImpressaoController extends FapescController {
 
         $paginas[] = array(0 => $this->escreve("02-relatorio2", $dados), false);
         $dados = array(//relatorio3
-            "dataExtenso" => $municipios[$projeto->getMunicipio()] . ", " . date("d/m/Y"),
+            "dataExtenso" => $municipios[$projeto->getMunicipio()] . $this->dataExtensa(),
             "coordenador" => $projeto->getUsuario()->getNome(),
+            "cpf" => $projeto->getUsuario()->getCpf(),
             "resultado" => $relatorio->getResultado(),
             "justificativa" => $relatorio->getJustificativa(),
             "dificuldade" => $relatorio->getDificuldade(),
@@ -186,22 +191,22 @@ class ImpressaoController extends FapescController {
             0 => "Caro Coordenador, substitua esta folha pela cópia impressa do balancete TC28 referente à nota de liberação " . $relatorio->getNota(),
             "Caro Coordenador, substitua esta folha pela cópia impressa do termo de Outorga de número " . $projeto->getContrato() . ".",
             "Caro Coordenador, substitua esta folha pela cópia impressa do plano de trabalho aprovado do projeto " . $projeto->getTitulo() . ".",
-            "Caro Coordenador, substitua esta folha pelo(s) originai(s) do(s) memorando(s) de alteração orçamentária, ordenados por ordem cronológica de encaminhamento. Importante: tais documentos devem conter o deferimento da Gerência de Projetos da FAPESC. Caso não existam alterações no plano de aplicação dos recursos, apenas descarte esta folha.",
-            "Caro Coordenador, cole aqui o extrato da conta bancária nº " . $projeto->getConta() . " / agência " . $projeto->getAgencia() . " - Banco " . $projeto->getBanco() . ". Caso a cópia impressa do extrato já esteja no formato A4, apenas substitua esta folha pelo referido documento.",
-            "Caro Coordenador, substitua esta folha pelo demonstrativo de rendimentos relativo à conta bancária nº " . $projeto->getConta() . " / agência " . $projeto->getAgencia() . " - Banco " . $projeto->getBanco() . ". Caso a cópia impressa do extrato já esteja no formato A4, apenas substitua esta folha pelo referido documento. Caso não existam rendimentos a serem declarados, apenas descarte esta folha.",
+            "Caro Coordenador, substitua esta folha pelo(s) originai(s) do(s) memorando(s) de alteração orçamentária, ordenados por ordem cronológica de encaminhamento. Importante: tais documentos devem conter o deferimento da Gerência de Projetos da FAPESC.<br/> Caso não existam alterações no plano de aplicação dos recursos, apenas descarte esta folha.",
+            "Caro Coordenador, cole aqui o extrato da conta bancária nº " . $projeto->getConta() . " / agência " . $projeto->getAgencia() . " - Banco " . $projeto->getBanco() . ". <br/>Caso a cópia impressa do extrato já esteja no formato A4, apenas substitua esta folha pelo referido documento.",
+            "Caro Coordenador, substitua esta folha pelo demonstrativo de rendimentos relativo à conta bancária nº " . $projeto->getConta() . " / agência " . $projeto->getAgencia() . " - Banco " . $projeto->getBanco() . ".<br/> Caso a cópia impressa do extrato já esteja no formato A4, apenas substitua esta folha pelo referido documento.<br/> Caso não existam rendimentos a serem declarados, apenas descarte esta folha.",
             6 => array(//conciliacao
                 "conta" => $projeto->getConta(),
                 "agencia" => $projeto->getAgencia(),
                 "banco" => $projeto->getBanco(),
                 "data" => $conciliacao["data"],
-                "nome" => $projeto->getUsuario()->getNome(),
+                "coordenador" => $projeto->getUsuario()->getNome(),
                 "cpf" => $projeto->getUsuario()->getCpf(),
                 "tabela" => $conciliacao["tabela"],
                 "saldo" => $conciliacao["saldo"],
                 "total" => $conciliacao["total"],
                 "diferenca" => $conciliacao["diferenca"],
             ),
-            "Caro Coordenador, cole aqui o comprovante de transferência / depósito de recursos remanescentes da nota de liberação " . $relatorio->getNota() . ". Caso a cópia impressa do comprovante já esteja no formato A4, apenas substitua esta folha pelo referido documento.",
+            "Caro Coordenador, cole aqui o comprovante de transferência / depósito de recursos remanescentes da nota de liberação " . $relatorio->getNota() . ". <br/>Caso a cópia impressa do comprovante já esteja no formato A4, apenas substitua esta folha pelo referido documento.",
         );
         for ($i = 0; $i <= 7; $i++) {
             if ($i == 6)
@@ -211,9 +216,10 @@ class ImpressaoController extends FapescController {
         }
         if ($empenho[0] != 0) {
             $dados = array(//planoAplicao
+                "titulo" => "LISTAGEM DE EMPENHOS",
                 "tabela" => $empenho[1],
             );
-            $paginas[] = array(0 => $this->escreve("04-planoAplicacao", $dados), false);
+            $paginas[] = array(0 => $this->escreve("04-listagem", $dados), false);
             $folhasCabecalho = $this->paginasDispendio($idRelatorio, "Empenho"); //$dados contem todas as paginas preenchidas para colar os documentos
 
             foreach ($folhasCabecalho as $folha)
@@ -221,15 +227,16 @@ class ImpressaoController extends FapescController {
         }
         if ($contrapartida[0] != 0) {
             $dados = array(//contrapartida
+                "titulo" => "LISTAGEM DE CONTRAPARTIDAS",
                 "tabela" => $contrapartida[1],
             );
-            $paginas[] = array(0 => $this->escreve("05-contrapartida", $dados), false);
+            $paginas[] = array(0 => $this->escreve("04-listagem", $dados), false);
 
             $folhasCabecalho = $this->paginasDispendio($idRelatorio, "Contrapartida"); //$dados contem todas as paginas preenchidas para colar os documentos
             foreach ($folhasCabecalho as $folha)
                 $paginas[] = array(0 => $folha[0], $folha[1]);
         }
-        $msg = "Caro Coordenador, substitua essa folha pela cópia impressa do pedido de registro de patrimônio dos itens adquiridos pela execução da nota de liberação " . $relatorio->getNota() . ".";
+        $msg = "Caro Coordenador, substitua essa folha pela cópia impressa do pedido de registro de patrimônio dos bens adquiridos pela execução da nota de liberação " . $relatorio->getNota() . ".";
         if ($relatorio->getRubrica() == 1)//se for do tipo capital,imprime essa pagina
             $paginas[] = array(0 => $this->escreve("*-paginaBranca", array("textoPaginaBranca" => $msg)), true);
 
@@ -367,7 +374,7 @@ class ImpressaoController extends FapescController {
                             $valor = $dispendio->getTotal(true);
                             switch ($dispendio->getCategoria()) {
                                 case "1": //bibliografia
-                                    $dados = array($dispendio->getData(), $dispendio->getDescricao(), $dispendio->getQuantidade(), "R$ " . $dispendio->getUnitario() ,"R$ " . $dispendio->getTotal());
+                                    $dados = array($dispendio->getData(), $dispendio->getDescricao(), $dispendio->getQuantidade(), "R$ " . $dispendio->getUnitario(), "R$ " . $dispendio->getTotal());
                                     $k = 3;
                                     break;
                                 case "2": //equipamento
@@ -426,7 +433,7 @@ class ImpressaoController extends FapescController {
                             $precoUnid = $diaria->getValor(true) / $diaria->getQuantidade(true);
                             $precoUnid = "R$ " . number_format($precoUnid, 2, ",", ".");
                             $diaria = $diaria->toArray();
-                            $dados = array($diaria["inicio"], $diaria["objetivos"], $precoUnid, $diaria["quantidade"], "R$ " . $diaria["valor"]);
+                            $dados = array($diaria["inicio"], $diaria["fim"], $precoUnid, $diaria["quantidade"], "R$ " . $diaria["valor"]);
                             $k = 7;
                         }
                         break;
@@ -500,6 +507,8 @@ class ImpressaoController extends FapescController {
                 $dispendio = $item[1]->toArray();
                 $fornecedor = $dispendio["fornecedor"];
                 $dados = array(
+                    "titulo" => $pagina == "Empenho" ? "LISTAGEM DE EMPENHOS" : "LISTAGEM DE CONTRAPARTIDAS",
+                    "descricaoTit" => $pagina == "Empenho" ? "do Empenho" : "da Contrapartida",
                     "fornecedor" => $fornecedor["nome"],
                     "cnpj" => $fornecedor["cadastro"],
                     "descricao" => $dispendio["descricao"],
@@ -524,17 +533,18 @@ class ImpressaoController extends FapescController {
                         $passagem = $item[1]->toArray();
                         $dados = array(
                             "data" => $passagem["compra"],
-                            "trecho" => $passagem["descrição"],
+                            "trecho" => $passagem["descricao"],
                             "saidaChegada" => $saidaChegada,
                             "vTotal" => "R$ " . $passagem["total"],
                             "mensagem" => "Caro Coordenados,</br> fixe aqui o bilhete de passagem / cartão de embarque referente ao trecho" . $passagem["descrição"] . ", emitido pela companhia " . $passagem["fornecedor"]["nome"] . " em " . $passagem["compra"] . ", no valor de R$ " . $passagem["total"] . " e seu respectivo comprovante de pagamento.",
                         );
-                         $paginas[] = array($this->escreve("*-dispendioPassagem", $dados), false);
+                        $paginas[] = array($this->escreve("*-dispendioPassagem", $dados), false);
                         break;
                     case "4"://diaria
                         $precoDiaria = $item[1]->getValor(true) / $item[1]->getQuantidade(true);
                         $precoDiaria = "R$ " . number_format($precoDiaria, 2, ",", ".");
                         $diaria = $item[1]->toArray();
+                        $municipios = $projeto->getMunicipios();
                         $dados = array(
                             "beneficiario" => $diaria["beneficiario"],
                             "cpf" => $diaria["cpf"],
@@ -543,7 +553,7 @@ class ImpressaoController extends FapescController {
                             "diarias" => $diaria["quantidade"],
                             "objetivos" => $diaria["objetivos"],
                             "resultados" => $diaria["resultados"],
-                            "dataExtenso" => $municipios[$projeto->getMunicipio()] . ", " . date("d/m/Y"),
+                            "dataExtenso" => $municipios[$projeto->getMunicipio()] . $this->dataExtensa(),
                         );
                         $paginas[] = array($this->escreve("*-declaracaoDiarias", $dados), false);
                         $dados = array(
@@ -553,10 +563,13 @@ class ImpressaoController extends FapescController {
                             "diaria" => $precoDiaria,
                             "quantidade" => $diaria["quantidade"],
                             "vTotal" => "R$ " . $diaria["valor"],
+                            
                         );
                         $qtdPaginas = $diaria["documentos"];
-                        for ($i = 0; $i < $qtdPaginas; $i++)
+                        for ($i = 0; $i < $qtdPaginas; $i++){
+                            $dados["numRom"] = $i + 1;
                             $paginas[] = array($this->escreve("*-dispendioDiarias", $dados), false);
+                        }
                         break;
                 }
             }
@@ -580,7 +593,7 @@ class ImpressaoController extends FapescController {
 					<tr>
 					<td class='numero'>		Número do cheque		</td>
 					<td class='data'>		Data de emissão			</td>
-					<td class='data'>		Data de compensação		</td>
+					<td class='data'>		A compensar em		</td>
 					<td class='valorTitulo'>	Valor(R$)			</td>
 					</tr>";
         }
@@ -602,7 +615,7 @@ class ImpressaoController extends FapescController {
 							    <td class='vTotal'>		Valor Total     	</td>";
                     } else {//bolsa
                         $header .= "<td class='data'>	        Data de Pag.	</td>
-							    <td class='nome'>	Bolsista 	</td>
+							    <td class='nome'>           Bolsista 	</td>
 						            <td class='data2'>		Período 	</td>
 							    <td class='vTotal'>		Valor Total     </td>";
                     }
@@ -615,8 +628,8 @@ class ImpressaoController extends FapescController {
 						            <td class='vUnit'>		Valor Unitário	 	</td>
 							    <td class='vTotal'>		Valor Total     	</td>";
                     } else {//diaria
-                        $header .= "<td class='data'>	        Data de Liberação	</td>
-							    <td class='objetivo'>	Objetivo 		</td>
+                        $header .= "<td class='data'>	        Data de Saída	</td>
+							    <td class='objetivo'>	Data de Retorno		</td>
 						            <td class='vUnit'>		Valor Diária 		</td>
 						            <td class='qtd'>		Quantidade 		</td>
 							    <td class='vTotal'>		Valor Total	        </td>";
@@ -689,6 +702,24 @@ class ImpressaoController extends FapescController {
                 }
             }
         return $items;
+    }
+    function dataExtensa(){
+        $data = explode("/",date("d/m/Y"));
+        switch($data[1]){
+            case "1": $data[1] = "janeiro";break;
+            case "2": $data[1] = "fevereiro";break;
+            case "3": $data[1] = "março";break;
+            case "4": $data[1] = "abril";break;
+            case "5": $data[1] = "maio";break;
+            case "6": $data[1] = "junho";break;
+            case "7": $data[1] = "julho";break;
+            case "8": $data[1] = "agosto";break;
+            case "9": $data[1] = "setembro";break;
+            case "10": $data[1] = "outubro";break;
+            case "11": $data[1] = "novembro";break;
+            case "12": $data[1] = "dezembro";break;
+        }
+        return ", " . $data[0] . " de " . $data[1] . " de " . $data[2] . ".";
     }
 
 }

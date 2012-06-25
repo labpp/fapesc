@@ -47,16 +47,15 @@
 
 #cabecalho #contrato{
 	float:left;
-	width:33%;
+	width:16%;
 }
 #cabecalho #empenho{
 	float:left;
-	width:33%;
+	width:16%;
 	border-left: 0.8pt solid #000;
 }
 
 #cabecalho #chamada{
 	float:left;
-	width:30%;
 	border-left: 0.8pt solid #000;
 }

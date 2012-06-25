@@ -6,12 +6,17 @@
 	<!-- LINHA2-->
 		<div class = "linhas">
 			<div id = "projeto">
-				<div class="menor espacamentoEsq">Projeto</div><br/>
+				<div class="menor espacamentoEsq">Projeto</div>
+			</div>
+			
+			<div id = "coordenador">
+				<div class="menor espacamentoEsq">Coordenador</div>
+			</div>
+                        <div id = "projeto">
 				<div class="fontePadrao espacamentoEsq">{{ projeto }}</div>
 			</div>
 			
 			<div id = "coordenador">
-				<div class="menor espacamentoEsq">Coordenador</div><br/>
 				<div class="fontePadrao espacamentoEsq">{{ coordenador }}</div>
 			</div>
 		</div>
@@ -19,11 +24,15 @@
 	<!-- LINHA3-->
 		<div class = "linhas">
 			<div id = "area">
-				<div class="menor espacamentoEsq">Área do Conhecimento</div><br/>
+				<div class="menor espacamentoEsq">Área do Conhecimento</div>
+			</div>
+			<div id = "localizacao">
+				<div class="menor espacamentoEsq">Localização(Cidade/Região/SDR)</div>
+			</div>
+                        <div id = "area">
 				<div class="fontePadrao espacamentoEsq">{{ area }}</div>
 			</div>
 			<div id = "localizacao">
-				<div class="menor espacamentoEsq">Localização(Cidade/Região/SDR)</div><br/>
 				<div class="fontePadrao espacamentoEsq">{{ local }}</div>
 			</div>
 		</div>
@@ -31,7 +40,9 @@
 	<!-- LINHA4-->	
 		<div class = "linhas">
 			<div id = "instituicao">
-				<div class="menor espacamentoEsq">Instituição Proponente</div><br/>
+				<div class="menor espacamentoEsq">Instituição Proponente</div>
+			</div>
+                        <div id = "instituicao">
 				<div class="fontePadrao espacamentoEsq">{{ instituicao }}</div>
 			</div>
 		</div>
@@ -42,23 +53,33 @@
 	<!-- LINHA5-->
 		<div class = "linhas">
 			<div id = "total">
-				<div class="menor espacamentoEsq">Valor Total do Projeto(incluindo intervinientes):</div><br/>
+				<div class="menor espacamentoEsq">Valor Total do Projeto(incluindo intervinientes):</div>
+			</div>
+			<div id = "inicio">
+				<div class="menor espacamentoEsq">Início do projeto</div>
+			</div>
+			<div id = "dataRelatorio">
+				<div class="menor espacamentoEsq">Data do Relatório:</div>
+			</div>
+			<div id = "dataNL">
+				<div class="menor espacamentoEsq">Data da Nota de Liberação:</div>
+			</div>
+			<div id = "valorNL">
+				<div class="menor espacamentoEsq">Valor da Nota de Liberação:</div>
+			</div>
+                        <div id = "total">
 				<div class="fontePadrao espacamentoEsq">{{ valorTotal }}</div>
 			</div>
 			<div id = "inicio">
-				<div class="menor espacamentoEsq">Início do projeto</div><br/>
 				<div class="fontePadrao espacamentoEsq"> {{ inicio }} </div>
 			</div>
 			<div id = "dataRelatorio">
-				<div class="menor espacamentoEsq">Data do Relatório:</div><br/>
 				<div class="fontePadrao espacamentoEsq"> {{ dataRelatorio }}</div>
 			</div>
 			<div id = "dataNL">
-				<div class="menor espacamentoEsq">Data da Nota de Liberação:</div><br/>
 				<div class="fontePadrao espacamentoEsq"> {{ dataNL }}</div>
 			</div>
 			<div id = "valorNL">
-				<div class="menor espacamentoEsq">Valor da Nota de Liberação:</div><br/>
 				<div class="fontePadrao espacamentoEsq"> {{ valorNL }}</div>
 			</div>
 		</div>
