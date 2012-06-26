@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    jQuery(function($){
+        $(".data").mask("99/99/9999");
+        $(".dinheiro").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+    });
+    $(document).ready(function(){
+        $("form").validate({
+            rules: {
+                descricao: "required",
+                inicio: "required",
+                fim: "required",
+                data: "required",
+                valor: "required"
+            },
+            messages: {
+                descricao: "Digite a descrição",
+                inicio: "Digite a data de início",
+                fim: "Digite a data de término",
+                data: "Digite a data de pagamento",
+                valor: "Digite o valor"
+            }
+        });
+    });
+</script>
+<form class="" action="{{ action }}" method="POST">
+    <fieldset class="form" width="90%">
+        <legend>Bolsa</legend>
+        <div>
+            <label>Bolsista:</label>
+            <select name="bolsista">
+                {% for item in bolsistas %}
+                <option value="{{ item.idBolsista }}" {% if item.idBolsista == bolsista.idBolsista %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cpf }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Descrição da Atividade:</label>
+            <textarea name="descricao">{{ descricao }}</textarea>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Período de Referência: </legend>
+        <div class="coluna2">
+            <label>De:</label>
+            <input type="text" class="data" name="inicio" value="{{ inicio }}" />
+        </div>
+        <div class="coluna2">
+            <label>Até:</label>
+            <input type="text" class="data" name="fim" value="{{ fim }}" />
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="coluna2">
+            <label>Data do Pagamento:</label>
+            <input type="text" class="data" name="data" value="{{ data }}" />
+        </div>
+        <div class="coluna2">
+            <label>Valor: (R$)</label>
+            <input type="text" id="valor" name="valor" class="dinheiro" value="{{ valor }}" />
+        </div>
+    </fieldset>		
+    <div>
+        <input type="submit" value="Salvar" />
+    </div>
+</form>	

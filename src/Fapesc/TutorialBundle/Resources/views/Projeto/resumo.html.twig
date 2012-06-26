@@ -4,26 +4,22 @@
 
 {% block content %}
 <div id="content">
-			
-	<div id="sidebar">
-		<p><b>Instruções:</b> No campo de texto ao lado, informe sucintamente (2000 caracteres) acerca dos objetivos gerais e específicos do projeto, sua motivação, a metodologia de trabalho, bem como os resultados esperados de sua conclusão.</p>
-	</div><!-- #sidebar -->
-
-	<div id="main-content">
-		<h1>:: Relatório Técnico</h1>
-		<form class="form-container" action="{{ path('projetoResumoPost', { 'idProjeto': idProjeto }) }}" method="POST">
-			<table class="form" width="90%">
-				<tr>
-					<td>Resumo da pesquisa (até 2000 caracteres):<br /><textarea name="resumo" rows="15" cols="70">{{ resumo }}</textarea>
-				</tr>
-			</table>
-			<table class="submit" width="90%">
-				<tr>
-					<td><input type="submit" value="Salvar" title="" /></td>
-				</tr>
-			</table>
-		</form>
-	</div><!-- #main-content -->
-
+    <div id="sidebar">
+        <p><b>Instruções:</b> No campo de texto ao lado, informe sucintamente (2000 caracteres) acerca dos objetivos gerais e específicos do projeto, sua motivação, a metodologia de trabalho, bem como os resultados esperados de sua conclusão.</p>
+    </div><!-- #sidebar -->
+    <div id="main-content">
+        <form class="" action="{{ path('projetoResumoPost', { 'idProjeto': idProjeto }) }}" method="POST">
+            <fieldset>
+                <legend>Relatório Técnico</legend>
+                <div>
+                    <label>Resumo da pesquisa:</label>
+                    <textarea name="resumo">{{ resumo }}</textarea>
+                </div>
+            </fieldset>
+            <div>
+                <input type="submit" value="Salvar" />
+            </div>
+        </form>
+    </div><!-- #main-content -->
 </div><!-- #content -->
 {% endblock %}

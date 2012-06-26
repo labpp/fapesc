@@ -21,7 +21,7 @@
 </script>
 <div id="content">
     <div id="sidebar">
-        <p><b>Insdivuções:</b></label></label>O Relatório Técnico pode ser "PARCIAL", se ainda existirem recursos de capital ou custeio para serem empenhados dendivo do cronograma do projeto, ou "FINAL", se a Nota de Liberação a que se refere o presente Relatório Técnico encerra o orçamento do projeto.</label></label>No relatório parcial, os campos devem ser preenchidos apenas no âmbito da aplicação dos recursos disponibilizados pela Nota de Liberação em questão.</p>
+        <p><b>Instruções:</b><br /><br />O Relatório Técnico pode ser "PARCIAL", se ainda existirem recursos de capital ou custeio para serem empenhados dendivo do cronograma do projeto, ou "FINAL", se a Nota de Liberação a que se refere o presente Relatório Técnico encerra o orçamento do projeto.<br /><br />No relatório parcial, os campos devem ser preenchidos apenas no âmbito da aplicação dos recursos disponibilizados pela Nota de Liberação em questão.</p>
     </div><!-- #sidebar -->
     <div id="main-content">
         <form class="" action="{{ path('relatorioRelatorioPost', { 'idRelatorio': idRelatorio }) }}" method="POST">
@@ -32,7 +32,7 @@
                     <textarea name="resultado">{{ resultado }}</textarea>
                 </div>
                 <div>
-                    <label>Os equipamentos e demais itens de capital previstos no plano de divabalho, foram adquiridos? Caso negativo, justifique:</label>
+                    <label>Os equipamentos e demais itens de capital previstos no plano de trabalho, foram adquiridos? Caso negativo, justifique:</label>
                     <textarea name="justificativa">{{ justificativa }}</textarea>
                 </div>
                 <div>

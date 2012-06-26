@@ -4,65 +4,64 @@
 
 {% block content %}
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("form").validate({
-			rules: {
-				nome: "required",
-				cadastro: "required"
-			},
-			messages: {
-				nome: "Digite o nome",
-				cadastro: "Digite o CPF ou CNPJ"
-			}
-		});
-                        $('#cadastro').focus(function() {
-                            if ($('#tipo').val() == 1) {
-                                $(this).mask("999.999.999-99");
-                            } 
-                            if ($('#tipo').val() == 2) {
-                                $(this).mask("99.999.999/9999-99");
-                            }
-                        });
-                        $('#tipo').change(function() {
-                            if ($(this).val() == 1) {
-                                $('#cadastro').mask("999.999.999-99");
-                            } 
-                            if ($(this).val() == 2) {
-                                $('#cadastro').mask("99.999.999/9999-99");
-                            }
-                        });
-	});
+    $(document).ready(function(){
+        $("form").validate({
+            rules: {
+                nome: "required",
+                cadastro: "required"
+            },
+            messages: {
+                nome: "Digite o nome",
+                cadastro: "Digite o CPF ou CNPJ"
+            }
+        });
+        $('#cadastro').focus(function() {
+            if ($('#tipo').val() == 1) {
+                $(this).mask("999.999.999-99");
+            } 
+            if ($('#tipo').val() == 2) {
+                $(this).mask("99.999.999/9999-99");
+            }
+        });
+        $('#tipo').change(function() {
+            if ($(this).val() == 1) {
+                $('#cadastro').mask("999.999.999-99");
+            } 
+            if ($(this).val() == 2) {
+                $('#cadastro').mask("99.999.999/9999-99");
+            }
+        });
+    });
 </script>
 <div id="content">
-	<div id="sidebar">
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
-	</div><!-- #sidebar -->
-	<div id="main-content">
-		<h1>:: Fornecedor</h1>
-		<form class="form-container" action="{{ path('fornecedorPost', { 'idFornecedor': idFornecedor }) }}" method="POST">
-			<table class="form" width="90%">
-				<tr>
-					<td>Nome:<br /><input type="text" name="nome" value="{{ nome }}" title="Nome do fornecedor." /></td>
-				</tr>
-			</table>
-			<table class="form" width="90%">
-				<tr>
-					<td width="15%">Tipo:<br />
-						<select id="tipo" name="tipo">
-							{% for item in tipoSelect %}
-							<option value="{{ item.value }}" {% if item.value == tipo %} selected="selected" {% endif %}>{{ item.text }}</option>
-							{% endfor %}
-						</select>
-					</td>
-					<td width="30%">CPF / CNPJ<br /><input type="text" id="cadastro" name="cadastro" value="{{ cadastro }}" title="Informe o CPF ou CNPJ." /></td>
-				</tr>
-			</table>
-			<table class="submit" width="90%">
-				<tr>
-					<td><input type="submit" value="Salvar" /></td>
-				</tr>
-			</table>
-		</form>
-	</div><!-- #main-content -->			
+    <div id="sidebar">
+        <p><b>Instruções:</b><br /><br />Campos de preenchimento obrigatório.</p>
+    </div><!-- #sidebar -->
+    <div id="main-content">
+        <form class="" action="{{ path('fornecedorPost', { 'idFornecedor': idFornecedor }) }}" method="POST">
+            <fieldset>
+                <legend>Fornecedor</legend>
+                <div>
+                    <label>Nome:</label>
+                    <input type="text" name="nome" value="{{ nome }}" title="Nome do fornecedor." />
+                </div>
+                <div class="coluna2">
+                    <label>Tipo:</label>
+                    <select id="tipo" name="tipo">
+                        {% for item in tipoSelect %}
+                        <option value="{{ item.value }}" {% if item.value == tipo %} selected="selected" {% endif %}>{{ item.text }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="coluna2">
+                    <label>CPF / CNPJ:</label>
+                    <input type="text" id="cadastro" class="cpf cnpj" name="cadastro" value="{{ cadastro }}" title="Informe o CPF ou CNPJ." />
+                </div>
+            </fieldset>
+            <div>
+                <input type="submit" value="Salvar" />
+            </div>
+        </form>
+    </div><!-- #main-content -->			
 </div><!-- #content -->
 {% endblock %}

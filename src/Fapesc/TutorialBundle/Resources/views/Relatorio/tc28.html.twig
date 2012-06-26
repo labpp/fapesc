@@ -5,13 +5,75 @@
 {% block content %}
 <div id="content">
 				
-	<div id="sidebar">
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
-	</div><!-- #sidebar -->
 			
 	<div id="main-content">
-		//@TODO TC28
+		<p><!-- parágrafo principal -->		
+		<h1>:: Balancete TC28</h1>
+		
+		<div id="conteudo-margem" style="margin-right:100px;">
+		<p>O Balancete TC28 é documento integrante da prestação de contas e, por determinação da Secretaria de Estado da Fazenda de Santa Catarina, <strong>deve ser gerado e impresso em ambiente externo a este sistema de auxílio de prestação de contas</strong>, sendo posteriormente encartado no relatório impresso por este gerado. Dado tal situação, recomenda-se bastante atenção em seu preenchimento.</p>
+		<p><strong>Observação:</strong> para acesso ao sistema da Sec. da Fazenda, recomenda-se uso dos navegadores Internet Explorer (versão 7.0 ou superior) ou Mozilla Firefox (versão 6.0 ou superior), <strong>bem como a desativação do bloqueio de “popups”.</strong></p>
+		<p>As informações fornecidas nas instruções de 1 à 4 devem estar concernentes com os dados constantes no e-mail/carta de <strong>Comunicação de Pagamento</strong>, enviado pela FAPESC ao coordenador do projeto.</p> 
+		<p>
+			<ol>
+				<li>Acesse o endereço do sistema TC28 <a href="http://sistemas.sc.gov.br/sef/anexo_tc28/default.asp">aqui</a></li>
+				<li>No campo <strong>“Orgão / Unidade Orçamentária”</strong>, entre com o valor <strong>“270024”</strong> (sem aspas).</li>
+				<li>No campo <strong>“Código de Gestão”</strong>, entre com o valor <strong>“001”</strong> (sem aspas).</li>
+				<li>No campo <strong>“Número da Nota de Liquidação”</strong>, entre com o valor <strong><!--sistema-->"{{ nota }}"</strong> (sem aspas) e o ano de liberação dos recursos. Ainda, confirme o ano de execução dos recursos em <strong>“Ano exercício”</strong>.</li>
+				<li>No campo <strong>“Quantidade de Documentos Comprobatórios”</strong>, entre com o valor <strong><!--sistema--> "{{ calculo  }}"</strong> (sem aspas).</li>
+				<li>Clique no botão <strong>“enviar”</strong>.</li>
+				
+				<li>Cada dispêndio executado a partir de recursos da Nota de Liberação ou, ainda, de contrapartida da instituição proponente, deverá ser registrado no formulário do Balancete TC28 utilizando a seguinte regra:
+<p><strong>Nome do fornecedor - Breve descrição dos itens adquiridos - Origem do recurso (FAP, para FAPESC ou CP, para contrapartida)</strong></p>
+
+<p>Ex:</p>
+
+<p>Casa do Pesquisador LTDA - reagentes - FAP
+Vidros e Coisas ME - vidraria - CP</p></li>
+				<li>Observado a ordem apresentada (do dispêndio mais antigo ao mais atual), <strong>copie e cole as informações abaixo para os respectivos campos do formulário TC28:</strong>
+
+			
+				<table id="goals" class="form" width="90%" cellspacing="5" cellpadding="5">
+					<tr>
+						<th width="10%" >Nº Documento</th>
+						<th width="12%" >Data Execução</th>
+						<th width="46%" >Histórico</th>
+						<th width="12%" >Recebimento</th>
+						<th width="10%" >Pagamento</th>
+					</tr>
+					{% for item in tc28 %}
+					<tr>
+						<td style="text-align:center;">{{ item.num }}</td>
+						<td style="text-align:center;">{{ item.data }}</td>
+						<td style="text-align:center; overflow:hidden;">{{ item.historico }}</td>
+						<td style="text-align:center;">{{ item.recebimento }}</td>
+						<td style="text-align:center;">{{ item.pagamento }}</td>
+					</tr>
+					{% else %}
+					<tr>
+						<td colspan="4">Nenhuma META(2)...</td>
+					</tr>
+					{% endfor %}
+				</table>		
+
+			
+			</li>
+			
+				
+			</ol>
+
+			<h3>Observações:</h3>			
+			<ul>
+				<li>Os dispêndios devem ser listados em ordem cronológica, do mais antigo ao mais recente;</li>
+				<li>Para dispêndios associados à aquisição de bens e/ou serviços, inclua o número do respectivo documento comprobatório (nota fiscal, bilhete de passagem, etc);</li>
+				<li>Em “rendimento da aplicação”, entre com o valor informado no comprovante de rendimentos da aplicação dos recursos. Se não existirem rendimentos, lance o campo como “0,00” (sem aspas);</li>
+				<li>Caso não se aplique contrapartida ao projeto, lance o campo como “0,00” (sem aspas);</li>
+				<li>A última linha a ser lançada deve se referir à devolução dos recursos remanescentes (se houver);</li>
+			</ul>
+		</p> 
+		</div><!--conteudo-margem-->
+		</p><!-- parágrafo principal -->
 	</div><!-- #main-content -->
 	
-</div><!-- #content -->
+</div><!-- #content --> 
 {% endblock %}

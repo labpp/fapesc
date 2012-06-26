@@ -1,0 +1,144 @@
+<script type="text/javascript">
+    jQuery(function($){
+        $(".data").mask("99/99/9999");
+        $(".cpf").mask("999.999.999-99");
+        $(".dinheiro").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+    });
+    function calcula() {
+        var tabela = new Array();
+        tabela[11] = 11000;
+        tabela[12] = 15300;
+        tabela[13] = 20000;
+        tabela[21] = 5500;
+        tabela[22] = 0;
+        tabela[23] = 0;
+        var indice;
+        indice = $("#tipo").val() + $("#destino").val();
+        $("#valor").val($("#quantidade").val().replace(/[^0-9]+/g,"") * tabela[indice]).priceFormat({prefix: '', centsSeparator: ',', thousandsSeparator: '.'});
+        return true;
+    }
+    $.validator.addMethod('minStrict', function (value, el, param) {
+        return parseInt(value.replace(/[^0-9]+/g,"")) >= param;        
+    });
+    $.validator.addMethod('minField', function (value, el, param) {
+        return parseInt(value) >= parseInt($(param).val());
+    });
+    $(document).ready(function(){
+        $("#quantidade").keyup(function(){
+            $("#quantidade").val($("#quantidade").val().replace(/[^0-9]+/g,""));
+            calcula();
+            $("form").validate().element("#documentos");
+        });
+        $("#documentos").keyup(function(){
+            $("#documentos").val($("#documentos").val().replace(/[^0-9]+/g,""));
+        });
+        $(".trigger").change(function(){
+            calcula();
+            $("form").validate().element("#valor");
+        });
+        $("form").validate({
+            rules: {
+                beneficiario: "required",
+                cpf: "required",
+                instituicao: "required",
+                objetivos: "required",
+                roteiro: "required",
+                resultados: "required",
+                inicio: "required",
+                fim: "required",
+                quantidade: "required",
+                valor: {
+                    minStrict: 5500
+                },
+                documentos: {
+                    minField: "#quantidade"
+                }
+            },
+            messages: {
+                beneficiario: "Digite o beneficiário",
+                cpf: "Digite o CPF",
+                instituicao: "Digite a instituição",
+                objetivos: "Digite os objetivos",
+                roteiro: "Digite o roteiro",
+                resultados: "Digite os resultados",
+                inicio: "Digite a data de início",
+                fim: "Digite a data de fim",
+                quantidade: "Digite a quantidade de diárias",
+                valor: {
+                    minStrict: "Não é possivel cadasdivar diárias para Auxiliar Técnico para Fora do Estado ou Exterior"
+                },
+                documentos: {
+                    minField: "O número de documentos não pode ser menor que a quantidade de diárias"
+                }
+            }
+        });
+    });
+</script>
+<form class="" action="{{ action }}" method="POST">
+    <fieldset class="form">
+        <legend>Diária</legend>
+        <div class="coluna3c">
+            <label>Beneficiário:</label>
+            <input type="text" name="beneficiario" value="{{ beneficiario }}" />
+        </div>
+        <div class="coluna3">
+            <label>CPF:</label>
+            <input type="text" class="cpf" name="cpf" value="{{ cpf }}" />
+        </div>
+        <div class="coluna3">
+            <label>Tipo:</label>
+            <select class="trigger" id="tipo" name="tipo">
+                {% for item in tipoSelect %}
+                <option value="{{ item.value }}" {% if item.value == tipo %} selected="selected" {% endif %}>{{ item.text }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="coluna3c">
+            <label>Instituição:</label>
+            <input type="text" name="instituicao" value="{{ instituicao }}" />
+        </div>
+        <div>
+            <label>Objetivos:</label>
+            <textarea name="objetivos">{{ objetivos }}</textarea>
+        </div>
+        <div class="coluna3c">
+            <label>Roteiro/Itinerário:</label>
+            <textarea name="roteiro">{{ roteiro }}</textarea>
+        </div>
+        <div class="coluna3">
+            <label>Destino:</label>
+            <select class="trigger" id="destino" name="destino">
+                {% for item in destinoSelect %}
+                <option value="{{ item.value }}" {% if item.value == destino %} selected="selected" {% endif %}>{{ item.text }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Resultados Obtidos:</label>
+            <textarea name="resultados">{{ resultados }}</textarea>
+        </div>
+        <div class="coluna2">
+            <label>De:</label>
+            <input type="text" class="data" name="inicio" value="{{ inicio }}" />
+        </div>
+        <div class="coluna2">
+            <label>Até:</label>
+            <input type="text" class="data" name="fim" value="{{ fim }}" />
+        </div>
+        <div class="coluna3">
+            <label>Quantidade:</label>
+            <input type="text" id="quantidade" name="quantidade" value="{{ quantidade }}" />
+        </div>
+        <div class="coluna3">
+            <label>Valor: (R$)</label>
+            <input type="text" id="valor" name="valor" class="dinheiro" value="{{ valor }}" readonly="readonly" />
+        </div>
+        <div class="coluna3">
+            <label>Documentos comprobatórios:</label>
+            <input type="text" id="documentos" name="documentos" value="{{ documentos }}" />
+        </div>
+    </fieldset>
+    <div>
+        <input type="submit" value="Salvar" />
+    </div>
+</form>	

@@ -1,0 +1,20 @@
+#dispendioSalario #periodo{
+	width:18%;
+	float:left;
+        border-bottom:0.8pt solid #000;
+}
+#dispendioSalario #nome{
+	width:60%;
+	border-left:0.8pt solid #000;
+        border-bottom:0.8pt solid #000;
+	float:left;
+}
+#dispendioSalario #vTotal{
+	border-left:0.8pt solid #000;
+        border-bottom:0.8pt solid #000;
+	float:left;
+}
+
+#dispendioSalario .centro{
+	text-align:center;
+}

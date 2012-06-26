@@ -5,27 +5,23 @@
 {% block content %}
 <div id="content">
     <div id="sidebar">
-        <p><b>Instruções:</b><br /><br />Cada comprovante de dispêndio (ex: nota fiscal de compra de itens de consumo) deverá ser cadastrado individualmente.<br /><br />O valor "Orçamento NL" se refere ao valor da Nota de Liberação em questão, informado na aba "Dados Iniciais".<br /><br />Para incluir um novo empenho, selecione a categoria de melhor enquadramento e clique em "Empenhar novo item".<br /><br />Para editar um dispêndio já cadastrado, clique na descrição do mesmo.<br /><br />O botão "X", em cinza, exclui um registro definitivamente.</p>
-        <p>Antes de iniciar o cadastro de novos empenhos, sugerimos a leitura do <a href="http://www.fapesc.sc.gov.br/index.php?option=com_docman&task=doc_download&gid=247&Itemid=42">Guia Básico para Prestação de Contas da FAPESC</a><br /><br />Em caso de dúvida sobre a validade ou o melhor enquadramento de um dispêndio, entre em contato com a Gerência de Projetos ds FAPESC.</p>
+        <p><b>Instruções:</b><br /><br />Cada comprovante de dispêndio (ex: nota fiscal de compra de itens de consumo) deverá ser cadastrado individualmente.<br /><br />O valor "Total de Contrapartidas" lista o total dos dispêndios registrados até o momento.<br /><br />Para incluir uma nova contrapartida, selecione a categoria de melhor enquadramento e clique em "Registrar".<br /><br />Para editar um dispêndio já cadastrado, clique na descrição do mesmo.<br /><br />O botão "X", em cinza, exclui um registro definitivamente.</p>
+        <p>Antes de iniciar o cadastro de novas contrapartidas, sugerimos a leitura do <a href="http://www.fapesc.sc.gov.br/index.php?option=com_docman&task=doc_download&gid=247&Itemid=42">Guia Básico para Prestação de Contas da FAPESC</a><br /><br />Em caso de dúvida sobre a validade ou o melhor enquadramento de um dispêndio, entre em contato com a Gerência de Projetos ds FAPESC.</p>
     </div><!-- #sidebar -->
     <div id="main-content">
         <h1>:: Contrapartidas</h1>
-        <div id="budget-panel">
+        <div id="budget-panel-c">
             <table>
                 <tr>
-                    <th>Orçamento NL:</th>
-                    <th>Total Empenhado:</th>
-                    <th>Disponível:</th>
+                   <th>Total de Contrapartidas:</th>
                 </tr>
                 <tr>
-                    <td title="Valor total da nota de liquidação">R$ {{ orcamento }}</td>
-                    <td title="Valor total já empenhado">R$ {{ empenhado }}</td>
-                    <td title="Valor disponível para empenho"><b>R$ {{ disponivel }}</b></td>
+                  <td title="Valor total das contrapartidas">R$ {{ empenhado }}</td>
                 </tr>
             </table>
         </div>
         <form class="form-container" action="{{ path('relatorioContrapartidasPost', { 'idRelatorio': idRelatorio }) }}" method="POST">
-            <table class="submit" width="90%">
+            <table class="submit" width="90%"  style="clear:both;">
                 <tr>
                     <td width="90%" style="text-align:right; padding-right:10px;">Categoria:</td>
                     <td>

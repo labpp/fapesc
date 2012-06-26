@@ -404,6 +404,7 @@ class EmpenhoController extends RelatorioController {
         $dados = $bolsa->toArray();
         $dados["idRelatorio"] = $idRelatorio;
         $dados["idEmpenho"] = $idEmpenho;
+        $dados["action"] = $this->get("router")->generate("relatorioEmpenhoBolsaPost", array("idRelatorio" => $idRelatorio, "idEmpenho" => $idEmpenho));
         return array_merge($this->usuario(), $this->menu("relatorio", "empenhos", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->bolsistas(), $dados);
     }
 
@@ -440,6 +441,7 @@ class EmpenhoController extends RelatorioController {
         $dados = $passagem->toArray();
         $dados["idRelatorio"] = $idRelatorio;
         $dados["idEmpenho"] = $idEmpenho;
+        $dados["action"] = $this->get("router")->generate("relatorioEmpenhoPassagemPost", array("idRelatorio" => $idRelatorio, "idEmpenho" => $idEmpenho));
         return array_merge($this->usuario(), $this->menu("relatorio", "empenhos", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->fornecedores("cnpj"), $dados);
     }
 
@@ -476,6 +478,7 @@ class EmpenhoController extends RelatorioController {
         $dados = $diaria->toArray();
         $dados["idRelatorio"] = $idRelatorio;
         $dados["idEmpenho"] = $idEmpenho;
+        $dados["action"] = $this->get("router")->generate("relatorioEmpenhoDiariaPost", array("idRelatorio" => $idRelatorio, "idEmpenho" => $idEmpenho));
         return array_merge($this->usuario(), $this->menu("relatorio", "empenhos", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->bolsistas(), $dados);
     }
 

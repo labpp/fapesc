@@ -1,63 +1,83 @@
 <script type="text/javascript">
-	jQuery(function($){
-	   $("#cpf").mask("999.999.999-99");
-	   $("#cep").mask("99999-999");
-	   $("#fone").mask("(99) 9999-9999");
-	});
-	$().ready(function() {
-		$("form").validate({
-			rules: {
-				cpf: "required",
-				nome: "required",
-				instituicao: "required",
-				endereco: "required",
-				municipio: "required",
-				uf: "required",
-				cep: "required",
-				email: {
-					required: true,
-					email: true
-				},
-				fone: "required"
-			},
-			messages: {
-				cpf: "Digite o CPF",
-				nome: "Digite o nome",
-				instituicao: "Digite a instituição",
-				endereco: "Digite o endereço",
-				municipio: "Digite o município",
-				uf: "Digite a UF",
-				cep: "Digite o CEP",
-				email: {
-					required: "Digite o email",
-					email: "Digite um email válido"
-				},
-				fone: "Digite o fone"
-			}
-		});
-	});
+    jQuery(function($){
+        $(".cpf").mask("999.999.999-99");
+        $(".uf").mask("aa");
+        $(".cep").mask("99999-999");
+        $(".fone").mask("(99) 9999-9999");
+    });
+    $().ready(function() {
+        $("form").validate({
+            rules: {
+                cpf: "required",
+                nome: "required",
+                instituicao: "required",
+                endereco: "required",
+                municipio: "required",
+                uf: "required",
+                cep: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                fone: "required"
+            },
+            messages: {
+                cpf: "Digite o CPF",
+                nome: "Digite o nome",
+                instituicao: "Digite a instituição",
+                endereco: "Digite o endereço",
+                municipio: "Digite o município",
+                uf: "Digite a UF",
+                cep: "Digite o CEP",
+                email: {
+                    required: "Digite o email",
+                    email: "Digite um email válido"
+                },
+                fone: "Digite o fone"
+            }
+        });
+    });
 </script>
 <form class="form-container" action="{{ action }}" method="POST">
-	<table class="form">
-		<tr><td>CPF:<br /><input type="text" id="cpf" name="cpf" title="Aqui, insira apenas números." size="14" value="{{ cpf }}" /></td></tr>
-		<tr><td>Nome Completo:<br /><input type="text" name="nome" title="Entre com seu nome completo, sem abreviaturas." maxlength="150" size="50" value="{{ nome }}" /></td></tr>
-		<tr><td>Instituição de vínculo:<br /><input type="text" name="instituicao" title="Entre com o nome completo da instituição, sem abreviaturas."  maxlength="200" size="50" value="{{ instituicao }}" /></td></tr>
-	</table>
-	<table class="form">
-		<tr><td colspan="3">Endereço correspondência:<br /><input type="text" name="endereco" title="Logradouro, Número, Complemento, etc."  maxlength="200" size="60" value="{{ endereco }}" /></td></tr>
-		<tr>
-			<td>Município:<br /><input type="text" name="municipio" title="Entre com o nome do município ou distrito, sem abreviaturas." maxlength="50" size="31" value="{{ municipio }}" /></td>
-			<td>UF:<br /><input type="text" name="uf" title="Digite o código da Unidade Federativa." size="2" maxlength="2" value="{{ uf }}" /></td>
-			<td>CEP:<br /><input type="text" id="cep" name="cep" title="Aqui, insira apenas números" size="9" value="{{ cep }}" /></td>
-		</tr>
-	</table>
-	<table class="form">
-		<tr><td colspan="2">E-mail:<br /><input type="text" name="email" title="Preencha este campo com atenção! Seu e-mail será necessário em caso da necessidade de recuperação da senha de acesso ao sistema." maxlength="50" size="38" value="{{ email }}" /></td></tr>
-		<tr>
-			<td>Fone:<br /><input type="text" id="fone" name="fone" title="Aqui, insira apenas números: DDD + Telefone" size="14" value="{{ fone }}" /></td>
-		</tr>
-	</table>
-	<table class="submit">
-		<tr><td><input type="submit" value="Salvar" title="" /></td></tr>
-	</table>
+    <fieldset>
+        <div class="coluna3c">
+            <label>Nome Completo:</label>
+            <input type="text" name="nome" title="Entre com seu nome completo, sem abreviaturas." value="{{ nome }}" />
+        </div>
+        <div class="coluna3">
+            <label>CPF:</label>
+            <input type="text" class="cpf" name="cpf" title="Aqui, insira apenas números." value="{{ cpf }}" />
+        </div>
+        <div>
+            <label>Instituição de vínculo:</label>
+            <input type="text" name="instituicao" title="Entre com o nome completo da instituição, sem abreviaturas."  value="{{ instituicao }}" />
+        </div>
+        <div>
+            <label>Endereço correspondência:</label>
+            <input type="text" name="endereco" title="Logradouro, Número, Complemento, etc."  value="{{ endereco }}" />
+        </div>
+        <div class="coluna2">
+            <label>Município:</label>
+            <input type="text" name="municipio" title="Entre com o nome do município ou distrito, sem abreviaturas." value="{{ municipio }}" />
+        </div>
+        <div class="coluna4">
+            <label>UF:</label>
+            <input type="text" name="uf" class="uf" title="Digite o código da Unidade Federativa." value="{{ uf }}" />
+        </div>
+        <div class="coluna4">
+            <label>CEP:</label>
+            <input type="text" class="cep" name="cep" title="Aqui, insira apenas números" value="{{ cep }}" />
+        </div>
+        <div class="coluna2">
+            <label>E-mail:</label>
+            <input type="text" name="email" title="Preencha este campo com atenção! Seu e-mail será necessário em caso da necessidade de recuperação da senha de acesso ao sistema." value="{{ email }}" />
+        </div>
+        <div class="coluna2">
+            <label>Fone:</label>
+            <input type="text" class="fone" name="fone" title="Aqui, insira apenas números: DDD + Telefone" value="{{ fone }}" />
+        </div>
+    </fieldset>
+    <div>
+        <input type="submit" value="Salvar"/>
+    </div>
 </form>

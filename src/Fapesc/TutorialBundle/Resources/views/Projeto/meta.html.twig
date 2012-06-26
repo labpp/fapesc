@@ -2,30 +2,26 @@
 
 {% block content %}
 <div id="content">
-	<div id="sidebar">
-		<p><b>Instruções:</b><br /><br />No campo "Meta", informe a descrição da meta/objetivo de projeto conforme descrito na proposta submetida à FAPESC.<br /><br />No campo "Indicadores", informe o indicador físico ou informacional que ratifica a conclusão da respectiva meta de trabalho.<br /><br />Todos os campos são de preenchimento obrigatório.</p>
-	</div><!-- #sidebar -->
-	<div id="main-content">
-		<h1>:: Plano de Metas</h1>
-		<form class="form-container" action="{{ path('projetoMetaPost', { 'idProjeto': idProjeto, 'idMeta': id }) }}" method="POST">
-			<table class="form" width="90%">
-				<tr>
-					<td>Meta:<br />
-					<textarea name="meta" title="Descrição da meta/objetivo" rows="5" cols="50">{{ meta }}</textarea></td>
-				</tr>
-			</table>
-			<table class="form" width="90%">
-				<tr>
-					<td>Indicadores:<br />
-					<textarea name="indicador" title="Informe os indicadores para ratificação da meta proposta" rows="5" cols="50">{{ indicador }}</textarea>
-				</tr>
-			</table>
-			<table class="submit" width="90%">
-				<tr>
-					<td><input type="submit" value="Salvar" title="" /></td>
-				</tr>
-			</table>
-		</form>
-	</div><!-- #main-content -->
+    <div id="sidebar">
+        <p><b>Instruções:</b><br /><br />No campo "Meta", informe a descrição da meta/objetivo de projeto conforme descrito na proposta submetida à FAPESC.<br /><br />No campo "Indicadores", informe o indicador físico ou informacional que ratifica a conclusão da respectiva meta de trabalho.<br /><br />Todos os campos são de preenchimento obrigatório.</p>
+    </div><!-- #sidebar -->
+    <div id="main-content">
+        <form class="form-container" action="{{ path('projetoMetaPost', { 'idProjeto': idProjeto, 'idMeta': id }) }}" method="POST">
+            <fieldset>
+                <legend>Plano de Metas</legend>
+                <div>
+                    <label>Meta:</label>
+                    <textarea name="meta" title="Descrição da meta/objetivo">{{ meta }}</textarea>
+                </div>
+                <div>
+                    <label>Indicadores:</label>
+                    <textarea name="indicador" title="Informe os indicadores para ratificação da meta proposta">{{ indicador }}</textarea>
+                </div>
+            </fieldset>
+            <div>
+                <input type="submit" value="Salvar" />
+            </div>
+        </form>
+    </div><!-- #main-content -->
 </div><!-- #content -->
 {% endblock %}

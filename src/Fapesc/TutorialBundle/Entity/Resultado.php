@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Resultado
-{
+class Resultado {
+
     /**
      * @var integer $id
      *
@@ -22,9 +22,9 @@ class Resultado
     private $id;
 
     /**
-     * @var string $resultado
+     * @var integer $resultado
      *
-     * @ORM\Column(name="resultado", type="string", length=2)
+     * @ORM\Column(name="resultado", type="integer")
      */
     private $resultado;
 
@@ -47,13 +47,17 @@ class Resultado
      */
     private $relatorio;
 
+    public function __construct() {
+        $this->resultado = 1;
+        $this->justificativa = "Não se aplica";
+    }
+
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -62,27 +66,32 @@ class Resultado
      *
      * @param string $resultado
      */
-    public function setResultado($resultado)
-    {
+    public function setResultado($resultado) {
         $this->resultado = $resultado;
     }
 
     /**
      * Get resultado
      *
-     * @return string
+     * @return integer
      */
-    public function getResultado($extenso = false)
-    {
-    	$resultado = empty($this->resultado) ? "NA" : strtoupper($this->resultado);
-    	if ($extenso) {
-    		switch ($this->resultado) {
-    			case "PR": $resultado = "Parcialmente alcançado"; break;
-    			case "PA": $resultado = "Plenamente alcançado"; break;
-    			default: $resultado = "Não alcançado"; break;
-    		}
-    	}
-        return $resultado;
+    public function getResultado() {
+        return $this->resultado;
+    }
+
+    public function getResultados($resultado = false) {
+        $resultados = array(
+            "1" => "Não alcançado",
+            "2" => "Parcialmente alcançado",
+            "3" => "Plenamente alcançado",
+        );
+        return $resultado ? $resultados[$resultado] : $resultados;
+    }
+
+    public function getResultadoSelect() {
+        foreach ($this->getResultados() as $key => $value)
+            $resultados[] = array("value" => $key, "text" => $value);
+        return $resultados;
     }
 
     /**
@@ -90,8 +99,7 @@ class Resultado
      *
      * @param text $justificativa
      */
-    public function setJustificativa($justificativa)
-    {
+    public function setJustificativa($justificativa) {
         $this->justificativa = $justificativa;
     }
 
@@ -100,8 +108,7 @@ class Resultado
      *
      * @return text
      */
-    public function getJustificativa()
-    {
+    public function getJustificativa() {
         return empty($this->justificativa) ? "Não se aplica" : $this->justificativa;
     }
 
@@ -110,8 +117,7 @@ class Resultado
      *
      * @param integer $meta
      */
-    public function setMeta($meta)
-    {
+    public function setMeta($meta) {
         $this->meta = $meta;
     }
 
@@ -120,8 +126,7 @@ class Resultado
      *
      * @return integer
      */
-    public function getMeta()
-    {
+    public function getMeta() {
         return $this->meta;
     }
 
@@ -130,8 +135,7 @@ class Resultado
      *
      * @param Fapesc\TutorialBundle\Entity\Relatorio $relatorio
      */
-    public function setRelatorio(\Fapesc\TutorialBundle\Entity\Relatorio $relatorio)
-    {
+    public function setRelatorio(\Fapesc\TutorialBundle\Entity\Relatorio $relatorio) {
         $this->relatorio = $relatorio;
     }
 
@@ -140,8 +144,25 @@ class Resultado
      *
      * @return Fapesc\TutorialBundle\Entity\Relatorio
      */
-    public function getRelatorio()
-    {
+    public function getRelatorio() {
         return $this->relatorio;
     }
+
+    public function populate($dados) {
+        $this->setResultado($dados["resultado"]);
+        $this->setJustificativa($dados["justificativa"]);
+    }
+
+    public function toArray() {
+        return array(
+            "idResultado" => $this->getId(),
+            "resultado" => $this->getResultado(),
+            "resultados" => $this->getResultados(),
+            "resultadoSelect" => $this->getResultadoSelect(),
+            "justificativa" => $this->getJustificativa(),
+            "meta" => $this->getMeta()->getId(),
+            "relatorio" => $this->getRelatorio()->getId(),
+        );
+    }
+
 }

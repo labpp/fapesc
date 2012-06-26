@@ -5,12 +5,38 @@
 {% block content %}
 <div id="content">
 				
-	<div id="sidebar">
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
-	</div><!-- #sidebar -->
-			
+		
 	<div id="main-content">
-		//@TODO Devolução
+		<p>
+			<h1>:: Devolução dos Recursos Remanescentes</h1>
+			<div id="conteudo-margem">
+
+			<p>O saldo remanescente do empenho dos recursos referentes à NL {{ NL }}, incluindo aí os rendimentos da aplicação financeira, deverá ser devolvido por depósito bancário identificado em favor da Secretaria de Estado da Fazenda de Santa Catarina, conforme instruções abaixo.</p>
+		
+			<table style="border-collapse:collapse; width:100%; font-size:10pt;">
+				<tr><td style="border: solid 1pt #000; width:75%; text-align:right;"><b>Saldo remanescente - NL {{ NL }}</b></td><td style="border: solid 1pt #000; width:75%; text-align:right;"><b>{{ saldo }}</b></td></tr>
+			</table>
+			
+			<p><strong>Observação:</strong> para acesso ao sistema da Sec. da Fazenda, recomenda-se uso dos navegadores Internet Explorer (versão 7.0 ou superior) ou Mozilla Firefox (versão 6.0 ou superior), <strong>bem como a desativação do bloqueio de “popups”.</strong></p>
+
+			<p>1. O número de identificação do depósito deverá ser gerado em sistema específico da Secretaria de Estado da Fazenda de Santa Catarina, disponível <a href="http://depositoidentificado.sef.sc.gov.br/Controles/GeraDeposito.aspx">aqui</a>.</p>
+
+			<p>2. No caixa de listagem <strong>“Orgão”</strong>, selecione o código <strong>“2724 - Fundação de Amparo Pesq. Inov. Est. SC - FAPESC”</strong>.</p>
+
+			<p>3. Mantenha <strong>“Banco”</strong> como <strong>“Banco do Brasil”</strong> e defina <strong>“Conta Corrente”</strong> como <strong>“948.001-3”</strong>.</p>
+
+			<p>4. Para o campo <strong>“Finalidade”</strong>, copie e cole o texto abaixo:
+				<p>Devolução saldo remanscente - TO <!--DB-->{{ TO }}<!--DB--> / NL <!--DB-->{{ NL }}<!--DB--></p>
+			</p>
+
+			<p>5. Informe em seguida o <strong>nome completo, CPF e telefone de contato  do coordenador do projeto.</strong></p>
+
+			<p>6. Informe o valor a ser depósitado. <strong>De acordo com as informações fornecidas neste sistema, o depósito será no montante de R$ <!--DB-->{{ saldo }}<!--DB-->.</strong></p>
+
+			<p>7. <strong><span style="color:red;">Atenção:</span> Não se esqueça de encartar o comprovante de depósito identificado à versão impressa do documento de prestação de contas.</strong> Somente este documento vale como confirmação da devolução do saldo referente à nota de liberação em questão.</p>
+
+			</div><!--conteudo-margem-->
+		</p>
 	</div><!-- #main-content -->
 	
 </div><!-- #content -->

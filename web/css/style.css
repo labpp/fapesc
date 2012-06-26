@@ -157,7 +157,7 @@ table {
     float: left;
     width: 22%;
     padding-right: 25px;
-    text-align: justify;
+    text-align: left;
 }
 
 /* --- Forms and Controls --- */
@@ -195,14 +195,14 @@ label.error {
 
 form fieldset {
     border: 1px dotted #eee;
-    margin: 3% 1%;
+    margin: 10px 5px;
 }
 
 form div {
     float: left;
     margin: 1%;
     padding: 1%;
-    width: 97%;
+    width: 95%;
 }
 
 form div.coluna2 {
@@ -221,24 +221,42 @@ form div.coluna4 {
     width: 20%;
 }
 
+form div.coluna5 {
+    width: 16%;
+}
+
 form div label {
     float: left;
     clear: both;
 }
 
-form div input, form div textarea, form div select {
+form div input, 
+form div textarea, 
+form div select {
     float: left;
     clear: both;
     width: 98%;
 }
 
-form div input[type=text], form div input[type=password], form div textarea {
+form div input[type=text], 
+form div input[type=password], 
+form div textarea {
     border: 0;
     background: #eee;
     padding: 5px;
 }
 
-form div input[type=text].data, form div input[type=text].hora, form div input[type=text].cnpj, form div input[type=text].cpf {
+form div textarea {
+    height: 5em;
+}
+
+form div input[type=text].data, 
+form div input[type=text].hora, 
+form div input[type=text].cnpj, 
+form div input[type=text].cpf, 
+form div input[type=text].cep, 
+form div input[type=text].uf, 
+form div input[type=text].fone {
     text-align: center;
 }
 
@@ -251,6 +269,7 @@ form div input[type=submit] {
     clear: both;
     width: 100px;
     height: 50px;
+    margin-right: 25px;
 }
 
 /* --- Content - Home and My Projects --- */
@@ -447,6 +466,16 @@ a#projects-button:hover{
     margin-left: 200px;
 }
 
+#budget-panel-c {
+    float: left;
+    width: 20%;
+    height: 52px;
+    background: #CCCCCC;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    margin-left: 520px;
+}
+
 #conc-panel {
     width: 40%;
     height: 52px;
@@ -516,6 +545,25 @@ a#projects-button:hover{
     background: #EEEEEE;
 }
 
+#budget-panel-c th {
+    width: 150px;
+    padding-top:4px;
+    padding-bottom:4px;
+    padding-left:4px;
+    text-align: left;
+    font-size: 8px;
+    background: #DDDDDD;
+}
+
+#budget-panel-c td {
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-right:5px;
+    text-align: right;
+    font-size: 14px;
+    background: #EEEEEE;
+}
+
 #budget-pledged {
     padding-bottom: 1px;
     border-bottom:#FFFFFF dotted 1px;"
@@ -531,6 +579,46 @@ a#projects-button:hover{
     background: #DDDDDD;
     padding-bottom:5px;
     border-bottom:#AAAAAA dotted 1px;"
+}
+
+a#rel-print {
+    width: 60px;	
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 35px;
+    padding-right: 12px;
+    font-size: 12px;
+    text-align: center;
+    background: #AA0000 url(../images/print.png) 8px 9px no-repeat;
+}
+
+a#rel-print {
+    color: #FFFFFF;
+}
+
+a#rel-print:hover{
+    color: #FFFFFF;
+    background: #999999 url(../images/print.png) 8px 9px no-repeat;
+}
+
+a#bolsista-button {
+    width: 60px;	
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 35px;
+    padding-right: 12px;
+    font-size: 12px;
+    text-align: center;
+    background: #AA0000 url(../images/bolsista.png) 8px 9px no-repeat;
+}
+
+a#bolsista-button {
+    color: #FFFFFF;
+}
+
+a#bolsista-button:hover{
+    color: #FFFFFF;
+    background: #999999 url(../images/bolsista.png) 8px 9px no-repeat;
 }
 
 

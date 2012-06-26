@@ -1,39 +1,43 @@
 <script type="text/javascript">
-	$().ready(function() {
-		$("form").validate({
-			rules: {
-				senha1: {
-					required: true,
-					minlength: 4
-				},
-				senha2: {
-					required: true,
-					minlength: 4,
-					equalTo: "#senha1"
-				}
-			},
-			messages: {
-				senha1: {
-					required: "Digite a senha",
-					minlength: "A senha deve ter no mínimo quatro caracteres"
-				},
-				senha2: {
-					required: "Digite a senha novamente",
-					minlength: "A senha deve ter no mínimo quatro caracteres",
-					equalTo: "As senhas digitadas não conferem"
-				}
-			}
-		});
-	});
+    $().ready(function() {
+        $("form").validate({
+            rules: {
+                senha1: {
+                    required: true,
+                    minlength: 4
+                },
+                senha2: {
+                    required: true,
+                    minlength: 4,
+                    equalTo: "#senha1"
+                }
+            },
+            messages: {
+                senha1: {
+                    required: "Digite a senha",
+                    minlength: "A senha deve ter no mínimo quatro caracteres"
+                },
+                senha2: {
+                    required: "Digite a senha novamente",
+                    minlength: "A senha deve ter no mínimo quatro caracteres",
+                    equalTo: "As senhas digitadas não conferem"
+                }
+            }
+        });
+    });
 </script>
-<form class="form-container" action="{{ action }}" method="POST">
-	<table class="form" style="text-align: center;">
-		<tr>
-			<td>Senha:<br /><input type="password" id="senha1" name="senha1" /></td>
-			<td>Confirmar senha:<br /><input type="password" id="senha2" name="senha2" /></td>
-		</tr>
-	</table>
-	<table class="submit">
-		<tr><td><input type="submit" value="Salvar" /></td></tr>
-	</table>
+<form class="" action="{{ action }}" method="POST">
+    <fieldset>
+        <div class="coluna2">
+            <label>Senha:</label>
+            <input type="password" id="senha1" name="senha1" />
+        </div>
+        <div class="coluna2">
+            <label>Confirmar senha:</label>
+            <input type="password" id="senha2" name="senha2" />
+        </div>
+    </fieldset>
+    <div>
+        <input type="submit" value="Salvar" />
+    </div>
 </form>

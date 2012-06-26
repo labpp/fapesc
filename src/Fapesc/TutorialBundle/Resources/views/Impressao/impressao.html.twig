@@ -4,13 +4,36 @@
 
 {% block content %}
 <div id="content">
-				
-	<div id="sidebar">
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
-	</div><!-- #sidebar -->
 			
 	<div id="main-content">
-		<a href="{{ path('relatorioImprimir', { 'idRelatorio': idRelatorio }) }}" title="Imprimir relatorio" > Imprimir </a>
+		<p>
+			<h1>:: Impressão do Documento de Prestação de Contas</h1>
+
+			<div id="conteudo-margem">
+			<p>Caro coordenador, antes de iniciar a impressão, <strong>recomendamos a conferência minuciosa de todas as partes relativas a esta prestação de contas.</strong> A agilidade do processo de auditoria das contas de seu projeto depende exclusivamente da clareza e correção das informações fornecidas neste sistema. </p>
+			
+			<p>Após a impressão, utilize a carta de apresentação (segunda página do relatório impresso) como lista de checagem dos principais documentos componentes à prestação de contas.</p>
+
+			<h3>Observações:</h3>
+	
+
+			<ul>
+				<p><li>O documento impresso deverá ser entregue em envelope contendo (a) número/nome da chamada; (b) número do termo de outorga; (c) número da nota de liberação; (d) nome coordenador e (e) título do projeto. <strong>Atenção: o documento impresso de prestação de contas não deve ser encadernado ou páginado.</strong> No momento oportuno, isso será feito pela gerência de projetos da FAPESC;</li></p>
+
+				<p><li><strong>Os documentos impressos e respectivos anexos devem manter a seguinte ordem:</strong> (1) Capa; (2) Carta Apresentação; (3) Relatório Técnico; (4) Balancete TC28; (5) termo de Outorga; (6) Plano de Trabalho; (7) Memorando(s) de Alteração Orçamentária (opcional); (8) Estrato Conta Bancária; (9) Demonstrativo de Rendimentos (opcional); (10) Conciliação Bancária (opcional); (11) Comprovante de Devolução dos Recursos; (12) Listagem de Empenhos; (13) Documentos comprobatórios de empenho dos recursos; (14) Listagem de Contrapartidas; (15) Documentos comprobatórios de execução da contrapartida; (16) Outros anexos;</li></p>
+
+				<p><li>Alguns documentos componentes da prestação de contas, como o Balancete TC28, tem sua geração anterior (ou externa) a este sistema. <strong>Para tais casos, será gerada folha de instrução informando a necessidade de encarte e/ou fixação dos referidos documentos.</strong></li></p>
+
+				<p><li>A cada documento comprobatório (nota fiscal, bilhete de passagem, etc), deverá constar, grapeado, o respectivo comprovante de pagamento/quitação do item adquirido/contratado. Ainda, tais documentos comprobatórios deverão conter, em seu verso (ou local apropriado), declaração assinada pelo coordenador do projeto, dando quite ao serviço ou entrega dos itens adquiridos.</li></p>
+
+				<p><li>O atendimento aos dispositivos legais e demais normativas que regulam o processo de prestação de contas é de responsabilidade exclusiva do coordenador do projeto. O presente sistema se destina exclusivamente a facilitar o exercício de prestação de conta no âmbito dos programas de fomento da FAPESC, não pode ser responsabilizado pelo uso indevido de seus recursos e funcionalidades.</li></p>
+					
+			</ul>
+			</div><!--conteudo-margem--><br /><br />	
+			
+		</p>
+
+		<p style="text-align:center;"><a id="rel-print" href="{{ path('relatorioImprimir', { 'idRelatorio': idRelatorio }) }}" title="Imprimir relatorio" > IMPRIMIR </a></p>
 	</div><!-- #main-content -->
 	
 </div><!-- #content -->

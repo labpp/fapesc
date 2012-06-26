@@ -415,6 +415,7 @@ class ContrapartidaController extends RelatorioController {
         $dados = $bolsa->toArray();
         $dados["idRelatorio"] = $idRelatorio;
         $dados["idContrapartida"] = $idContrapartida;
+        $dados["action"] = $this->get("router")->generate("relatorioContrapartidaBolsaPost", array("idRelatorio" => $idRelatorio, "idContrapartida" => $idContrapartida));
         return array_merge($this->usuario(), $this->menu("relatorio", "contrapartidas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->bolsistas(), $dados);
     }
 

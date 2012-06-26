@@ -3,34 +3,6 @@
 {% block title "Contrapartidas - Bolsa" %}
 
 {% block content %}
-<script type="text/javascript">
-    jQuery(function($){
-        $(".data").mask("99/99/9999");
-        $("#valor").priceFormat({
-            prefix: '',
-            centsSeparator: ',',
-            thousandsSeparator: '.'
-        });
-    });
-    $(document).ready(function(){
-        $("form").validate({
-            rules: {
-                descricao: "required",
-                inicio: "required",
-                fim: "required",
-                data: "required",
-                valor: "required"
-            },
-            messages: {
-                descricao: "Digite a descrição",
-                inicio: "Digite a data de início",
-                fim: "Digite a data de término",
-                data: "Digite a data de pagamento",
-                valor: "Digite o valor"
-            }
-        });
-    });
-</script>
 <div id="content">
     <div id="sidebar">
         <a id="projects-button" href="{{ path('bolsistas') }}" title="Gerenciar bolsistas">& Gerenciar Bolsistas</a><br /><br />
@@ -38,37 +10,7 @@
     </div><!-- #sidebar -->
     <div id="main-content">
         <h1>:: Contrapartidas - Bolsa</h1>
-        <form class="form-container" action="{{ path('relatorioContrapartidaBolsaPost', { 'idRelatorio': idRelatorio, 'idContrapartida': idContrapartida }) }}" method="POST">
-            <table class="form" width="90%">
-                <td width="15%">Bolsista:<br />
-                    <select name="bolsista">
-                        {% for item in bolsistas %}
-                        <option value="{{ item.idBolsista }}" {% if item.idBolsista == bolsista.idBolsista %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cpf }}</option>
-                        {% endfor %}
-                    </select>
-                </td>
-                <tr>
-                    <td>Descrição da Atividade:<textarea name="descricao" cols="60" rows="5">{{ descricao }}</textarea></td>
-                </tr>
-            </table>
-            <table class="form" width="40%">
-                <tr> Período de Referência: <br />
-                <td width="15%">De:<br /><input type="text" class="data" name="inicio" value="{{ inicio }}" maxlength="15" size="15" /></td>
-                <td width="15%">Até:<br /><input type="text" class="data" name="fim" value="{{ fim }}" maxlength="15" size="15" /></td>
-                </tr>
-            </table>
-            <table class="form" width="25%">
-                <tr>
-                    <td width="35%">Data do Pagamento:<br /><input type="text" class="data" name="data" value="{{ data }}" title="" maxlength="255" size="12" /></td>
-                    <td>Valor R$:<br /><input type="text" id="valor" name="valor" value="{{ valor }}" title="" maxlength="18" /></td>
-                </tr>					
-            </table>		
-            <table class="submit" width="90%">
-                <tr>
-                    <td><input type="submit" value="Incluir" title="" /></td>
-                </tr>
-            </table>
-        </form>			
+        {% include "FapescTutorialBundle:Relatorio:formBolsa.html.twig" with { "action" : action } %}		
     </div><!-- #main-content -->			
 </div><!-- #content -->
 {% endblock %}

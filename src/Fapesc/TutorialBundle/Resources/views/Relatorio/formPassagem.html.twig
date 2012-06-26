@@ -1,0 +1,93 @@
+<script type="text/javascript">
+    jQuery(function($){
+        $(".hora").mask("99/99/9999 99:99");
+        $(".data").mask("99/99/9999");
+        $(".dinheiro").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+    });
+    $(document).ready(function(){
+        $("form").validate({
+            rules: {
+                origem: "required",
+                saida: "required",
+                destino: "required",
+                chegada: "required",
+                tiquete: "required",
+                compra: "required",
+                valor: "required",
+                objetivo: "required",
+                resultado: "required"
+            },
+            messages: {
+                origem: "Digite a origem",
+                saida: "Digite a data e hora da saída",
+                destino: "Digite o destino",
+                chegada: "Digite a data e hora da chegada",
+                tiquete: "Digite o tíquete",
+                compra: "Digite a data da compra",
+                valor: "Digite o valor",
+                objetivo: "Digite o objetivo",
+                resultado: "Digite o resultado"
+            }
+        });
+    });
+</script>
+<form class="" action="{{ action }}" method="POST">
+    <fieldset>
+        <legend>Passagem</legend>
+        <div class="coluna3c">
+            <label>Fornecedor:</label>
+            <select name="fornecedor">
+                {% for item in fornecedores %}
+                <option value="{{ item.idFornecedor }}" {% if item.idFornecedor == fornecedor.idFornecedor %} selected="selected" {% endif %}>{{ item.nome }} - {{  item.cadastro }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="coluna3">
+            <label>Tipo:</label>
+            <select name="tipo" title="Selecione o tipo de passagem">
+                {% for item in tipoSelect %}
+                <option value="{{ item.value }}" {% if item.value == tipo %} selected="selected" {% endif %}>{{ item.text }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="coluna3c">
+            <label>Origem:</label>
+            <input type="text" name="origem" value="{{ origem }}" title="Cidade de origem da viagem" />
+        </div>
+        <div class="coluna3">
+            <label>Saída:</label>
+            <input type="text" name="saida" class="hora" value="{{ saida }}" />
+        </div>
+        <div class="coluna3c">
+            <label>Destino: </label>
+            <input type="text" name="destino"  value="{{ destino }}" title="Cidade de destino da viagem" />
+        </div>
+        <div class="coluna3">
+            <label>Chegada: </label>
+            <input type="text" name="chegada" class="hora" value="{{ chegada }}" />
+        </div>
+        <div class="coluna3">
+            <label>Número do Tíquete:</label>
+            <input type="text" name="tiquete" value="{{ tiquete }}" title="Informe o número ou localizador da passagem" />
+        </div>
+        <div class="coluna3">
+            <label>Data da Compra:</label>
+            <input type="text" name="compra" class="data" value="{{ compra }}" title="Informe a data da compra da passagem" />
+        </div>
+        <div class="coluna3">
+            <label>Valor: (R$)</label>
+            <input type="text" name="valor" id="valor" class="dinheiro" value="{{ valor }}" title="Informe o valor da passagem" />
+        </div>
+        <div>
+            <label>Objetivos:</label>
+            <textarea name="objetivo" title="Escreva os objetivos associados ao uso da passagem">{{ objetivo }}</textarea>
+        </div>
+        <div>
+            <label>Resultados Alcançados:</label>
+            <textarea name="resultado" title="Descreva os resultados alcançados associados ao uso da passagem">{{ resultado }}</textarea>
+        </div>
+    </fieldset>
+    <div>
+        <input type="submit" value="Salvar" />
+    </div>
+</form>
