@@ -223,6 +223,12 @@ projetoMetaDelete:
     idProjeto: \d+
     idMeta: \d+
 
+projetoRelatorios:
+  pattern: /projeto/{idProjeto}/relatorios
+  defaults: { _controller: FapescTutorialBundle:Projeto:relatorios }
+  requirements:
+    idProjeto: \d+
+
 projetoDelete:
   pattern: /projeto/{idProjeto}/delete
   defaults: { _controller: FapescTutorialBundle:Projeto:delete }
@@ -234,6 +240,13 @@ projetoDelete:
 
 relatorioDados:
   pattern: /relatorio/{idRelatorio}/dados
+  defaults: { _controller: FapescTutorialBundle:Relatorio:dados }
+  requirements:
+    _method: GET
+    idRelatorio: \d+
+
+relatorioDadosProjeto:
+  pattern: /relatorio/{idRelatorio}/dados/{idProjeto}
   defaults: { _controller: FapescTutorialBundle:Relatorio:dados }
   requirements:
     _method: GET

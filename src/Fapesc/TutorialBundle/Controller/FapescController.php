@@ -22,6 +22,7 @@ class FapescController extends Controller {
                 "dados" => "Dados Iniciais",
                 "resumo" => "Resumo",
                 "metas" => "Plano de Metas",
+                "relatorios" => "Relatórios",
             ),
             "relatorio" => array(
                 "dados" => "Dados Iniciais",

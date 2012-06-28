@@ -34,14 +34,22 @@ class RelatorioController extends FapescController {
      * @Route("/relatorio/{idRelatorio}/dados")
      * @Template("FapescTutorialBundle:Relatorio:dados.html.twig")
      */
-    public function dadosAction($idRelatorio) {
+    public function dadosAction($idRelatorio, $idProjeto = null) {
         $relatorio = ($idRelatorio == 0) ? new Relatorio() : $this->find($idRelatorio);
         $dados = $relatorio->toArray();
-        $projetos = $this->getDoctrine()->getRepository("FapescTutorialBundle:Projeto")->findBy(array("usuario" => $this->get("security.context")->getToken()->getUser()->getId(), "ativo" => true));
+        $projetos = $this->getDoctrine()->getRepository("FapescTutorialBundle:Projeto")->findBy(
+                array(
+                    "usuario" => $this->get("security.context")->getToken()->getUser()->getId(), 
+                    "ativo" => true),
+                array(
+                    "inicio" => "DESC",
+                    "termino" => "DESC",
+                    "titulo" => "ASC"));
         $dados["projetos"] = array();
         if (!empty($projetos))
             foreach ($projetos as $projeto)
                 $dados["projetos"][] = $projeto->toArray();
+        $dados["projeto"] = empty($idProjeto) ? 0 : $idProjeto;
         return array_merge(
             $this->usuario(), 
             $this->menu("relatorio", "dados", $idRelatorio),

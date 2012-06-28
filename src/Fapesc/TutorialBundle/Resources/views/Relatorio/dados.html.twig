@@ -37,7 +37,7 @@
                     <label>Projeto:</label>
                     <select name="projeto" title="Selecione o projeto aque se refere este relatório.">
                         {% for item in projetos %}
-                        <option value="{{ item.idProjeto }}" {% if item.idProjeto == projeto %} selected="selected" {% endif %}>{{ item.titulo }}</option>
+                        <option value="{{ item.idProjeto }}" {% if item.idProjeto == projeto %} selected="selected" {% endif %}>{{ item.titulo }} ({{ item.inicio }} - {{ item.termino }})</option>
                         {% endfor %}
                     </select>
                 </div>

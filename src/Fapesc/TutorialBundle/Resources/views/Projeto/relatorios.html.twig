@@ -1,0 +1,42 @@
+{% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
+
+{% block content %}
+<div id="content">
+    <div id="sidebar">
+        <a id="new-report" href="{{ path('relatorioDadosProjeto', { 'idRelatorio': 0, 'idProjeto': idProjeto }) }}" title="Iniciar um novo relatório.">Iniciar Relatório</a><br /><br /><br />
+        <p><b>Atenção:</b> Antes de iniciar a documentação de um projeto, recomendamos a leitura dos seguintes documentos:
+        <ul>
+            <li><a href="http://www.fapesc.sc.gov.br/index.php?option=com_docman&task=doc_download&gid=247&Itemid=42">Guia Básico - Prestação de Contas;</a></li>
+            <li><a href="http://www.fapesc.sc.gov.br/index.php?option=com_content&view=article&id=41&Itemid=45">Decreto 2060/09;</a></li>
+            <li><a href="http://www.fapesc.sc.gov.br/index.php?option=com_docman&task=doc_download&gid=30&Itemid=42">Decreto 307/03.</a></li>
+        </ul>
+        </p>
+    </div><!-- #sidebar -->
+    <div id="main-content">
+        <table class="project-report">
+            <tr>
+                <th>Nota de liquidação</th>
+                <th>Data NL</th>
+                <th>Rubrica</th>
+                <th>Relatório</th>
+                <th>Valor total</th>
+                <th>&nbsp;</th>
+            </tr>
+            {% for relatorio in relatorios %}
+            <tr>
+                <td><img src="{{ asset('images/report.png') }}" alt="Relatórios"> <a href="{{ path('relatorioDados', { 'idRelatorio': relatorio.idRelatorio  }) }}" title="Clique para editar informações do relatório">{{ relatorio.nota }}</a></td>
+                <td style="text-align:center;">{{ relatorio.liberacao }}</td>
+                <td style="text-align:center;">{{ relatorio.rubricas[relatorio.rubrica] }}</td>
+                <td style="text-align:center;">{{ relatorio.tipos[relatorio.tipo] }}</td>
+                <td style="text-align:right;">R$ {{ relatorio.valor }}</td>	
+                <td style="text-align:right;"><a href="{{ path('relatorioDelete', { 'idRelatorio': relatorio.idRelatorio }) }}" title="Excluir relatório" onclick="return confirm('Tem certeza que deseja excluir este relatório?\nEsta ação não poderá ser desfeita.')" ><img src="{{ asset('images/excluir-pq.png') }}" alt="Excluir"></a></td>						
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">Nenhum relatório...</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div><!-- #main-content -->
+</div><!-- #content -->
+{% endblock %}

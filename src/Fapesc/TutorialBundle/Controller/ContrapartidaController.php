@@ -452,6 +452,7 @@ class ContrapartidaController extends RelatorioController {
         $dados = $passagem->toArray();
         $dados["idRelatorio"] = $idRelatorio;
         $dados["idContrapartida"] = $idContrapartida;
+        $dados["action"] = $this->get("router")->generate("relatorioContrapartidaPassagemPost", array("idRelatorio" => $idRelatorio, "idContrapartida" => $idContrapartida));
         return array_merge($this->usuario(), $this->menu("relatorio", "contrapartidas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->fornecedores("cnpj"), $dados);
     }
 
@@ -488,6 +489,7 @@ class ContrapartidaController extends RelatorioController {
         $dados = $diaria->toArray();
         $dados["idRelatorio"] = $idRelatorio;
         $dados["idContrapartida"] = $idContrapartida;
+        $dados["action"] = $this->get("router")->generate("relatorioContrapartidaDiariaPost", array("idRelatorio" => $idRelatorio, "idContrapartida" => $idContrapartida));
         return array_merge($this->usuario(), $this->menu("relatorio", "contrapartidas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $this->bolsistas(), $dados);
     }
 

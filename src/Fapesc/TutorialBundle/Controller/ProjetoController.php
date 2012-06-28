@@ -157,6 +157,26 @@ class ProjetoController extends FapescController {
     }
 
     /**
+     * @Route("/projeto/{idProjeto}/relatorios")
+     * @Template("FapescTutorialBundle:Projeto:relatorios.html.twig")
+     */
+    public function relatoriosAction($idProjeto) {
+        $relatorios = $this->getDoctrine()
+                ->getRepository("FapescTutorialBundle:Relatorio")
+                ->findBy(
+                array("projeto" => $idProjeto, "ativo" => true), array("liberacao" => "DESC"));
+        if (empty($relatorios)) {
+            $dados["relatorios"] = array();
+        } else {
+            foreach ($relatorios as $relatorio) {
+                $dados["relatorios"][] = $relatorio->toArray();
+            }
+        }
+        $dados["idProjeto"] = $idProjeto;
+        return $this->dados("relatorios", $idProjeto, $dados);
+    }
+
+    /**
      * @Route("/projeto/{idProjeto}/delete")
      * @Template()
      */

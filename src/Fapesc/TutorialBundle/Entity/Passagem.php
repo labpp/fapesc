@@ -22,6 +22,20 @@ class Passagem {
     private $id;
 
     /**
+     * @var string $beneficiario
+     *
+     * @ORM\Column(name="beneficiario", type="string", length=255)
+     */
+    private $beneficiario;
+
+    /**
+     * @var string $cpf
+     *
+     * @ORM\Column(name="cpf", type="string", length=14)
+     */
+    private $cpf;
+
+    /**
      * @var integer $tipo
      * 1: aerea; 2: rodoviaria;
      * @ORM\Column(name="tipo", type="integer")
@@ -344,6 +358,8 @@ class Passagem {
     public function toArray() {
         return array(
             "id" => $this->getId(),
+            "beneficiario" => $this->getBeneficiario(),
+            "cpf" => $this->getCpf(),
             "tipo" => $this->getTipo(),
             "tipos" => $this->getTipos(),
             "tipoSelect" => $this->getTipoSelect(),
@@ -365,6 +381,8 @@ class Passagem {
     }
 
     public function populate($data) {
+        $this->setBeneficiario($data["beneficiario"]);
+        $this->setCpf($data["cpf"]);
         $this->setTipo($data["tipo"]);
         $this->setOrigem($data["origem"]);
         $this->setSaida($data["saida"]);
@@ -377,4 +395,44 @@ class Passagem {
         $this->setResultado($data["resultado"]);
     }
 
+
+    /**
+     * Set beneficiario
+     *
+     * @param string $beneficiario
+     */
+    public function setBeneficiario($beneficiario)
+    {
+        $this->beneficiario = $beneficiario;
+    }
+
+    /**
+     * Get beneficiario
+     *
+     * @return string 
+     */
+    public function getBeneficiario()
+    {
+        return $this->beneficiario;
+    }
+
+    /**
+     * Set cpf
+     *
+     * @param string $cpf
+     */
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+    }
+
+    /**
+     * Get cpf
+     *
+     * @return string 
+     */
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
 }

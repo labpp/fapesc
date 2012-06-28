@@ -1,5 +1,6 @@
 <script type="text/javascript">
     jQuery(function($){
+        $(".cpf").mask("999.999.999-99");
         $(".hora").mask("99/99/9999 99:99");
         $(".data").mask("99/99/9999");
         $(".dinheiro").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
@@ -7,6 +8,8 @@
     $(document).ready(function(){
         $("form").validate({
             rules: {
+                beneficiario: "required",
+                cpf: "required",
                 origem: "required",
                 saida: "required",
                 destino: "required",
@@ -18,6 +21,8 @@
                 resultado: "required"
             },
             messages: {
+                beneficiario: "Digite o beneficiário",
+                cpf: "Digite o CPF",
                 origem: "Digite a origem",
                 saida: "Digite a data e hora da saída",
                 destino: "Digite o destino",
@@ -34,6 +39,14 @@
 <form class="" action="{{ action }}" method="POST">
     <fieldset>
         <legend>Passagem</legend>
+        <div class="coluna3c">
+            <label>Beneficiário:</label>
+            <input type="text" name="beneficiario" value="{{ beneficiario }}" />
+        </div>
+        <div class="coluna3">
+            <label>CPF:</label>
+            <input type="text" class="cpf" name="cpf" value="{{ cpf }}" />
+        </div>
         <div class="coluna3c">
             <label>Fornecedor:</label>
             <select name="fornecedor">
