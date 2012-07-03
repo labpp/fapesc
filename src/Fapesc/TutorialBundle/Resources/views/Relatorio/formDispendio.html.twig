@@ -2,9 +2,10 @@
     jQuery(function($){
         $(".data").mask("99/99/9999");
         $(".dinheiro").priceFormat({ prefix: "", centsSeparator: ",", thousandsSeparator: "." });
+        $("#quantidade").priceFormat({ prefix: "", centsSeparator: ",", thousandsSeparator: ".", centsLimit: 3 });
     });
     function calcula() {
-        $("#total").val($("#quantidade").val().replace(/[^0-9]+/g,"") * $("#unitario").val().replace(/[^0-9]+/g,"")).priceFormat({prefix: "", centsSeparator: ",", thousandsSeparator: "."});
+        $("#total").val(Math.round($("#quantidade").val().replace(/[^0-9]+/g,"") * $("#unitario").val().replace(/[^0-9]+/g,"") / 1000)).priceFormat({prefix: "", centsSeparator: ",", thousandsSeparator: "."});
     }
     $(document).ready(function(){
         $(".trigger").keyup(function(){
@@ -45,7 +46,7 @@
             </select>
         </div>
         <div>
-            <label>Descrição do serviço:</label>
+            <label>Descrição:</label>
             <input type="text" name="descricao" title="Descrição do serviço a ser empenhado, conforme recibo ou documento fiscal." value="{{ descricao }}"/>
         </div>
         <div class="coluna2">
@@ -57,12 +58,12 @@
             <input type="text" name="quantidade" id="quantidade" class="trigger" title="Informe a quantidade de serviços adquiridos." value="{{ quantidade }}"/>
         </div>
         <div class="coluna2">
-            <label>Valor unitário:</label>
+            <label>Valor unitário: (R$)</label>
             <input type="text" name="unitario" id="unitario" class="dinheiro trigger" title="Informe o valor unitário do serviço." value="{{ unitario }}" />
         </div>
         <div class="coluna2">
-            <label>Valor total:</label>
-            <input type="text" name="total" class="dinheiro" id="total" title="Informe o valor total do serviço, conforme recibo ou documento fiscal." value="{{ total }}"/>
+            <label>Valor total: (R$)</label>
+            <input type="text" name="total" id="total" class="dinheiro" title="Informe o valor total do serviço, conforme recibo ou documento fiscal." value="{{ total }}"/>
         </div>
         <div class="coluna3">
             <label>Documento fiscal / Recibo:</label>

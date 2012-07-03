@@ -417,18 +417,21 @@ class RelatorioController extends FapescController {
 			        break;
 			}//fim switch
 			if (isset($dado)){
-				$dados["tc28"][] = $dado;
+				$my_array[] = array($dado["data"] , $dado);
 				$contador++;
 			}
 		    }//fim foreach
 	}
+	$my_array = $this->bubbleSort($my_array);
+	foreach($my_array as $dado)
+		$dados["tc28"][] = $dado[1];
 	$resto = $relatorio->getValor(true) - $totalFAP;
 	$dados["tc28"][1]["recebimento"] = number_format($totalCP, 2, ",", ".");
 	$totalRec = number_format($totalCP + $relatorio->getValor(true), 2, ",", ".");
 	$totalPag = number_format($totalCP + $totalFAP + $resto, 2, ",", ".");
 	$dados["tc28"][] = array("num" => "", "data" => "", "historico" => "Devolução do saldo remanescente", "recebimento" =>"", "pagamento" => number_format($resto, 2, ",", "."));
 	$dados["tc28"][] = array("num" => "", "data" => "", "historico" => "TOTAL", "recebimento" =>$totalRec, "pagamento" => $totalPag);
-	$dados["calculo"] = $contador + 5;
+	$dados["calculo"] = $contador + 4;
 	$dados["nota"] = $relatorio->getNota();
         return array_merge($this->usuario(), $this->menu("relatorio", "tc28", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }
@@ -491,5 +494,21 @@ class RelatorioController extends FapescController {
         $this->get("session")->setFlash("sucesso", "Relatório excluído com sucesso!");
         return $this->forward("FapescTutorialBundle:Fapesc:inicio", array());
     }
-
+    function bubbleSort($items) {
+        $temp = "";
+        $size = sizeof($items);
+        for ($i = 1; $i < $size; $i++)
+            for ($j = 0; $j < $size - $i; $j++) {
+                $data1 = explode("/", $items[$j + 1][0]);
+                $data1 = $data1[0] + 100 * ($data1[1] + 100 * $data1[2]); //invertendo a data e transformando em numero
+                $data2 = explode("/", $items[$j][0]);
+                $data2 = $data2[0] + 100 * ($data2[1] + 100 * $data2[2]); //(dd/mm/aaaa) => aaaammdd
+                if ($data1 < $data2) {
+                    $temp = $items[$j];
+                    $items[$j] = $items[$j + 1];
+                    $items[$j + 1] = $temp;
+                }
+            }
+        return $items;
+    }
 }

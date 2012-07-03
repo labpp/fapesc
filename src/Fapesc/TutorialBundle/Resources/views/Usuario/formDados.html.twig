@@ -1,8 +1,6 @@
 <script type="text/javascript">
     jQuery(function($){
         $(".cpf").mask("999.999.999-99");
-        $(".uf").mask("aa");
-        $(".cep").mask("99999-999");
         $(".fone").mask("(99) 9999-9999");
     });
     $().ready(function() {
@@ -12,9 +10,6 @@
                 nome: "required",
                 instituicao: "required",
                 endereco: "required",
-                municipio: "required",
-                uf: "required",
-                cep: "required",
                 email: {
                     required: true,
                     email: true
@@ -26,9 +21,6 @@
                 nome: "Digite o nome",
                 instituicao: "Digite a instituição",
                 endereco: "Digite o endereço",
-                municipio: "Digite o município",
-                uf: "Digite a UF",
-                cep: "Digite o CEP",
                 email: {
                     required: "Digite o email",
                     email: "Digite um email válido"
@@ -52,21 +44,17 @@
             <label>Instituição de vínculo:</label>
             <input type="text" name="instituicao" title="Entre com o nome completo da instituição, sem abreviaturas."  value="{{ instituicao }}" />
         </div>
-        <div>
-            <label>Endereço correspondência:</label>
+        <div class="coluna3c">
+            <label>Endereço:</label>
             <input type="text" name="endereco" title="Logradouro, Número, Complemento, etc."  value="{{ endereco }}" />
         </div>
-        <div class="coluna2">
+        <div class="coluna3">
             <label>Município:</label>
-            <input type="text" name="municipio" title="Entre com o nome do município ou distrito, sem abreviaturas." value="{{ municipio }}" />
-        </div>
-        <div class="coluna4">
-            <label>UF:</label>
-            <input type="text" name="uf" class="uf" title="Digite o código da Unidade Federativa." value="{{ uf }}" />
-        </div>
-        <div class="coluna4">
-            <label>CEP:</label>
-            <input type="text" class="cep" name="cep" title="Aqui, insira apenas números" value="{{ cep }}" />
+            <select name="municipio" title="Entre com o nome do município ou distrito, sem abreviaturas.">
+                {% for item in municipioSelect %}
+                <option value="{{ item.value }}" {% if item.value == municipio %} selected="selected" {% endif %}>{{ item.text }}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="coluna2">
             <label>E-mail:</label>

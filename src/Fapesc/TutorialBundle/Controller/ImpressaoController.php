@@ -75,7 +75,7 @@ class ImpressaoController extends FapescController {
             $mpdf->WriteHTML($stylesheet, 1);
         }
         $cabecalho = array(
-            "projeto" => $projeto->getTitulo(),
+            "projeto" => substr($projeto->getTitulo(), 0, 50),
             "coordenador" => $projeto->getUsuario()->getNome(),
             "contrato" => $projeto->getContrato(),
             "empenho" => $relatorio->getNota(),
