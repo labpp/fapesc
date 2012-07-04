@@ -273,7 +273,17 @@ class ImpressaoController extends FapescController {
             unset($resultadoJ);
             foreach ($relatorio->getResultados() as $resultado) {
                 if ($resultado->getMeta()->getId() == $meta->getId()) {
-                    $resultadoR = $resultado->getResultado(false);
+		     switch ($resultado->getResultado(false)) {
+                                case "1": 
+				    $resultadoR = "NA";
+                                    break;
+                                case "2":
+				    $resultadoR = "PR";
+                                    break;
+                                case "3":
+				    $resultadoR = "PA";
+                                    break;
+		    }
                     $resultadoJ = $resultado->getJustificativa();
                     break;
                 }

@@ -39,22 +39,18 @@ class RelatorioController extends FapescController {
         $dados = $relatorio->toArray();
         $projetos = $this->getDoctrine()->getRepository("FapescTutorialBundle:Projeto")->findBy(
                 array(
-                    "usuario" => $this->get("security.context")->getToken()->getUser()->getId(), 
-                    "ativo" => true),
-                array(
-                    "inicio" => "DESC",
-                    "termino" => "DESC",
-                    "titulo" => "ASC"));
+            "usuario" => $this->get("security.context")->getToken()->getUser()->getId(),
+            "ativo" => true), array(
+            "inicio" => "DESC",
+            "termino" => "DESC",
+            "titulo" => "ASC"));
         $dados["projetos"] = array();
         if (!empty($projetos))
             foreach ($projetos as $projeto)
                 $dados["projetos"][] = $projeto->toArray();
         $dados["projeto"] = empty($idProjeto) ? 0 : $idProjeto;
         return array_merge(
-            $this->usuario(), 
-            $this->menu("relatorio", "dados", $idRelatorio),
-            $this->info($relatorio->getProjeto()->getId(), $idRelatorio),
-            $dados
+                        $this->usuario(), $this->menu("relatorio", "dados", $idRelatorio), $this->info($relatorio->getProjeto()->getId(), $idRelatorio), $dados
         );
     }
 
@@ -72,7 +68,7 @@ class RelatorioController extends FapescController {
             $em->persist($relatorio);
             $em->flush();
             $acao = "registrado";
-            
+
             //para cada meta do projeto, clonar resultado do relatorio anterior (se houver)
             $relatorios = $this->getDoctrine()->getRepository("FapescTutorialBundle:Relatorio")->findBy(array("projeto" => $projeto->getId(), "ativo" => true), array("liberacao" => "DESC"));
             $anterior = false;
@@ -94,7 +90,6 @@ class RelatorioController extends FapescController {
                 $em->persist($resultado);
                 $em->flush();
             }
-            
         } else { //edita existente
             $relatorio = $this->find($idRelatorio);
             $relatorio->populateDados($_POST);
@@ -102,7 +97,7 @@ class RelatorioController extends FapescController {
             $em->flush();
             $acao = "editado";
         }
-        
+
         $this->get("session")->setFlash("sucesso", "Relatório {$acao} com sucesso!");
         return $this->forward("FapescTutorialBundle:Relatorio:relatorio", array("idRelatorio" => $relatorio->getId()));
     }
@@ -323,116 +318,115 @@ class RelatorioController extends FapescController {
      * @Template("FapescTutorialBundle:Relatorio:tc28.html.twig")
      */
     public function tc28Action($idRelatorio) {
-            $dados[] = array();
-	$dados["tc28"] = array();
-	$relatorio = $this->getDoctrine()
-                ->getRepository("FapescTutorialBundle:Relatorio")
-                ->find($idRelatorio);
-	$projeto = $relatorio->getProjeto();
+        $dados[] = array();
+        $dados["tc28"] = array();
+        $relatorio = $this->getDoctrine()->getRepository("FapescTutorialBundle:Relatorio")->find($idRelatorio);
+        $projeto = $relatorio->getProjeto();
 
-	$contador = 0;
-	$dados["tc28"][0] = array("num" => "", "data" => $relatorio->getLiberacao(), "historico" => "Valor Recebido" , "recebimento" => $relatorio->getValor(), "pagamento" => "");
-	$dados["tc28"][1] = array("num" => "", "data" => "", "historico" => "Total Contrapartida", "recebimento" => "", "pagamento" => "");
-	$dados["tc28"][2] = array("num" => "", "data" => "", "historico" => "Rendimentos da Aplicação", "recebimento" => "Ver observações", "pagamento" => "");
-	$paginas = array("Contrapartida" => "CP","Empenho" => "FAP");
-	$totalCP = 0.0;
-	$totalFAP = 0.0;
-	foreach($paginas as $key => $value){
-		$itens = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:".$key)->findBy(array("relatorio" => $idRelatorio));
-		if (!empty($itens))
-		    foreach ($itens as $item) {
-			unset($dado);
-			switch ($item->getCategoria()) {
-			    case "1": //dispendio
-			        $dispendio = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Dispendio")->find($item->getItem());
-			        if (is_object($dispendio)){	
-					if($value == "CP")
-						$totalCP +=  $dispendio->getTotal(true);
-					else
-						$totalFAP +=  $dispendio->getTotal(true);
-				        $dado["num"] = $dispendio->getDocumento();
-					$dado["data"] = $dispendio->getData();
-					$dado["historico"] = mb_substr($dispendio->getFornecedor()->getNome(), 0, 20) . " - " . mb_substr($dispendio->getDescricao(), 0, 10) . " - " . $value ;
-					$dado["recebimento"] = "";
-					$dado["pagamento"] = $dispendio->getTotal();
-				}
-			        break;
-			    case "2": //bolsa
-				$bolsa = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Bolsa")->find($item->getItem());
-			        if (is_object($bolsa)){
-					if($value == "CP")
-						$totalCP +=  $bolsa->getValor(true);
-					else
-						$totalFAP +=  $bolsa->getValor(true);
-					$dado["num"] = "";
-					$dado["data"] = $bolsa->getData(false);
-					$dado["historico"] =  "Bolsa - " . mb_substr($bolsa->getBolsista()->getNome(), 0, 25) . " - CP";
-					$dado["recebimento"] = "";
-					$dado["pagamento"] = $bolsa->getValor();
-					}
-			        break;
-			    case "3": //passagem
-			        $passagem = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Passagem")->find($item->getItem());
-			        if (is_object($passagem)){
-					if($value == "CP")
-						$totalCP += $passagem->getValor(true);
-					else
-						$totalFAP += $passagem->getValor(true);
-					$passagem = $passagem->toArray();
-					$dado["num"] = $passagem["tiquete"];
-					$dado["data"] = $passagem["compra"];
-					$dado["historico"] = mb_substr($passagem["descricao"], 0, 25) . " - " . $value;;
-					$dado["recebimento"] = "";
-					$dado["pagamento"] = $passagem["valor"];
-					}
-			        break;
-			    case "4": //diaria
-			        $diaria = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Diaria")->find($item->getItem());
-			        if (is_object($diaria)){
-					if($value == "CP")
-						$totalCP += $diaria->getValor(true);
-					else
-						$totalFAP += $diaria->getValor(true);
-					$dado["num"] = "";
-					$dado["data"] = $diaria->getInicio();
-					$dado["historico"] = "Diária - " . mb_substr($diaria->getBeneficiario(), 0, 25) . " - " . $value;
-					$dado["recebimento"] = "";
-					$dado["pagamento"] = $diaria->getValor();
-					}
-			        break;
-			    case "5": //salario
-			        $salario = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Salario")->find($item->getItem());
-			        if (is_object($salario)){
-					if($value == "CP")
-						$totalCP += $salario->getProporcional(true);
-					else
-						$totalFAP += $salario->getProporcional(true);
-					$dado["num"] = "";
-					$dado["data"] = "01/".$salario->getData();//convencao ja que o salario nao possui dia
-					$pesquisador = $salario->getPesquisador();
-					$dado["historico"] = "Salários e Encargos - " . mb_substr($pesquisador->getNome(), 0, 10) . " - CP";
-					$dado["recebimento"] = "";
-					$dado["pagamento"] = $salario->getProporcional();
-					}
-			        break;
-			}//fim switch
-			if (isset($dado)){
-				$my_array[] = array($dado["data"] , $dado);
-				$contador++;
-			}
-		    }//fim foreach
-	}
-	$my_array = $this->bubbleSort($my_array);
-	foreach($my_array as $dado)
-		$dados["tc28"][] = $dado[1];
-	$resto = $relatorio->getValor(true) - $totalFAP;
-	$dados["tc28"][1]["recebimento"] = number_format($totalCP, 2, ",", ".");
-	$totalRec = number_format($totalCP + $relatorio->getValor(true), 2, ",", ".");
-	$totalPag = number_format($totalCP + $totalFAP + $resto, 2, ",", ".");
-	$dados["tc28"][] = array("num" => "", "data" => "", "historico" => "Devolução do saldo remanescente", "recebimento" =>"", "pagamento" => number_format($resto, 2, ",", "."));
-	$dados["tc28"][] = array("num" => "", "data" => "", "historico" => "TOTAL", "recebimento" =>$totalRec, "pagamento" => $totalPag);
-	$dados["calculo"] = $contador + 4;
-	$dados["nota"] = $relatorio->getNota();
+        $contador = 0;
+        $dados["tc28"][0] = array("num" => "", "data" => $relatorio->getLiberacao(), "historico" => "Valor Recebido", "recebimento" => $relatorio->getValor(), "pagamento" => "");
+        $dados["tc28"][1] = array("num" => "", "data" => "", "historico" => "Total Contrapartida", "recebimento" => "", "pagamento" => "");
+        $dados["tc28"][2] = array("num" => "", "data" => "", "historico" => "Rendimentos da Aplicação", "recebimento" => "Ver observações", "pagamento" => "");
+        $paginas = array("Contrapartida" => "CP", "Empenho" => "FAP");
+        $totalCP = 0.0;
+        $totalFAP = 0.0;
+        foreach ($paginas as $key => $value) {
+            $itens = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:" . $key)->findBy(array("relatorio" => $idRelatorio));
+            if (!empty($itens))
+                foreach ($itens as $item) {
+                    unset($dado);
+                    switch ($item->getCategoria()) {
+                        case "1": //dispendio
+                            $dispendio = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Dispendio")->find($item->getItem());
+                            if (is_object($dispendio)) {
+                                if ($value == "CP")
+                                    $totalCP += $dispendio->getTotal(true);
+                                else
+                                    $totalFAP += $dispendio->getTotal(true);
+                                $dado["num"] = $dispendio->getDocumento();
+                                $dado["data"] = $dispendio->getData();
+                                $dado["historico"] = mb_substr($dispendio->getFornecedor()->getNome(), 0, 20) . " - " . mb_substr($dispendio->getDescricao(), 0, 10) . " - " . $value;
+                                $dado["recebimento"] = "";
+                                $dado["pagamento"] = $dispendio->getTotal();
+                            }
+                            break;
+                        case "2": //bolsa
+                            $bolsa = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Bolsa")->find($item->getItem());
+                            if (is_object($bolsa)) {
+                                if ($value == "CP")
+                                    $totalCP += $bolsa->getValor(true);
+                                else
+                                    $totalFAP += $bolsa->getValor(true);
+                                $dado["num"] = "";
+                                $dado["data"] = $bolsa->getData(false);
+                                $dado["historico"] = "Bolsa - " . mb_substr($bolsa->getBolsista()->getNome(), 0, 25) . " - CP";
+                                $dado["recebimento"] = "";
+                                $dado["pagamento"] = $bolsa->getValor();
+                            }
+                            break;
+                        case "3": //passagem
+                            $passagem = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Passagem")->find($item->getItem());
+                            if (is_object($passagem)) {
+                                if ($value == "CP")
+                                    $totalCP += $passagem->getValor(true);
+                                else
+                                    $totalFAP += $passagem->getValor(true);
+                                $passagem = $passagem->toArray();
+                                $dado["num"] = $passagem["tiquete"];
+                                $dado["data"] = $passagem["compra"];
+                                $dado["historico"] = mb_substr($passagem["descricao"], 0, 25) . " - " . $value;
+                                ;
+                                $dado["recebimento"] = "";
+                                $dado["pagamento"] = $passagem["valor"];
+                            }
+                            break;
+                        case "4": //diaria
+                            $diaria = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Diaria")->find($item->getItem());
+                            if (is_object($diaria)) {
+                                if ($value == "CP")
+                                    $totalCP += $diaria->getValor(true);
+                                else
+                                    $totalFAP += $diaria->getValor(true);
+                                $dado["num"] = "";
+                                $dado["data"] = $diaria->getInicio();
+                                $dado["historico"] = "Diária - " . mb_substr($diaria->getBeneficiario(), 0, 25) . " - " . $value;
+                                $dado["recebimento"] = "";
+                                $dado["pagamento"] = $diaria->getValor();
+                            }
+                            break;
+                        case "5": //salario
+                            $salario = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Salario")->find($item->getItem());
+                            if (is_object($salario)) {
+                                if ($value == "CP")
+                                    $totalCP += $salario->getProporcional(true);
+                                else
+                                    $totalFAP += $salario->getProporcional(true);
+                                $dado["num"] = "";
+                                $dado["data"] = "01/" . $salario->getData(); //convencao ja que o salario nao possui dia
+                                $pesquisador = $salario->getPesquisador();
+                                $dado["historico"] = "Salários e Encargos - " . mb_substr($pesquisador->getNome(), 0, 10) . " - CP";
+                                $dado["recebimento"] = "";
+                                $dado["pagamento"] = $salario->getProporcional();
+                            }
+                            break;
+                    }//fim switch
+                    if (isset($dado)) {
+                        $my_array[] = array($dado["data"], $dado);
+                        $contador++;
+                    }
+                }//fim foreach
+        }
+        $my_array = $this->bubbleSort(isset($my_array) ? $my_array : array());
+        foreach ($my_array as $dado)
+            $dados["tc28"][] = $dado[1];
+        $resto = $relatorio->getValor(true) - $totalFAP;
+        $dados["tc28"][1]["recebimento"] = number_format($totalCP, 2, ",", ".");
+        $totalRec = number_format($totalCP + $relatorio->getValor(true), 2, ",", ".");
+        $totalPag = number_format($totalCP + $totalFAP + $resto, 2, ",", ".");
+        $dados["tc28"][] = array("num" => "", "data" => "", "historico" => "Devolução do saldo remanescente", "recebimento" => "", "pagamento" => number_format($resto, 2, ",", "."));
+        $dados["tc28"][] = array("num" => "", "data" => "", "historico" => "TOTAL", "recebimento" => $totalRec, "pagamento" => $totalPag);
+        $dados["calculo"] = $contador + 4;
+        $dados["nota"] = $relatorio->getNota();
         return array_merge($this->usuario(), $this->menu("relatorio", "tc28", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }
 
@@ -441,45 +435,45 @@ class RelatorioController extends FapescController {
      * @Template("FapescTutorialBundle:Relatorio:devolucao.html.twig")
      */
     public function devolucaoAction($idRelatorio) {
-            $dados = array();
-	$relatorio = $this->getDoctrine()
+        $dados = array();
+        $relatorio = $this->getDoctrine()
                 ->getRepository("FapescTutorialBundle:Relatorio")
                 ->find($idRelatorio);
-	$total = 0.0;
-	$itens = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Empenho")->findBy(array("relatorio" => $idRelatorio));
-	if (!empty($itens))
-	    foreach ($itens as $item)
-		switch ($item->getCategoria()) {
-		    case "1": //dispendio
-		        $dispendio = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Dispendio")->find($item->getItem());
-		        if (is_object($dispendio))
-				$total += $dispendio->getTotal(true);
-			break;
-		    case "2": //bolsa
-			$bolsa = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Bolsa")->find($item->getItem());
-			if (is_object($bolsa))
-				$total += $bolsa->getValor(true);
-			break;
-		    case "3": //passagem
-			$passagem = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Passagem")->find($item->getItem());
-			if (is_object($passagem))
-				$total += $passagem->getValor(true);
-			break;
-		    case "4": //diaria
-			$diaria = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Diaria")->find($item->getItem());
-			if (is_object($diaria))
-				$total += $diaria->getValor(true);
-			break;
-		    case "5": //salario
-			$salario = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Salario")->find($item->getItem());
-			if (is_object($salario))
-				$total += $salario->getProporcional(true);
-			break;
-		}//fim switch
-	    $dados["NL"] = $relatorio->getNota();
-	    $dados["TO"] = $relatorio->getProjeto()->getContrato();
-	    $dados["saldo"] = number_format($relatorio->getValor(true) - $total, 2, ",", ".");
-            return array_merge($this->usuario(), $this->menu("relatorio", "devolucao", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
+        $total = 0.0;
+        $itens = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Empenho")->findBy(array("relatorio" => $idRelatorio));
+        if (!empty($itens))
+            foreach ($itens as $item)
+                switch ($item->getCategoria()) {
+                    case "1": //dispendio
+                        $dispendio = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Dispendio")->find($item->getItem());
+                        if (is_object($dispendio))
+                            $total += $dispendio->getTotal(true);
+                        break;
+                    case "2": //bolsa
+                        $bolsa = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Bolsa")->find($item->getItem());
+                        if (is_object($bolsa))
+                            $total += $bolsa->getValor(true);
+                        break;
+                    case "3": //passagem
+                        $passagem = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Passagem")->find($item->getItem());
+                        if (is_object($passagem))
+                            $total += $passagem->getValor(true);
+                        break;
+                    case "4": //diaria
+                        $diaria = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Diaria")->find($item->getItem());
+                        if (is_object($diaria))
+                            $total += $diaria->getValor(true);
+                        break;
+                    case "5": //salario
+                        $salario = $this->getDoctrine()->getEntityManager()->getRepository("FapescTutorialBundle:Salario")->find($item->getItem());
+                        if (is_object($salario))
+                            $total += $salario->getProporcional(true);
+                        break;
+                }//fim switch
+                $dados["NL"] = $relatorio->getNota();
+        $dados["TO"] = $relatorio->getProjeto()->getContrato();
+        $dados["saldo"] = number_format($relatorio->getValor(true) - $total, 2, ",", ".");
+        return array_merge($this->usuario(), $this->menu("relatorio", "devolucao", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }
 
     /**
@@ -494,6 +488,7 @@ class RelatorioController extends FapescController {
         $this->get("session")->setFlash("sucesso", "Relatório excluído com sucesso!");
         return $this->forward("FapescTutorialBundle:Fapesc:inicio", array());
     }
+
     function bubbleSort($items) {
         $temp = "";
         $size = sizeof($items);
@@ -511,4 +506,5 @@ class RelatorioController extends FapescController {
             }
         return $items;
     }
+
 }
