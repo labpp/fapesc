@@ -1,0 +1,23 @@
+#dispendioDiarias #dataLib{
+	width:24%;
+	float:left;
+}
+#dispendioDiarias #vDiaria{
+	width:24%;
+	border-left:0.8pt solid #000;
+	float:left;
+}
+#dispendioDiarias #qtd{
+	width:24%;
+	border-left:0.8pt solid #000;
+	float:left;
+}
+#dispendioDiarias #vTotal{
+	width:24%;
+	border-left:0.8pt solid #000;
+	float:left;
+}
+
+#dispendioDiarias .centro{
+	text-align:center;
+}

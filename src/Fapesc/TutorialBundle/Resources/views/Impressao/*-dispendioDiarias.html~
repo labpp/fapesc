@@ -1,0 +1,36 @@
+<div id="corpo">
+	<div id="dispendio">
+		<div id="dispendioDiarias">
+			<h1 class ="head" > DISPÊNDIO DIÁRIAS </h1>
+
+			<div class="linha2">
+				<div id="dataLib">
+					<div class="espacamentoEsq menor">	Data de liberação:	</div>	
+					<div class="maior centro">	                {{ data }}</div>
+				</div>
+				<div id="vDiaria">
+					<div class="espacamentoEsq menor">	Valor Diária:	</div>	
+					<div class="maior centro">	                {{ diaria }}    </div>
+				</div>
+				<div id="qtd">
+					<div class="espacamentoEsq menor">	Quantidade:	</div>	
+					<div class="maior centro">	                {{ quantidade }}</div>
+				</div>
+				<div id="vTotal">
+					<div class="espacamentoEsq menor">	Valor Total:	</div>	
+					<div class="maior centro">	                {{ vTotal }}    </div>
+				</div>
+			</div>
+			<div class="linha3">
+					{{ objetivo }}
+			</div>
+
+			<!--texto central -->	
+			<div id="textoCentral">
+					<p>	{{ mensagem }}	</p>
+			</div>
+			<!--texto central -->
+		</div>
+	</div><!--dispendio-->			
+	
+</div> <!--corpo-->

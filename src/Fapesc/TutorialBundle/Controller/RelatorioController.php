@@ -416,16 +416,20 @@ class RelatorioController extends FapescController {
                     }
                 }//fim foreach
         }
+        $resto = $relatorio->getValor(true) - $totalFAP;
         $my_array = $this->bubbleSort(isset($my_array) ? $my_array : array());
         foreach ($my_array as $dado)
             $dados["tc28"][] = $dado[1];
-        $resto = $relatorio->getValor(true) - $totalFAP;
+	$totalCP = $resto <= 0 ? $totalCP - $resto : $totalCP;
         $dados["tc28"][1]["recebimento"] = number_format($totalCP, 2, ",", ".");
         $totalRec = number_format($totalCP + $relatorio->getValor(true), 2, ",", ".");
         $totalPag = number_format($totalCP + $totalFAP + $resto, 2, ",", ".");
-        $dados["tc28"][] = array("num" => "", "data" => "", "historico" => "Devolução do saldo remanescente", "recebimento" => "", "pagamento" => number_format($resto, 2, ",", "."));
+	if($resto > 0){
+	        $dados["tc28"][] = array("num" => "", "data" => "", "historico" => "Devolução do saldo remanescente", "recebimento" => "", "pagamento" => number_format($resto, 2, ",", "."));
+		$contador++;
+	}
         $dados["tc28"][] = array("num" => "", "data" => "", "historico" => "TOTAL", "recebimento" => $totalRec, "pagamento" => $totalPag);
-        $dados["calculo"] = $contador + 4;
+        $dados["calculo"] = $contador + 3;
         $dados["nota"] = $relatorio->getNota();
         return array_merge($this->usuario(), $this->menu("relatorio", "tc28", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }
@@ -472,7 +476,9 @@ class RelatorioController extends FapescController {
                 }//fim switch
                 $dados["NL"] = $relatorio->getNota();
         $dados["TO"] = $relatorio->getProjeto()->getContrato();
-        $dados["saldo"] = number_format($relatorio->getValor(true) - $total, 2, ",", ".");
+	$resto = $relatorio->getValor(true) - $total;
+	$dados["positivo"] = $resto > 0 ? true : false;
+        $dados["saldo"] = $resto > 0 ? number_format($resto, 2, ",", ".") : "0,00";
         return array_merge($this->usuario(), $this->menu("relatorio", "devolucao", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }
 

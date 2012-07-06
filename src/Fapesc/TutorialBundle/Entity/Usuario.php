@@ -627,4 +627,44 @@ class Usuario implements UserInterface {
         $this->setFone($dados["fone"]);
     }
 
+
+    /**
+     * Set uf
+     *
+     * @param string $uf
+     */
+    public function setUf($uf)
+    {
+        $this->uf = $uf;
+    }
+
+    /**
+     * Get uf
+     *
+     * @return string 
+     */
+    public function getUf()
+    {
+        return $this->uf;
+    }
+
+    /**
+     * Set cep
+     *
+     * @param string $cep
+     */
+    public function setCep($cep)
+    {
+        $this->cep = $cep;
+    }
+
+    /**
+     * Get cep
+     *
+     * @return string 
+     */
+    public function getCep()
+    {
+        return $this->cep;
+    }
 }

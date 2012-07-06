@@ -1,0 +1,34 @@
+<div id="corpo">
+	<div id="dispendio">
+		<div id="dispendioPassagem">
+			<h1 class ="head" > REGISTRO DE DISPÊNDIOS </h1>
+			<div class="linha2">
+					<div id="dataAq">
+						<div class="espacamentoEsq menor">	Data de aquisição:	</div>	
+						<div class="maior centro">	           {{ data }}	        </div>
+					</div>
+					<div id="trecho">
+						<div class="espacamentoEsq menor">	   Trecho		</div>	
+						<div class="maior centro">	        {{ trecho }}    	</div>
+					</div>
+					<div id="saidaChegada">
+						<div class="espacamentoEsq menor">	Saída - Chegada:	</div>	
+						<div class="maior centro">	        {{ saidaChegada }}	</div>
+					</div>
+					<div id="vTotal">
+						<div class="espacamentoEsq menor">	Valor Total:		</div>	
+						<div class="maior centro">	        {{ vTotal }}    	</div>
+					</div>
+			</div>
+			<!--texto central -->	
+			<div id="textoCentral">
+				<p>
+					{{ mensagem }}
+				</p>
+		
+			</div>
+			<!--texto central -->
+
+		</div>
+	</div><!--dispendio-->			
+</div> <!--corpo-->

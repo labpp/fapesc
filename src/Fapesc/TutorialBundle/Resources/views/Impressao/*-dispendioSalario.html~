@@ -1,0 +1,30 @@
+<div id="corpo">
+	<div id="dispendio">
+		<div id="dispendioSalario">
+			<h1 class ="head" > REGISTRO DE DISPÊNDIOS </h1>
+			<div class="linha2">
+					<div id="periodo">
+						<div class="espacamentoEsq menor">	Período:	</div>	
+						<div class="maior centro">	        {{ periodo }}	</div>
+					</div>
+					<div id="nome">
+						<div class="espacamentoEsq menor">	   Nome do pesquisador		</div>	
+						<div class="maior centro">	        {{ nome }}    	</div>
+					</div>
+					<div id="vTotal">
+						<div class="espacamentoEsq menor">	Valor Bruto:		</div>	
+						<div class="maior centro">	        {{ valor }}    	</div>
+					</div>
+			</div>
+			<!--texto central -->	
+			<div id="textoCentral">
+				<p>
+					{{ mensagem }}
+				</p>
+		
+			</div>
+			<!--texto central -->
+
+		</div>
+	</div><!--dispendio-->			
+</div> <!--corpo-->

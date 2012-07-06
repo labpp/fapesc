@@ -16,7 +16,7 @@
 			<table style="border-collapse:collapse; width:100%; font-size:10pt;">
 				<tr><td style="border: solid 1pt #000; width:75%; text-align:right;"><b>Saldo remanescente - NL {{ NL }}</b></td><td style="border: solid 1pt #000; width:75%; text-align:right;"><b>{{ saldo }}</b></td></tr>
 			</table>
-			
+			{% if positivo %}
 			<p><strong>Observação:</strong> para acesso ao sistema da Sec. da Fazenda, recomenda-se uso dos navegadores Internet Explorer (versão 7.0 ou superior) ou Mozilla Firefox (versão 6.0 ou superior), <strong>bem como a desativação do bloqueio de “popups”.</strong></p>
 
 			<p>1. O número de identificação do depósito deverá ser gerado em sistema específico da Secretaria de Estado da Fazenda de Santa Catarina, disponível <a href="http://depositoidentificado.sef.sc.gov.br/Controles/GeraDeposito.aspx">aqui</a>.</p>
@@ -32,9 +32,12 @@
 			<p>5. Informe em seguida o <strong>nome completo, CPF e telefone de contato  do coordenador do projeto.</strong></p>
 
 			<p>6. Informe o valor a ser depósitado. <strong>De acordo com as informações fornecidas neste sistema, o depósito será no montante de R$ <!--DB-->{{ saldo }}<!--DB-->.</strong></p>
+			
 
 			<p>7. <strong><span style="color:red;">Atenção:</span> Não se esqueça de encartar o comprovante de depósito identificado à versão impressa do documento de prestação de contas.</strong> Somente este documento vale como confirmação da devolução do saldo referente à nota de liberação em questão.</p>
-
+			{% else %}
+				<p> Não há recursos para devolver.</p>
+			{% endif %}
 			</div><!--conteudo-margem-->
 		</p>
 	</div><!-- #main-content -->

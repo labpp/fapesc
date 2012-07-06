@@ -50,45 +50,40 @@ class __TwigTemplate_f681e43776e41d4f1a0c71133a0039fe extends Twig_Template
         echo "<script type=\"text/javascript\">
     jQuery(function(\$){
         \$(\".data\").mask(\"99/99/9999\");
-        \$(\"#saldo\").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
+        \$(\".dinheiro\").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
     });
 </script>
 <div id=\"content\">
-
     <div id=\"sidebar\">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec magna magna, porttitor a ornare quis, interdum quis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <br /><br />Integer in commodo tellus. Suspendisse lobortis lacinia felis, ut laoreet ipsum posuere sed. Ut placerat volutpat luctus. <br /><br />Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec velit diam, tincidunt sed ultricies vel, scelerisque et ligula.</p>
+        <p><b>Instruções:</b><br /><br />Posicione o ponteiro do mouse sobre um campo em específico para receber ajuda em seu preenchimento.</p>
     </div><!-- #sidebar -->
-
     <div id=\"main-content\">
-        <h1>:: Extrato Bancário</h1>
-        <form class=\"form-container\" action=\"";
-        // line 20
+        <form class=\"\" action=\"";
+        // line 17
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("relatorioExtratoPost", array("idRelatorio" => $this->getContext($context, 'idRelatorio'))), "html");
         echo "\" method=\"POST\">
-            <table class=\"form\" width=\"90%\">
-                <tr>
-                    <td>Data do extrato:<br /><input type=\"text\" name=\"data\" class=\"data\" title=\"Informe a data do extrato.\" value=\"";
-        // line 23
+            <fieldset class=\"\">
+                <legend>Extrato Bancário</legend>
+                <div class=\"coluna2\">
+                    <label>Data do extrato:</label>
+                    <input type=\"text\" name=\"data\" class=\"data\" title=\"Informe a data do extrato.\" value=\"";
+        // line 22
         echo twig_escape_filter($this->env, $this->getContext($context, 'data'), "html");
-        echo "\" /></td>
-                </tr>
-            </table>
-            <table class=\"form\" width=\"90%\">
-                <tr>
-                    <td>Saldo (R\$):<br /><input type=\"text\" name=\"saldo\" id=\"saldo\" title=\"Informe o saldo.\" value=\"";
-        // line 28
+        echo "\" />
+                </div>
+                <div class=\"coluna2\">
+                    <label>Saldo (R\$):</label>
+                    <input type=\"text\" name=\"saldo\" class=\"dinheiro\" title=\"Informe o saldo.\" value=\"";
+        // line 26
         echo twig_escape_filter($this->env, $this->getContext($context, 'saldo'), "html");
-        echo "\" /></td>
-                </tr>
-            </table>
-            <table class=\"submit\" width=\"90%\">
-                <tr>
-                    <td><input type=\"submit\" value=\"Salvar\" /></td>
-                </tr>
-            </table>
+        echo "\" />
+                </div>
+            </fieldset>
+            <div>
+                <input type=\"submit\" value=\"Salvar\" />
+            </div>
         </form>
     </div><!-- #main-content -->
-
 </div><!-- #content -->
 ";
     }

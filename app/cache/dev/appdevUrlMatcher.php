@@ -406,6 +406,16 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\EmpenhoController::chequeDeleteAction',)), array('_route' => 'fapesc_tutorial_empenho_chequedelete'));
         }
 
+        // fapesc_tutorial_empenho_tc28
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>[^/]+?)/tc28$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\EmpenhoController::tc28Action',)), array('_route' => 'fapesc_tutorial_empenho_tc28'));
+        }
+
+        // fapesc_tutorial_empenho_devolucao
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>[^/]+?)/devolucao$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\EmpenhoController::devolucaoAction',)), array('_route' => 'fapesc_tutorial_empenho_devolucao'));
+        }
+
         // fapesc_tutorial_empenho_delete
         if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>[^/]+?)/delete$#xs', $pathinfo, $matches)) {
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\EmpenhoController::deleteAction',)), array('_route' => 'fapesc_tutorial_empenho_delete'));
@@ -462,6 +472,11 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // fapesc_tutorial_projeto_metadelete
         if (0 === strpos($pathinfo, '/projeto') && preg_match('#^/projeto/(?P<idProjeto>[^/]+?)/meta/(?P<idMeta>[^/]+?)/delete$#xs', $pathinfo, $matches)) {
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ProjetoController::metaDeleteAction',)), array('_route' => 'fapesc_tutorial_projeto_metadelete'));
+        }
+
+        // fapesc_tutorial_projeto_relatorios
+        if (0 === strpos($pathinfo, '/projeto') && preg_match('#^/projeto/(?P<idProjeto>[^/]+?)/relatorios$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ProjetoController::relatoriosAction',)), array('_route' => 'fapesc_tutorial_projeto_relatorios'));
         }
 
         // fapesc_tutorial_projeto_delete
@@ -667,6 +682,16 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ContrapartidaController::chequeDeleteAction',)), array('_route' => 'fapesc_tutorial_contrapartida_chequedelete'));
         }
 
+        // fapesc_tutorial_contrapartida_tc28
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>[^/]+?)/tc28$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ContrapartidaController::tc28Action',)), array('_route' => 'fapesc_tutorial_contrapartida_tc28'));
+        }
+
+        // fapesc_tutorial_contrapartida_devolucao
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>[^/]+?)/devolucao$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ContrapartidaController::devolucaoAction',)), array('_route' => 'fapesc_tutorial_contrapartida_devolucao'));
+        }
+
         // fapesc_tutorial_contrapartida_delete
         if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>[^/]+?)/delete$#xs', $pathinfo, $matches)) {
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ContrapartidaController::deleteAction',)), array('_route' => 'fapesc_tutorial_contrapartida_delete'));
@@ -799,6 +824,16 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // fapesc_tutorial_relatorio_chequedelete
         if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>[^/]+?)/cheque/(?P<idCheque>[^/]+?)/delete$#xs', $pathinfo, $matches)) {
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::chequeDeleteAction',)), array('_route' => 'fapesc_tutorial_relatorio_chequedelete'));
+        }
+
+        // fapesc_tutorial_relatorio_tc28
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>[^/]+?)/tc28$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::tc28Action',)), array('_route' => 'fapesc_tutorial_relatorio_tc28'));
+        }
+
+        // fapesc_tutorial_relatorio_devolucao
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>[^/]+?)/devolucao$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::devolucaoAction',)), array('_route' => 'fapesc_tutorial_relatorio_devolucao'));
         }
 
         // fapesc_tutorial_relatorio_delete
@@ -1122,6 +1157,11 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
         not_projetoMetaDelete:
 
+        // projetoRelatorios
+        if (0 === strpos($pathinfo, '/projeto') && preg_match('#^/projeto/(?P<idProjeto>\\d+)/relatorios$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ProjetoController::relatoriosAction',)), array('_route' => 'projetoRelatorios'));
+        }
+
         // projetoDelete
         if (0 === strpos($pathinfo, '/projeto') && preg_match('#^/projeto/(?P<idProjeto>\\d+)/delete$#xs', $pathinfo, $matches)) {
             if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
@@ -1141,6 +1181,16 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::dadosAction',)), array('_route' => 'relatorioDados'));
         }
         not_relatorioDados:
+
+        // relatorioDadosProjeto
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>\\d+)/dados/(?P<idProjeto>[^/]+?)$#xs', $pathinfo, $matches)) {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_relatorioDadosProjeto;
+            }
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::dadosAction',)), array('_route' => 'relatorioDadosProjeto'));
+        }
+        not_relatorioDadosProjeto:
 
         // relatorioDadosPost
         if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>\\d+)/dados/post$#xs', $pathinfo, $matches)) {
@@ -1535,6 +1585,16 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // relatorioChequeDelete
         if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>\\d+)/cheque/(?P<idCheque>\\d+)/delete$#xs', $pathinfo, $matches)) {
             return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::chequeDeleteAction',)), array('_route' => 'relatorioChequeDelete'));
+        }
+
+        // relatorioTc28
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>\\d+)/tc28$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::tc28Action',)), array('_route' => 'relatorioTc28'));
+        }
+
+        // relatorioDevolucao
+        if (0 === strpos($pathinfo, '/relatorio') && preg_match('#^/relatorio/(?P<idRelatorio>\\d+)/devolucao$#xs', $pathinfo, $matches)) {
+            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::devolucaoAction',)), array('_route' => 'relatorioDevolucao'));
         }
 
         // relatorioImpressao

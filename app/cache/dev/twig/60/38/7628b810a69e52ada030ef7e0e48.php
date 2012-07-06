@@ -81,7 +81,7 @@ class __TwigTemplate_60387628b810a69e52ada030ef7e0e48 extends Twig_Template
         // line 27
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("relatorioEmpenhosPost", array("idRelatorio" => $this->getContext($context, 'idRelatorio'))), "html");
         echo "\" method=\"POST\">
-            <table class=\"submit\" width=\"90%\">
+            <table class=\"submit\" width=\"90%\" style=\"clear:both;\">
                 <tr>
                     <td width=\"90%\" style=\"text-align:right; padding-right:10px;\">Categoria:</td>
                     <td>

@@ -1,15 +1,12 @@
 #capa #titulo {
 	font-size:16pt;
 	text-align:center;
-
-	width:100%;
 	float:left;
 	margin-top:8%; 
 }
 
 
 #capa #subtitulos {
-	width:100%;	
 	float:left;
 	margin-top:8%;
 
@@ -17,7 +14,6 @@
 
 #capa #subtitulos .espacamento {
 	text-align:center;
-	width:100%;
 	margin-top:2%;
 }
 
@@ -38,16 +34,14 @@
 
 #capa #projeto {
 	text-align:center;
-	width:100%;
 	float:left;
-	margin-top:24%;
+	margin-top:12.5%;
 }
 
 #capa #coordenador {
 	text-align:center;
-	width:100%;
 	float:left;
-	margin-top:20%;
+	margin-top:12.5%;
 }
 
 #capa #data {

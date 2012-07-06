@@ -102,6 +102,18 @@ class FapescTutorialBundleEntityProjetoProxy extends \Fapesc\TutorialBundle\Enti
         return parent::getMunicipio();
     }
 
+    public function getMunicipios($municipio = false)
+    {
+        $this->__load();
+        return parent::getMunicipios($municipio);
+    }
+
+    public function getMunicipioSelect()
+    {
+        $this->__load();
+        return parent::getMunicipioSelect();
+    }
+
     public function setRegiao($regiao)
     {
         $this->__load();
@@ -114,6 +126,18 @@ class FapescTutorialBundleEntityProjetoProxy extends \Fapesc\TutorialBundle\Enti
         return parent::getRegiao();
     }
 
+    public function getRegioes($regiao = false)
+    {
+        $this->__load();
+        return parent::getRegioes($regiao);
+    }
+
+    public function getRegiaoSelect()
+    {
+        $this->__load();
+        return parent::getRegiaoSelect();
+    }
+
     public function setSdr($sdr)
     {
         $this->__load();
@@ -124,6 +148,18 @@ class FapescTutorialBundleEntityProjetoProxy extends \Fapesc\TutorialBundle\Enti
     {
         $this->__load();
         return parent::getSdr();
+    }
+
+    public function getSdrs($sdr = false)
+    {
+        $this->__load();
+        return parent::getSdrs($sdr);
+    }
+
+    public function getSdrSelect()
+    {
+        $this->__load();
+        return parent::getSdrSelect();
     }
 
     public function setOrcamento($orcamento)
@@ -204,10 +240,10 @@ class FapescTutorialBundleEntityProjetoProxy extends \Fapesc\TutorialBundle\Enti
         return parent::setInicio($inicio);
     }
 
-    public function getInicio()
+    public function getInicio($format = 'd/m/Y')
     {
         $this->__load();
-        return parent::getInicio();
+        return parent::getInicio($format);
     }
 
     public function setTermino($termino)
@@ -216,10 +252,10 @@ class FapescTutorialBundleEntityProjetoProxy extends \Fapesc\TutorialBundle\Enti
         return parent::setTermino($termino);
     }
 
-    public function getTermino()
+    public function getTermino($format = 'd/m/Y')
     {
         $this->__load();
-        return parent::getTermino();
+        return parent::getTermino($format);
     }
 
     public function addRelatorio(\Fapesc\TutorialBundle\Entity\Relatorio $relatorios)

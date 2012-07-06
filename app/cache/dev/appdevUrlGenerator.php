@@ -85,6 +85,8 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'fapesc_tutorial_empenho_cheque' => true,
        'fapesc_tutorial_empenho_chequepost' => true,
        'fapesc_tutorial_empenho_chequedelete' => true,
+       'fapesc_tutorial_empenho_tc28' => true,
+       'fapesc_tutorial_empenho_devolucao' => true,
        'fapesc_tutorial_empenho_delete' => true,
        'fapesc_tutorial_empenho_index' => true,
        'fapesc_tutorial_empenho_inicio' => true,
@@ -96,6 +98,7 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'fapesc_tutorial_projeto_meta' => true,
        'fapesc_tutorial_projeto_metapost' => true,
        'fapesc_tutorial_projeto_metadelete' => true,
+       'fapesc_tutorial_projeto_relatorios' => true,
        'fapesc_tutorial_projeto_delete' => true,
        'fapesc_tutorial_projeto_index' => true,
        'fapesc_tutorial_projeto_inicio' => true,
@@ -136,6 +139,8 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'fapesc_tutorial_contrapartida_cheque' => true,
        'fapesc_tutorial_contrapartida_chequepost' => true,
        'fapesc_tutorial_contrapartida_chequedelete' => true,
+       'fapesc_tutorial_contrapartida_tc28' => true,
+       'fapesc_tutorial_contrapartida_devolucao' => true,
        'fapesc_tutorial_contrapartida_delete' => true,
        'fapesc_tutorial_contrapartida_index' => true,
        'fapesc_tutorial_contrapartida_inicio' => true,
@@ -161,6 +166,8 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'fapesc_tutorial_relatorio_cheque' => true,
        'fapesc_tutorial_relatorio_chequepost' => true,
        'fapesc_tutorial_relatorio_chequedelete' => true,
+       'fapesc_tutorial_relatorio_tc28' => true,
+       'fapesc_tutorial_relatorio_devolucao' => true,
        'fapesc_tutorial_relatorio_delete' => true,
        'fapesc_tutorial_relatorio_index' => true,
        'fapesc_tutorial_relatorio_inicio' => true,
@@ -196,8 +203,10 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'projetoMeta' => true,
        'projetoMetaPost' => true,
        'projetoMetaDelete' => true,
+       'projetoRelatorios' => true,
        'projetoDelete' => true,
        'relatorioDados' => true,
+       'relatorioDadosProjeto' => true,
        'relatorioDadosPost' => true,
        'relatorioRelatorio' => true,
        'relatorioRelatorioPost' => true,
@@ -239,6 +248,8 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        'relatorioCheque' => true,
        'relatorioChequePost' => true,
        'relatorioChequeDelete' => true,
+       'relatorioTc28' => true,
+       'relatorioDevolucao' => true,
        'relatorioImpressao' => true,
        'relatorioImprimir' => true,
        'relatorioDelete' => true,
@@ -625,6 +636,16 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         return array(array (  0 => 'idRelatorio',  1 => 'idCheque',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\EmpenhoController::chequeDeleteAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idCheque',  ),  2 =>   array (    0 => 'text',    1 => '/cheque',  ),  3 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  4 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
     }
 
+    private function getfapesc_tutorial_empenho_tc28RouteInfo()
+    {
+        return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\EmpenhoController::tc28Action',), array (), array (  0 =>   array (    0 => 'text',    1 => '/tc28',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
+    }
+
+    private function getfapesc_tutorial_empenho_devolucaoRouteInfo()
+    {
+        return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\EmpenhoController::devolucaoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/devolucao',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
+    }
+
     private function getfapesc_tutorial_empenho_deleteRouteInfo()
     {
         return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\EmpenhoController::deleteAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
@@ -678,6 +699,11 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
     private function getfapesc_tutorial_projeto_metadeleteRouteInfo()
     {
         return array(array (  0 => 'idProjeto',  1 => 'idMeta',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ProjetoController::metaDeleteAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idMeta',  ),  2 =>   array (    0 => 'text',    1 => '/meta',  ),  3 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idProjeto',  ),  4 =>   array (    0 => 'text',    1 => '/projeto',  ),));
+    }
+
+    private function getfapesc_tutorial_projeto_relatoriosRouteInfo()
+    {
+        return array(array (  0 => 'idProjeto',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ProjetoController::relatoriosAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/relatorios',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idProjeto',  ),  2 =>   array (    0 => 'text',    1 => '/projeto',  ),));
     }
 
     private function getfapesc_tutorial_projeto_deleteRouteInfo()
@@ -880,6 +906,16 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         return array(array (  0 => 'idRelatorio',  1 => 'idCheque',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ContrapartidaController::chequeDeleteAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idCheque',  ),  2 =>   array (    0 => 'text',    1 => '/cheque',  ),  3 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  4 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
     }
 
+    private function getfapesc_tutorial_contrapartida_tc28RouteInfo()
+    {
+        return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ContrapartidaController::tc28Action',), array (), array (  0 =>   array (    0 => 'text',    1 => '/tc28',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
+    }
+
+    private function getfapesc_tutorial_contrapartida_devolucaoRouteInfo()
+    {
+        return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ContrapartidaController::devolucaoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/devolucao',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
+    }
+
     private function getfapesc_tutorial_contrapartida_deleteRouteInfo()
     {
         return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ContrapartidaController::deleteAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
@@ -1003,6 +1039,16 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
     private function getfapesc_tutorial_relatorio_chequedeleteRouteInfo()
     {
         return array(array (  0 => 'idRelatorio',  1 => 'idCheque',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::chequeDeleteAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idCheque',  ),  2 =>   array (    0 => 'text',    1 => '/cheque',  ),  3 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  4 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
+    }
+
+    private function getfapesc_tutorial_relatorio_tc28RouteInfo()
+    {
+        return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::tc28Action',), array (), array (  0 =>   array (    0 => 'text',    1 => '/tc28',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
+    }
+
+    private function getfapesc_tutorial_relatorio_devolucaoRouteInfo()
+    {
+        return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::devolucaoAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/devolucao',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
     }
 
     private function getfapesc_tutorial_relatorio_deleteRouteInfo()
@@ -1180,6 +1226,11 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         return array(array (  0 => 'idProjeto',  1 => 'idMeta',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ProjetoController::metaDeleteAction',), array (  '_method' => 'GET',  'idProjeto' => '\\d+',  'idMeta' => '\\d+',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idMeta',  ),  2 =>   array (    0 => 'text',    1 => '/meta',  ),  3 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idProjeto',  ),  4 =>   array (    0 => 'text',    1 => '/projeto',  ),));
     }
 
+    private function getprojetoRelatoriosRouteInfo()
+    {
+        return array(array (  0 => 'idProjeto',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ProjetoController::relatoriosAction',), array (  'idProjeto' => '\\d+',), array (  0 =>   array (    0 => 'text',    1 => '/relatorios',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idProjeto',  ),  2 =>   array (    0 => 'text',    1 => '/projeto',  ),));
+    }
+
     private function getprojetoDeleteRouteInfo()
     {
         return array(array (  0 => 'idProjeto',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\ProjetoController::deleteAction',), array (  '_method' => 'GET',  'idProjeto' => '\\d+',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idProjeto',  ),  2 =>   array (    0 => 'text',    1 => '/projeto',  ),));
@@ -1188,6 +1239,11 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
     private function getrelatorioDadosRouteInfo()
     {
         return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::dadosAction',), array (  '_method' => 'GET',  'idRelatorio' => '\\d+',), array (  0 =>   array (    0 => 'text',    1 => '/dados',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
+    }
+
+    private function getrelatorioDadosProjetoRouteInfo()
+    {
+        return array(array (  0 => 'idRelatorio',  1 => 'idProjeto',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::dadosAction',), array (  '_method' => 'GET',  'idRelatorio' => '\\d+',), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'idProjeto',  ),  1 =>   array (    0 => 'text',    1 => '/dados',  ),  2 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idRelatorio',  ),  3 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
     }
 
     private function getrelatorioDadosPostRouteInfo()
@@ -1393,6 +1449,16 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
     private function getrelatorioChequeDeleteRouteInfo()
     {
         return array(array (  0 => 'idRelatorio',  1 => 'idCheque',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::chequeDeleteAction',), array (  'idRelatorio' => '\\d+',  'idCheque' => '\\d+',), array (  0 =>   array (    0 => 'text',    1 => '/delete',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idCheque',  ),  2 =>   array (    0 => 'text',    1 => '/cheque',  ),  3 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idRelatorio',  ),  4 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
+    }
+
+    private function getrelatorioTc28RouteInfo()
+    {
+        return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::tc28Action',), array (  'idRelatorio' => '\\d+',), array (  0 =>   array (    0 => 'text',    1 => '/tc28',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
+    }
+
+    private function getrelatorioDevolucaoRouteInfo()
+    {
+        return array(array (  0 => 'idRelatorio',), array (  '_controller' => 'Fapesc\\TutorialBundle\\Controller\\RelatorioController::devolucaoAction',), array (  'idRelatorio' => '\\d+',), array (  0 =>   array (    0 => 'text',    1 => '/devolucao',  ),  1 =>   array (    0 => 'variable',    1 => '/',    2 => '\\d+',    3 => 'idRelatorio',  ),  2 =>   array (    0 => 'text',    1 => '/relatorio',  ),));
     }
 
     private function getrelatorioImpressaoRouteInfo()

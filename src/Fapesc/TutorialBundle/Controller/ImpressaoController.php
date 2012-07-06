@@ -79,7 +79,7 @@ class ImpressaoController extends FapescController {
             "coordenador" => $projeto->getUsuario()->getNome(),
             "contrato" => $projeto->getContrato(),
             "empenho" => $relatorio->getNota(),
-            "chamada" => $projeto->getChamada(),
+            "chamada" => mb_substr($projeto->getChamada(), 0, 65),
         );
 
         $cabecalho = $this->escreve("00-cabecalho", $cabecalho);
@@ -135,7 +135,7 @@ class ImpressaoController extends FapescController {
         $cidade = $cidade[$numero];
         $dados = array(//capa
             "tipo" => strtoupper($tipo),
-            "chamada" => $projeto->getChamada(),
+            "chamada" => $projeto->getChamada,
             "contrato" => $projeto->getContrato(),
             "empenho" => $relatorio->getNota(),
             "projeto" => $projeto->getTitulo(),
