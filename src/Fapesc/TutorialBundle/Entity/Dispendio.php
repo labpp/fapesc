@@ -71,6 +71,20 @@ class Dispendio {
     private $documento;
 
     /**
+     * @var string $serie
+     *
+     * @ORM\Column(name="serie", type="string", length=255, nullable=true)
+     */
+    private $serie;
+
+    /**
+     * @var string $subserie
+     *
+     * @ORM\Column(name="subserie", type="string", length=255, nullable=true)
+     */
+    private $subserie;
+
+    /**
      * @var date $data
      *
      * @ORM\Column(name="data", type="date")
@@ -313,6 +327,8 @@ class Dispendio {
             "unitario" => $this->getUnitario(),
             "total" => $this->getTotal(),
             "documento" => $this->getDocumento(),
+            "serie" => $this->getSerie(),
+            "subserie" => $this->getSubserie(),
             "data" => $this->getData(),
             "comprovante" => $this->getComprovante(),
         );
@@ -325,8 +341,50 @@ class Dispendio {
         $this->setUnitario($data["unitario"]);
         $this->setTotal($data["total"]);
         $this->setDocumento($data["documento"]);
+        $this->setSerie($data["serie"]);
+        $this->setSubserie($data["subserie"]);
         $this->setData($data["data"]);
         $this->setComprovante($data["comprovante"]);
     }
 
+
+    /**
+     * Set serie
+     *
+     * @param string $serie
+     */
+    public function setSerie($serie)
+    {
+        $this->serie = $serie;
+    }
+
+    /**
+     * Get serie
+     *
+     * @return string 
+     */
+    public function getSerie()
+    {
+        return $this->serie;
+    }
+
+    /**
+     * Set subserie
+     *
+     * @param string $subserie
+     */
+    public function setSubserie($subserie)
+    {
+        $this->subserie = $subserie;
+    }
+
+    /**
+     * Get subserie
+     *
+     * @return string 
+     */
+    public function getSubserie()
+    {
+        return $this->subserie;
+    }
 }

@@ -96,8 +96,10 @@ class Salario {
      * @param string $data
      */
     public function setData($data) {
-        list($m, $a) = explode("/", $data);
-        $this->data = new \DateTime("{$a}-{$m}-01");
+        list($d, $m, $a) = explode("/", $data);
+        $d = ((int) $d > 31) ? 31 : (int) $d;
+        $m = ((int) $m > 12) ? 12 : (int) $m;
+        $this->data = new \DateTime("{$a}-{$m}-{$d}");
     }
 
     /**
@@ -105,7 +107,7 @@ class Salario {
      *
      * @return string
      */
-    public function getData($format = "m/Y") {
+    public function getData($format = "d/m/Y") {
         return $format ? $this->data->format($format) : $this->data;
     }
 

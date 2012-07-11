@@ -33,27 +33,92 @@ Vidros e Coisas ME - vidraria - CP</p></li>
 				<li>Observado a ordem apresentada (do dispêndio mais antigo ao mais atual), <strong>copie e cole as informações abaixo para os respectivos campos do formulário TC28:</strong>
 
 			
-				<table id="goals" class="form" width="90%" cellspacing="5" cellpadding="5">
+				<table id="goals" class="form" width="90%">
 					<tr>
-						<th width="10%" >Nº Documento</th>
-						<th width="12%" >Data Execução</th>
-						<th width="46%" >Histórico</th>
-						<th width="12%" >Recebimento</th>
-						<th width="10%" >Pagamento</th>
+						<th width="9%"></th>
+						<th width="9%"></th>
+						<th width="9%"></th>
+						<th width="9%"></th>
+						<th width="9%"></th>
+						<th width="22.5%"></th>
+						<th width="22.5%"></th>
+						<th width="15%" ></th>
+					</tr>
+
+
+					<tr>
+						<td style="text-align:center;" colspan="5"> Responsável </td>
+						<td style="text-align:left;" colspan="3">{{ coordenador }}</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan="5"> CPF </td>
+						<td style="text-align:left;" colspan="3">{{ cpf }}</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan="8"></td>
+					</tr>
+
+					<tr>
+						<td style="text-align:center;" colspan="5"> Data </td>
+						<td style="text-align:center;" colspan="2"> Histórico </td>
+						<td style="text-align:center;"> Recebimento </td>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan="5"> ------- </td>
+						<td style="text-align:left;" colspan="2"> Valor Recebido </td>
+						<td style="text-align:right;"> {{ valorNL }} </td>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan="5"> {{ dataEmissao }} </td>
+						<td style="text-align:left;" colspan="2"> Rendimentos de Aplicação </td>
+						<td style="text-align:right;"> (ver instruções) </td>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan="5"> {{ data1aCP }} </td>
+						<td style="text-align:left;" colspan="2"> Contrapartida </td>
+						<td style="text-align:right;"> {{ totalCP }} </td>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan="8"></td>
+					</tr>
+
+					<tr>
+						<td style="text-align:center;"> No. Nota </td>
+						<td style="text-align:center;"> No. Série </td>
+						<td style="text-align:center;"> No. Sub-Série </td>
+						<td style="text-align:center;"> Data </td>
+						<td style="text-align:center;"> CPF/CPNJ </td>
+						<td style="text-align:center; overflow:hidden;"  colspan="2"> Histórico </td>
+						<td style="text-align:center;"> Pagamentos </td>
 					</tr>
 					{% for item in tc28 %}
 					<tr>
+
 						<td style="text-align:center;">{{ item.num }}</td>
+						<td style="text-align:center;">{{ item.serie }}</td>
+						<td style="text-align:center;">{{ item.subSerie }}</td>
 						<td style="text-align:center;">{{ item.data }}</td>
-						<td style="text-align:center; overflow:hidden;">{{ item.historico }}</td>
-						<td style="text-align:center;">{{ item.recebimento }}</td>
-						<td style="text-align:center;">{{ item.pagamento }}</td>
-					</tr>
-					{% else %}
-					<tr>
-						<td colspan="4">Nenhuma META(2)...</td>
+						<td style="text-align:center;">{{ item.cpf }}</td>
+						<td style="text-align:left; overflow:hidden;"  colspan="2">{{ item.historico }}</td>
+						<td style="text-align:right;">{{ item.pagamento }}</td>
 					</tr>
 					{% endfor %}
+
+					<tr>
+						<td style="text-align:center;" colspan="8"></td>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan="2"> Local </td>
+						<td style="text-align:center;" colspan="2"> Data TC28 </td>
+						<td style="text-align:center;" colspan="2"> Titular da Unidade Gestora </td>
+						<td style="text-align:center;" colspan="2"> Contador / Técnico em contabilidade </td>
+					</tr>
+					<tr>
+						<td style="text-align:center;" colspan="2"> {{ local }} </td>
+						<td style="text-align:center;" colspan="2"> (ver instruções) </td>
+						<td style="text-align:center;" colspan="2"> {{ coordenador }} </td>
+						<td style="text-align:center;" colspan="2"> (ver instruções) </td>
+					</tr>
 				</table>		
 
 			

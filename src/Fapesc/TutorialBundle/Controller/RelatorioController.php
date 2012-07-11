@@ -322,11 +322,16 @@ class RelatorioController extends FapescController {
         $dados["tc28"] = array();
         $relatorio = $this->getDoctrine()->getRepository("FapescTutorialBundle:Relatorio")->find($idRelatorio);
         $projeto = $relatorio->getProjeto();
+	$municipios = $projeto->getMunicipios();
 
+	$dados["coordenador"] = $projeto->getUsuario()->getNome();
+	$dados["cpf"] = $projeto->getUsuario()->getCpf();
+	$dados["valorNL"] = "R$ " . $relatorio->getValor();
+	$dados["dataEmissao"] = "#definir";
+	$dados["data1aCP"] = "------";
+	$dados["local"] = $municipios[$projeto->getMunicipio()] . " - " . $dados["coordenador"] ;
+        $dados["nota"] = $relatorio->getNota();
         $contador = 0;
-        $dados["tc28"][0] = array("num" => "", "data" => $relatorio->getLiberacao(), "historico" => "Valor Recebido", "recebimento" => $relatorio->getValor(), "pagamento" => "");
-        $dados["tc28"][1] = array("num" => "", "data" => "", "historico" => "Total Contrapartida", "recebimento" => "", "pagamento" => "");
-        $dados["tc28"][2] = array("num" => "", "data" => "", "historico" => "Rendimentos da Aplicação", "recebimento" => "Ver observações", "pagamento" => "");
         $paginas = array("Contrapartida" => "CP", "Empenho" => "FAP");
         $totalCP = 0.0;
         $totalFAP = 0.0;
@@ -344,10 +349,13 @@ class RelatorioController extends FapescController {
                                 else
                                     $totalFAP += $dispendio->getTotal(true);
                                 $dado["num"] = $dispendio->getDocumento();
+				$dado["serie"] = $dispendio->getSerie();
+				$dado["subSerie"] = $dispendio->getSubserie();
                                 $dado["data"] = $dispendio->getData();
+				$dado["cpf"] = $dispendio->getFornecedor()->getCadastro();
                                 $dado["historico"] = mb_substr($dispendio->getFornecedor()->getNome(), 0, 20) . " - " . mb_substr($dispendio->getDescricao(), 0, 10) . " - " . $value;
-                                $dado["recebimento"] = "";
                                 $dado["pagamento"] = $dispendio->getTotal();
+				$dado["tipo"] = $value;
                             }
                             break;
                         case "2": //bolsa
@@ -358,10 +366,13 @@ class RelatorioController extends FapescController {
                                 else
                                     $totalFAP += $bolsa->getValor(true);
                                 $dado["num"] = "";
+				$dado["serie"] = "";
+				$dado["subSerie"] = "";
                                 $dado["data"] = $bolsa->getData(false);
-                                $dado["historico"] = "Bolsa - " . mb_substr($bolsa->getBolsista()->getNome(), 0, 25) . " - CP";
-                                $dado["recebimento"] = "";
+				$dado["cpf"] = $bolsa->getBolsista()->getCpf();
+                                $dado["historico"] = "Bolsa - " . mb_substr($bolsa->getBolsista()->getNome(), 0, 25) . " - " . $value;
                                 $dado["pagamento"] = $bolsa->getValor();
+				$dado["tipo"] = $value;
                             }
                             break;
                         case "3": //passagem
@@ -373,11 +384,13 @@ class RelatorioController extends FapescController {
                                     $totalFAP += $passagem->getValor(true);
                                 $passagem = $passagem->toArray();
                                 $dado["num"] = $passagem["tiquete"];
+				$dado["serie"] = "";
+				$dado["subSerie"] = "";
                                 $dado["data"] = $passagem["compra"];
+				$dado["cpf"] = $passagem["cpf"];
                                 $dado["historico"] = mb_substr($passagem["descricao"], 0, 25) . " - " . $value;
-                                ;
-                                $dado["recebimento"] = "";
                                 $dado["pagamento"] = $passagem["valor"];
+				$dado["tipo"] = $value;
                             }
                             break;
                         case "4": //diaria
@@ -388,10 +401,13 @@ class RelatorioController extends FapescController {
                                 else
                                     $totalFAP += $diaria->getValor(true);
                                 $dado["num"] = "";
+				$dado["serie"] = "";
+				$dado["subSerie"] = "";
                                 $dado["data"] = $diaria->getInicio();
+				$dado["cpf"] = $diaria->getCpf();
                                 $dado["historico"] = "Diária - " . mb_substr($diaria->getBeneficiario(), 0, 25) . " - " . $value;
-                                $dado["recebimento"] = "";
                                 $dado["pagamento"] = $diaria->getValor();
+				$dado["tipo"] = $value;
                             }
                             break;
                         case "5": //salario
@@ -401,12 +417,15 @@ class RelatorioController extends FapescController {
                                     $totalCP += $salario->getProporcional(true);
                                 else
                                     $totalFAP += $salario->getProporcional(true);
+				$pesquisador = $salario->getPesquisador();
                                 $dado["num"] = "";
-                                $dado["data"] = "01/" . $salario->getData(); //convencao ja que o salario nao possui dia
-                                $pesquisador = $salario->getPesquisador();
-                                $dado["historico"] = "Salários e Encargos - " . mb_substr($pesquisador->getNome(), 0, 10) . " - CP";
-                                $dado["recebimento"] = "";
+				$dado["serie"] = "";
+				$dado["subSerie"] = "";
+                                $dado["data"] = $salario->getData(); 
+				$dado["cpf"] = $pesquisador->getCpf();
+                                $dado["historico"] = "Salários e Encargos - " . mb_substr($pesquisador->getNome(), 0, 10) . " - " . $value;
                                 $dado["pagamento"] = $salario->getProporcional();
+				$dado["tipo"] = $value;
                             }
                             break;
                     }//fim switch
@@ -418,19 +437,17 @@ class RelatorioController extends FapescController {
         }
         $resto = $relatorio->getValor(true) - $totalFAP;
         $my_array = $this->bubbleSort(isset($my_array) ? $my_array : array());
-        foreach ($my_array as $dado)
+	$achouCP  = false;
+        foreach ($my_array as $dado){
             $dados["tc28"][] = $dado[1];
-	$totalCP = $resto <= 0 ? $totalCP - $resto : $totalCP;
-        $dados["tc28"][1]["recebimento"] = number_format($totalCP, 2, ",", ".");
-        $totalRec = number_format($totalCP + $relatorio->getValor(true), 2, ",", ".");
-        $totalPag = number_format($totalCP + $totalFAP + $resto, 2, ",", ".");
-	if($resto > 0){
-	        $dados["tc28"][] = array("num" => "", "data" => "", "historico" => "Devolução do saldo remanescente", "recebimento" => "", "pagamento" => number_format($resto, 2, ",", "."));
-		$contador++;
+	    if($achouCP == false && $dado[1]["tipo"] == "CP"){
+		$achouCP = true;
+		$dados["data1aCP"] = $dado[0];
+	    }
 	}
-        $dados["tc28"][] = array("num" => "", "data" => "", "historico" => "TOTAL", "recebimento" => $totalRec, "pagamento" => $totalPag);
-        $dados["calculo"] = $contador + 3;
-        $dados["nota"] = $relatorio->getNota();
+	$totalCP = $resto <= 0 ? $totalCP - $resto : $totalCP;
+        $dados["totalCP"] = "R$ " . number_format($totalCP, 2, ",", ".");
+        $dados["calculo"] = $contador + 1;
         return array_merge($this->usuario(), $this->menu("relatorio", "tc28", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }
 

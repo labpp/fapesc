@@ -5,7 +5,7 @@
 {% block content %}
 <script type="text/javascript">
     jQuery(function($){
-        $(".data").mask("99/9999");
+        $(".data").mask("99/99/9999");
         $(".dinheiro").priceFormat({ prefix: '', centsSeparator: ',', thousandsSeparator: '.' });
     });
     $(document).ready(function(){
@@ -47,7 +47,7 @@
                     <input type="text" name="carga" value="{{ carga }}" />
                 </div>
                 <div class="coluna2">
-                    <label>Período de Referência:</label>
+                    <label>Data de Pagamento:</label>
                     <input type="text" class="data" name="data" value="{{ data }}" />
                 </div>
                 <div class="coluna2">

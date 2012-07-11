@@ -4,11 +4,11 @@
 
 {% block content %}
 <div id="login-content">
-	<div id="sidebar" class="login-sidebar">
-		<span id="login-title">Recuperar senha</span>
+	<div id="sidebar">
+		<p><b>Instruções:</b><br /><br />Digite a nova senha nos campos ao lado.<br /><br />Dê preferência por uma senha forte, combinando letras (maiúsculas e minúsculas)e números.</p> 
 	</div><!-- #sidebar -->
-	<div id="main-content" class="login-main-content">
+	<div id="main-content">
 		{% include "FapescTutorialBundle:Usuario:formSenha.html.twig" with { "action" : action } %}
-	</div><!-- #main-content -->			
+	</div><!-- #main-content -->
 </div><!-- #content -->
 {% endblock %}
