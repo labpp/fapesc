@@ -19,7 +19,6 @@
                 inicio: "required",
                 termino: "required",
                 orcamento: "required",
-                banco: "required",
                 conta: "required",
                 agencia: "required"
             },
@@ -31,7 +30,6 @@
                 inicio: "Digite a data de início",
                 termino: "Digite a data de término",
                 orcamento: "Digite o orçamento",
-                banco: "Digite o banco",
                 conta: "Digite a conta",
                 agencia: "Digite a agência"
             }
@@ -109,7 +107,11 @@
                 <legend>Dados do projeto</legend>
                 <div class="coluna3">
                     <label for="banco">Banco:</label>
-                    <input type="text" id="banco" name="banco" value="{{ banco }}" title="Informe o número do banco." />
+                    <select id="banco" name="banco" title="Informe o número do banco.">
+                        {% for item in bancoSelect %}
+                        <option value="{{ item.value }}" {% if item.value == banco %} selected="selected" {% endif %}>{{ item.text }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="coluna3">
                     <label for="conta">Conta:</label>

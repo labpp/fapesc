@@ -327,7 +327,6 @@ class RelatorioController extends FapescController {
 	$dados["coordenador"] = $projeto->getUsuario()->getNome();
 	$dados["cpf"] = $projeto->getUsuario()->getCpf();
 	$dados["valorNL"] = "R$ " . $relatorio->getValor();
-	$dados["dataEmissao"] = "#definir";
 	$dados["data1aCP"] = "------";
 	$dados["local"] = $municipios[$projeto->getMunicipio()] . " - " . $dados["coordenador"] ;
         $dados["nota"] = $relatorio->getNota();
@@ -353,7 +352,7 @@ class RelatorioController extends FapescController {
 				$dado["subSerie"] = $dispendio->getSubserie();
                                 $dado["data"] = $dispendio->getData();
 				$dado["cpf"] = $dispendio->getFornecedor()->getCadastro();
-                                $dado["historico"] = mb_substr($dispendio->getFornecedor()->getNome(), 0, 20) . " - " . mb_substr($dispendio->getDescricao(), 0, 10) . " - " . $value;
+                                $dado["historico"] = mb_substr($dispendio->getFornecedor()->getNome(), 0, 39) . " - " . mb_substr($dispendio->getDescricao(), 0, 19) . " - " . $value;//historico contem no maximo 67 caracteres
                                 $dado["pagamento"] = $dispendio->getTotal();
 				$dado["tipo"] = $value;
                             }
@@ -370,7 +369,7 @@ class RelatorioController extends FapescController {
 				$dado["subSerie"] = "";
                                 $dado["data"] = $bolsa->getData(false);
 				$dado["cpf"] = $bolsa->getBolsista()->getCpf();
-                                $dado["historico"] = "Bolsa - " . mb_substr($bolsa->getBolsista()->getNome(), 0, 25) . " - " . $value;
+                                $dado["historico"] = "Bolsa - " . mb_substr($bolsa->getBolsista()->getNome(), 0, 53) . " - " . $value;//historico contem no maximo 67 caracteres
                                 $dado["pagamento"] = $bolsa->getValor();
 				$dado["tipo"] = $value;
                             }
@@ -388,7 +387,7 @@ class RelatorioController extends FapescController {
 				$dado["subSerie"] = "";
                                 $dado["data"] = $passagem["compra"];
 				$dado["cpf"] = $passagem["cpf"];
-                                $dado["historico"] = mb_substr($passagem["descricao"], 0, 25) . " - " . $value;
+                                $dado["historico"] = mb_substr($passagem["descricao"], 0, 61) . " - " . $value;//historico contem no maximo 67 caracteres
                                 $dado["pagamento"] = $passagem["valor"];
 				$dado["tipo"] = $value;
                             }
@@ -405,7 +404,7 @@ class RelatorioController extends FapescController {
 				$dado["subSerie"] = "";
                                 $dado["data"] = $diaria->getInicio();
 				$dado["cpf"] = $diaria->getCpf();
-                                $dado["historico"] = "Diária - " . mb_substr($diaria->getBeneficiario(), 0, 25) . " - " . $value;
+                                $dado["historico"] = "Diária - " . mb_substr($diaria->getBeneficiario(), 0, 52) . " - " . $value;//historico contem no maximo 67 caracteres
                                 $dado["pagamento"] = $diaria->getValor();
 				$dado["tipo"] = $value;
                             }
@@ -423,7 +422,7 @@ class RelatorioController extends FapescController {
 				$dado["subSerie"] = "";
                                 $dado["data"] = $salario->getData(); 
 				$dado["cpf"] = $pesquisador->getCpf();
-                                $dado["historico"] = "Salários e Encargos - " . mb_substr($pesquisador->getNome(), 0, 10) . " - " . $value;
+                                $dado["historico"] = "Salários e Encargos - " . mb_substr($pesquisador->getNome(), 0, 39) . " - " . $value;//historico contem no maximo 67 caracteres
                                 $dado["pagamento"] = $salario->getProporcional();
 				$dado["tipo"] = $value;
                             }

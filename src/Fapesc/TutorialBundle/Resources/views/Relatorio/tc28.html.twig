@@ -30,19 +30,21 @@
 
 <p>Casa do Pesquisador LTDA - reagentes - FAP
 Vidros e Coisas ME - vidraria - CP</p></li>
-				<li>Observado a ordem apresentada (do dispêndio mais antigo ao mais atual), <strong>copie e cole as informações abaixo para os respectivos campos do formulário TC28:</strong>
+				<li>Observando a ordem apresentada (do dispêndio mais antigo ao mais atual), <strong>copie e cole as informações abaixo para os respectivos campos do formulário TC28:</strong>
+				</p>
 
 			
-				<table id="goals" class="form" width="90%">
-					<tr>
-						<th width="9%"></th>
-						<th width="9%"></th>
-						<th width="9%"></th>
-						<th width="9%"></th>
-						<th width="9%"></th>
-						<th width="22.5%"></th>
-						<th width="22.5%"></th>
-						<th width="15%" ></th>
+				<table border="1pt" style="border-collapse: collapse;" width="90%">
+
+					<tr style="background-color:grey;">
+						<th width="8.5%" style="border-color:grey;"></th>
+						<th width="8.5%" style="border-color:grey;"></th>
+						<th width="8.5%" style="border-color:grey;"></th>
+						<th width="8.5%" style="border-color:grey;"></th>
+						<th width="11%" style="border-color:grey;"></th>
+						<th width="22.5%" style="border-color:grey;"></th>
+						<th width="22.5%" style="border-color:grey;"></th>
+						<th width="15%" style="border-color:grey;"></th>
 					</tr>
 
 
@@ -55,7 +57,7 @@ Vidros e Coisas ME - vidraria - CP</p></li>
 						<td style="text-align:left;" colspan="3">{{ cpf }}</td>
 					</tr>
 					<tr>
-						<td style="text-align:center;" colspan="8"></td>
+						<td style="text-align:center;background-color:grey;" colspan="8"></td>
 					</tr>
 
 					<tr>
@@ -69,7 +71,7 @@ Vidros e Coisas ME - vidraria - CP</p></li>
 						<td style="text-align:right;"> {{ valorNL }} </td>
 					</tr>
 					<tr>
-						<td style="text-align:center;" colspan="5"> {{ dataEmissao }} </td>
+						<td style="text-align:center;" colspan="5"> (ver instruções) </td>
 						<td style="text-align:left;" colspan="2"> Rendimentos de Aplicação </td>
 						<td style="text-align:right;"> (ver instruções) </td>
 					</tr>
@@ -79,7 +81,7 @@ Vidros e Coisas ME - vidraria - CP</p></li>
 						<td style="text-align:right;"> {{ totalCP }} </td>
 					</tr>
 					<tr>
-						<td style="text-align:center;" colspan="8"></td>
+						<td style="text-align:center;background-color:grey;" colspan="8"></td>
 					</tr>
 
 					<tr>
@@ -100,12 +102,12 @@ Vidros e Coisas ME - vidraria - CP</p></li>
 						<td style="text-align:center;">{{ item.data }}</td>
 						<td style="text-align:center;">{{ item.cpf }}</td>
 						<td style="text-align:left; overflow:hidden;"  colspan="2">{{ item.historico }}</td>
-						<td style="text-align:right;">{{ item.pagamento }}</td>
+						<td style="text-align:right;">R$ {{ item.pagamento }}</td>
 					</tr>
 					{% endfor %}
 
 					<tr>
-						<td style="text-align:center;" colspan="8"></td>
+						<td style="text-align:center;background-color:grey;" colspan="8"></td>
 					</tr>
 					<tr>
 						<td style="text-align:center;" colspan="2"> Local </td>
@@ -119,22 +121,29 @@ Vidros e Coisas ME - vidraria - CP</p></li>
 						<td style="text-align:center;" colspan="2"> {{ coordenador }} </td>
 						<td style="text-align:center;" colspan="2"> (ver instruções) </td>
 					</tr>
-				</table>		
-
+				</table>
+			
+			<h3>Observações:</h3>			
+			<ul>
+				<li>Os dispêndios devem ser listados em ordem cronológica, do mais antigo ao mais recente;</li>
+				<li>Para dispêndios associados à aquisição de bens e/ou serviços, inclua os dados do respectivo documento comprobatório (No. Nota Fiscal, Série, Sub-Série , Data de emissão, etc);</li>
+				<li>Em “rendimento da aplicação”, entre com o valor informado no comprovante de rendimentos da aplicação dos recursos. Se não existirem rendimentos, lance o campo como “0,00” (sem aspas);</li>
+				<li>Deixe o campo "Contador/Técnico em contabilidade" em branco;</li>
+				<li>Caso não se aplique contrapartida ao projeto, lance o campo como “0,00” (sem aspas);</li>
+				<li>A última linha a ser lançada deve se referir à devolução dos recursos remanescentes (se existirem);</li>
+			</ul>		
+			</p>
 			
 			</li>
 			
 				
-			</ol>
+			
 
-			<h3>Observações:</h3>			
-			<ul>
-				<li>Os dispêndios devem ser listados em ordem cronológica, do mais antigo ao mais recente;</li>
-				<li>Para dispêndios associados à aquisição de bens e/ou serviços, inclua o número do respectivo documento comprobatório (nota fiscal, bilhete de passagem, etc);</li>
-				<li>Em “rendimento da aplicação”, entre com o valor informado no comprovante de rendimentos da aplicação dos recursos. Se não existirem rendimentos, lance o campo como “0,00” (sem aspas);</li>
-				<li>Caso não se aplique contrapartida ao projeto, lance o campo como “0,00” (sem aspas);</li>
-				<li>A última linha a ser lançada deve se referir à devolução dos recursos remanescentes (se houver);</li>
-			</ul>
+			
+	
+			<li> Após o preenchimento, clique em imprimir.Atenção: A versão impressa do TC 28 deve ser assinada pelo coordenador do projeto.</li>
+			
+			</ol>
 		</p> 
 		</div><!--conteudo-margem-->
 		</p><!-- parágrafo principal -->

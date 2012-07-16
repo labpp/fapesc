@@ -27,7 +27,6 @@
                 },
                 telefone: "required",
                 celular: "required",
-                banco: "required",
                 conta: "required",
                 agencia: "required"
             },
@@ -46,7 +45,6 @@
                 },
                 telefone: "Digite o telefone",
                 celular: "Digite o celular",
-                banco: "Digite o banco",
                 conta: "Digite a conta",
                 agencia: "Digite a agência"
             }
@@ -115,7 +113,11 @@
                 </div>
                 <div class="coluna3">
                     <label>Banco:</label>
-                    <input type="text" name="banco" value="{{ banco }}" title="Informe o número do banco." />
+                    <select id="banco" name="banco" title="Informe o número do banco.">
+                        {% for item in bancoSelect %}
+                        <option value="{{ item.value }}" {% if item.value == banco %} selected="selected" {% endif %}>{{ item.text }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="coluna3">
                     <label>Conta:</label>
