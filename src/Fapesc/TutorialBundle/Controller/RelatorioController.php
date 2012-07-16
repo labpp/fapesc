@@ -159,13 +159,7 @@ class RelatorioController extends FapescController {
         $resultado = $this->getDoctrine()->getRepository("FapescTutorialBundle:Resultado")->findOneBy(array("meta" => $idMeta, "relatorio" => $idRelatorio));
         if (!is_object($resultado))
             $resultado = new Resultado();
-        $dados = array(
-            "id" => $meta->getId(),
-            "meta" => $meta->getMeta(),
-            "resultado" => $resultado->getResultado(),
-            "resultadoSelect" => $resultado->getResultadoSelect(),
-            "justificativa" => $resultado->getJustificativa(),
-        );
+        $dados = array_merge($resultado->toArray(), $meta->toArray());
         $dados["idRelatorio"] = $idRelatorio;
         return array_merge($this->usuario(), $this->menu("relatorio", "metas", $idRelatorio), $this->info($this->find($idRelatorio)->getProjeto()->getId(), $idRelatorio), $dados);
     }

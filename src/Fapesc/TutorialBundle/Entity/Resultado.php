@@ -155,13 +155,13 @@ class Resultado {
 
     public function toArray() {
         return array(
-            "idResultado" => $this->getId(),
+            "id" => $this->getId(),
             "resultado" => $this->getResultado(),
             "resultados" => $this->getResultados(),
             "resultadoSelect" => $this->getResultadoSelect(),
             "justificativa" => $this->getJustificativa(),
-            "meta" => $this->getMeta()->getId(),
-            "relatorio" => $this->getRelatorio()->getId(),
+            "meta" => $this->getMeta(),
+            "relatorio" => $this->getRelatorio(),
         );
     }
 

@@ -1,6 +1,27 @@
 {% extends "FapescTutorialBundle:Fapesc:info.html.twig" %}
 
 {% block content %}
+<script type="text/javascript">
+    jQuery(function($){
+        $(".data").mask("99/99/9999");
+    });
+    $().ready(function() {
+        $("form").validate({
+            rules: {
+                meta: "required",
+                indicador: "required",
+                inicio: "required",
+                termino: "required",
+            },
+            messages: {
+                meta: "Digite a meta",
+                indicador: "Digite os indicadores",
+                inicio: "Digite a data de início",
+                termino: "Digite a data de término",
+            }
+        });
+    });
+</script>
 <div id="content">
     <div id="sidebar">
         <p><b>Instruções:</b><br /><br />No campo "Meta", informe a descrição da meta/objetivo de projeto conforme descrito na proposta submetida à FAPESC.<br /><br />No campo "Indicadores", informe o indicador físico ou informacional que ratifica a conclusão da respectiva meta de trabalho.<br /><br />Todos os campos são de preenchimento obrigatório.</p>
@@ -16,6 +37,14 @@
                 <div>
                     <label>Indicadores:</label>
                     <textarea name="indicador" title="Informe os indicadores para ratificação da meta proposta">{{ indicador }}</textarea>
+                </div>
+                <div class="coluna2">
+                    <label for="inicio">Data de início:</label>
+                    <input type="text" id="inicio" name="inicio" class="data" value="{{ inicio }}" title="Informe a data de início." />
+                </div>
+                <div class="coluna2">
+                    <label for="termino">Data de término:</label>
+                    <input type="text" id="termino" name="termino" class="data" value="{{ termino }}" title="Informe a data de término." />
                 </div>
             </fieldset>
             <div>

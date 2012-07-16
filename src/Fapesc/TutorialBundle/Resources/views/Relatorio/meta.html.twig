@@ -19,12 +19,27 @@
     </div><!-- #sidebar -->
     <div id="main-content">
         <form class="" action="{{ path('relatorioMetaPost', { 'idRelatorio': idRelatorio, 'idMeta': id }) }}" method="POST">
-            <fieldset class="">
+            <fieldset>
                 <legend>Plano de Metas</legend>
                 <div>
                     <label>Meta:</label>
-                    <input type="text" readonly="readonly" value="{{ meta }}" />
+                    <textarea readonly="readonly" name="meta" title="Descrição da meta/objetivo">{{ meta }}</textarea>
                 </div>
+                <div>
+                    <label>Indicadores:</label>
+                    <textarea readonly="readonly" name="indicador" title="Informe os indicadores para ratificação da meta proposta">{{ indicador }}</textarea>
+                </div>
+                <div class="coluna2">
+                    <label for="inicio">Data de início:</label>
+                    <input readonly="readonly" type="text" id="inicio" name="inicio" class="data" value="{{ inicio }}" title="Informe a data de início." />
+                </div>
+                <div class="coluna2">
+                    <label for="termino">Data de término:</label>
+                    <input readonly="readonly" type="text" id="termino" name="termino" class="data" value="{{ termino }}" title="Informe a data de término." />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Resultados</legend>
                 <div>
                     <label>Resultado:</label>
                     <select name="resultado" title="Informe o estado de desenvolvimento da meta/objetivo.">
