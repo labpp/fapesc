@@ -75,7 +75,7 @@ class ImpressaoController extends FapescController {
             $mpdf->WriteHTML($stylesheet, 1);
         }
         $cabecalho = array(
-            "projeto" => substr($projeto->getTitulo(), 0, 50),
+            "projeto" => substr($projeto->getTitulo(), 0, 35),
             "coordenador" => $projeto->getUsuario()->getNome(),
             "contrato" => $projeto->getContrato(),
             "empenho" => $relatorio->getNota(),
@@ -161,7 +161,7 @@ class ImpressaoController extends FapescController {
         $paginas[] = array(0 => $this->escreve("01-checklist", $dados), false);
         $dados = array(//relatorio1
 	    "tipo" => strtoupper($tipo),
-            "projeto" => $projeto->getTitulo(),
+            "projeto" => substr($projeto->getTitulo(), 0, 40),
             "coordenador" => $projeto->getUsuario()->getNome(),
             "area" => $projeto->getArea(),
             "local" => $municipios[$projeto->getMunicipio()] . "/" . $regioes[$projeto->getRegiao()] . "/" . $sdrs[$projeto->getSdr()],

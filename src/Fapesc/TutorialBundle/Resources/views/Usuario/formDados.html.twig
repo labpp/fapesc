@@ -32,11 +32,19 @@
 </script>
 <form class="form-container" action="{{ action }}" method="POST">
     <fieldset>
-        <div class="coluna3c">
+        <div class="coluna4">
+            <label>Titulação:</label>
+            <select name="titulacao" title="Entre com a titulação.">
+                {% for item in titulacaoSelect %}
+                <option value="{{ item.value }}" {% if item.value == titulacao %} selected="selected" {% endif %}>{{ item.text }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="coluna2">
             <label>Nome Completo:</label>
             <input type="text" name="nome" title="Entre com seu nome completo, sem abreviaturas." value="{{ nome }}" />
         </div>
-        <div class="coluna3">
+        <div class="coluna4">
             <label>CPF:</label>
             <input type="text" class="cpf" name="cpf" title="Aqui, insira apenas números." value="{{ cpf }}" />
         </div>
